@@ -1,0 +1,37 @@
+$fontFamily: "Blinker";
+$regular: "-Regular";
+$thin: "-Thin";
+$bold: "-Bold";
+$backgroundImagePath: url("../public/imgs/bg_light.png");
+
+@mixin importFont($fontName) {
+  @font-face {
+    font-family: $fontName;
+    src: url("../public/fonts/Blinker/" + $fontName + ".ttf");
+  }
+}
+
+@include importFont($fontFamily + $regular);
+@include importFont($fontFamily + $thin);
+@include importFont($fontFamily + $bold);
+
+body {
+  font-family: $fontFamily + $regular, Arial, Helvetica, sans-serif;
+  background-image: $backgroundImagePath;
+
+  --p-1: 0.25rem;
+  --p-2: 0.5rem;
+  --p-3: 1rem;
+  --p-4: 1.5rem;
+  --p-5: 1.8rem;
+  --p-6: 2rem;
+  --p-7: 2.5rem;
+
+  --m-1: 0.25rem;
+  --m-2: 0.5rem;
+  --m-3: 1rem;
+  --m-4: 1.5rem;
+  --m-5: 1.8rem;
+  --m-6: 2rem;
+  --m-7: 2.5rem;
+}
