@@ -1,0 +1,117 @@
+@import "../../styles/mixins";
+
+// Class to toggle nav will be found in Header.module.scss
+// as the class was defined there.
+
+nav.nav {
+  background-image: url("../../public/imgs/bg_light.png");
+  position: fixed;
+  top: -150%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--inverse-font-colour);
+  z-index: 10;
+  transition: top 0.3s;
+  padding: var(--p-6);
+  @include XYCenterChildren;
+  flex-direction: column;
+
+  // Shows nav at 768px
+
+  @media screen and (min-width: 500px) {
+    margin: 0 auto;
+    width: 90%;
+  }
+  @media screen and (min-width: 768px) {
+    // box-shadow: inset 0 0 0 2px red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    align-items: flex-end;
+    background-image: none;
+    height: var(--header-height);
+    background-color: transparent;
+    padding-right: 0;
+  }
+
+  @media screen and (min-width: 1800px) {
+    max-width: 1366px;
+  }
+
+  & ul {
+    background-image: var(--glass-bg);
+    flex-direction: column;
+    @include XYCenterChildren;
+    padding: var(--p-6);
+
+    // Shows nav at 768px
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      background-image: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    // Nav logo wrapper
+    & > div {
+      width: 12rem;
+      padding: var(--p-2);
+      padding-bottom: var(--p-1);
+      margin-bottom: var(--m-3);
+      background-image: var(--grey-gradient);
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+    }
+
+    & li {
+      margin-bottom: var(--m-2);
+      border-radius: var(--button-border-radius);
+      box-shadow: var(--sm-md-shadow);
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+        margin-right: var(--m-3);
+      }
+
+      & a {
+        border-radius: var(--button-border-radius);
+        font-size: 1.2rem;
+        letter-spacing: 0.15rem;
+        border: 1px ridge var(--grey);
+        background-image: var(--inverse-solid-bg);
+        color: var(--inverse-font-colour);
+        display: block;
+        width: 12rem;
+        height: 3rem;
+        text-shadow: 0 2px 2px var(--inverse-shadow-colour);
+        @include XYCenterChildren;
+
+        // Shows nav at 768px
+        @media screen and (min-width: 768px) {
+          width: 7.5rem;
+          height: 2.5rem;
+          padding-bottom: var(--p-1);
+        }
+      }
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--sheet);
+  z-index: -1;
+  transition: background-color 0.3s;
+
+  @media screen and (min-width: 768px) {
+    background-color: transparent;
+  }
+}

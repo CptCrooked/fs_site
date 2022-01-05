@@ -1,0 +1,43 @@
+@import "../../styles/mixins";
+
+.toggle {
+  position: relative;
+  margin-top: var(--m-2);
+  border-radius: 10rem;
+  font-size: 0;
+  letter-spacing: 0.15rem;
+  border: 1px ridge var(--grey);
+  background-image: var(--inverse-solid-bg);
+  color: var(--inverse-font-colour);
+  display: block;
+  width: 4rem;
+  height: 2rem;
+  text-shadow: 0 2px 2px var(--inverse-shadow-colour);
+  @include XYCenterChildren;
+  box-shadow: inset var(--sm-md-shadow);
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
+
+  &::after {
+    $size: 1.5rem;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 4.5%;
+    width: $size;
+    height: $size;
+    background-image: var(--solid-bg);
+    box-shadow: var(--sm-shadow);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: left 0.3s;
+  }
+}
+
+.darkModeClass {
+  &::after {
+    left: 55.5%;
+  }
+}

@@ -3,3 +3,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin pseudoEl {
+  position: absolute;
+  top: 0;
+  content: "";
+}

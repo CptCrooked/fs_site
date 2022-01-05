@@ -11,8 +11,8 @@ const ThemeContextProvider = ({ children }) => {
   const currentTheme = {
     primary: darkMode ? "dark" : "light",
     secondary: darkMode ? "light" : "dark",
+    darkMode: darkMode,
   };
-  console.log(currentTheme);
   return (
     <ThemeContext.Provider value={{ currentTheme, toggleDarkMode }}>
       {children}

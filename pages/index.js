@@ -9,10 +9,9 @@ export default function Home() {
   } = useContext(ThemeContext);
 
   return (
-    <>
-      <main className={`${primary} page`}>
-        <div aria-hidden="true" className={overlay}></div>
-        <h1 onClick={toggleDarkMode}>Hello World</h1>
+    <div>
+      <h1>Hello World</h1>
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
         quas molestias? Repudiandae, corrupti unde! Architecto animi placeat ex
         nulla esse reiciendis, dignissimos quo maxime omnis culpa minus est
@@ -36,7 +35,7 @@ export default function Home() {
         veritatis esse repudiandae assumenda asperiores ab accusamus odit,
         placeat expedita. Alias consectetur ipsa facere. Rerum repudiandae
         officiis ratione harum qui obcaecati, ipsam voluptatibus eum.
-      </main>
-    </>
+      </p>
+    </div>
   );
 }

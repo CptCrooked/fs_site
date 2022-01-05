@@ -19,7 +19,7 @@ body {
   font-family: $fontFamily + $regular, Arial, Helvetica, sans-serif;
   background-image: $backgroundImagePath;
 
-  --header-height: 60px;
+  --header-height: 70.4px;
 
   --p-1: 0.25rem;
   --p-2: 0.5rem;
@@ -38,8 +38,10 @@ body {
   --m-7: 3rem;
 
   --sm-border-radius: 0.4rem;
-
-  padding-top: var(--header-height);
+  --button-border-radius: 2rem 2rem 10rem 10rem;
+  --light-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.2);
+  --dark-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
+  --light-sm-shadow-colour: rgba(0, 0, 0, 0.5);
 
   --blue-gradient: linear-gradient(
     180deg,
@@ -54,16 +56,16 @@ body {
 
   --grey-gradient: linear-gradient(
     180deg,
-    rgba(225, 225, 225, 1) 0%,
-    rgba(238, 238, 238, 1) 11.46%,
-    rgba(255, 255, 255, 1) 26.04%,
-    rgba(250, 250, 250, 1) 42.71%,
-    rgba(243, 243, 243, 1) 61.46%,
-    rgba(230, 230, 230, 1) 79.17%,
-    rgba(219, 219, 219, 1) 100%
+    rgb(204, 204, 204) 0%,
+    rgb(233, 233, 233) 11.46%,
+    rgb(255, 255, 255) 26.04%,
+    rgb(242, 242, 242) 42.71%,
+    rgb(220, 220, 220) 61.46%,
+    rgb(213, 213, 213) 79.17%,
+    rgb(206, 206, 206) 100%
   );
-  --light-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.2);
-  --dark-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
+  --blue: rgb(6, 25, 55);
+  --grey: rgb(218, 218, 218);
 }
 
 .light {
@@ -78,7 +80,8 @@ body {
   --inset-md-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   --inset-md-shadow-carousel: inset 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
   --inset-lg-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
-  --shadow-colour: rgba(0, 0, 0, 0.5);
+  --shadow-colour: rgba(0, 0, 0, 0.3);
+  --inverse-shadow-colour: rgba(0, 0, 0, 0.8);
 
   --glass-bg: linear-gradient(
     180deg,
@@ -169,6 +172,17 @@ body {
   --logo-font-colour: rgb(184, 184, 184);
   --font-colour: rgb(184, 184, 184);
   --inverse-font-colour: rgb(6, 25, 55);
+  --xs-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
+  --sm-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
+  --sm-md-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+  --md-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.8);
+  --lg-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
+  --inset-sm-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
+  --inset-md-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
+  --inset-md-shadow-carousel: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
+  --inset-lg-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
+  --shadow-colour: rgba(0, 0, 0, 0.8);
+  --inverse-shadow-colour: rgba(0, 0, 0, 0.3);
 
   --glass-bg: linear-gradient(
     180deg,
@@ -252,26 +266,12 @@ body {
     rgba(215, 215, 215, 0.85) 79.17%,
     rgba(173, 173, 173, 0.9) 100%
   );
-  --xs-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
-  --sm-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
-  --sm-md-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
-  --md-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.8);
-  --lg-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
-  --inset-sm-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
-  --inset-md-shadow: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
-  --inset-md-shadow-carousel: inset 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
-  --inset-lg-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
-  --shadow-colour: rgba(0, 0, 0, 0.8);
 }
 
 .dark,
 .light {
   color: var(--font-colour);
   transition: color 0.5s, background-color 0.3s, box-shadow 0.3s;
-}
-
-.wrapper {
-  padding: 0.5rem;
 }
 
 .flex {
@@ -292,6 +292,10 @@ body {
   box-shadow: var(--md-shadow);
 }
 
+label.pressed {
+  box-shadow: 0 0 0 0 transparent, inset 0 0 0.5rem var(--shadow-colour);
+}
+
 .bg-dark {
   background-color: var(--sheet);
   background-image: var(--glass-bg);
@@ -305,5 +309,53 @@ body {
   &-light,
   &-dark {
     @include bgProperties;
+  }
+}
+
+.page {
+  position: relative;
+  padding-top: var(--header-height);
+
+  &::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    background-color: var(--sheet);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: var(--sheet);
+  z-index: -1;
+  transition: background-color 0.3s;
+}
+
+.contentWrapper {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: var(--p-2);
+
+  @media screen and (min-width: 500px) {
+    max-width: 90%;
+    padding: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 80%;
+  }
+
+  @media screen and (min-width: 1800px) {
+    max-width: 1366px;
   }
 }
