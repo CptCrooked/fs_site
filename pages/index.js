@@ -6,7 +6,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
 
 //! development
-import testImage from "../public/imgs/test/filler.png";
+// import testImage from "../public/imgs/test/filler.png";
+import testImage from "../public/imgs/stars/elevenMeterAfrican/11mafrlounge2-1000px.png";
 import { tempMapContainer } from "../styles/Home.module.scss";
 
 export default function Home() {
