@@ -1,41 +1,68 @@
-import { useContext } from "react";
+import Link from "next/link";
+import { useState, useContext } from "react";
+import Carousel from "../components/Carousel/Carousel";
+import HR from "../components/HR/HR";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { overlay } from "../styles/Home.module.scss";
+import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
+
+//! development
+import testImage from "../public/imgs/test/filler.png";
+import { tempMapContainer } from "../styles/Home.module.scss";
 
 export default function Home() {
   const {
     currentTheme: { primary, secondary },
-    toggleDarkMode,
   } = useContext(ThemeContext);
 
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
-        quas molestias? Repudiandae, corrupti unde! Architecto animi placeat ex
-        nulla esse reiciendis, dignissimos quo maxime omnis culpa minus est
-        iusto similique modi aut quibusdam ipsum? Praesentium odio officiis
-        impedit natus ea illum deserunt, quae tenetur ipsa accusantium ipsam
-        consectetur voluptates, laudantium obcaecati. Maxime ipsam laborum,
-        omnis ut eos explicabo vitae? Obcaecati nisi aut perspiciatis omnis!
-        Necessitatibus sint veritatis aliquid excepturi consequatur, fugit
-        inventore ut laboriosam sapiente numquam dolorem dolor amet cupiditate
-        dolores praesentium voluptate magnam! Qui sunt accusamus doloribus
-        eligendi provident distinctio exercitationem eum officiis accusantium,
-        quaerat veniam quos, nesciunt ipsum ducimus est dignissimos cumque
-        perspiciatis repellendus sed, ratione officia ullam vel! Harum minus
-        vitae officiis debitis libero! Qui saepe suscipit accusamus tenetur
-        ullam perferendis consequuntur adipisci debitis molestias sunt sapiente,
-        veritatis minus cumque vel sequi eius! Officia illum quo aliquam,
-        dolores veniam ex sapiente eius molestias nesciunt cumque eum voluptatem
-        nam. Illum corrupti voluptates, eos consequuntur dolores nulla ipsum
-        quaerat deserunt architecto quisquam similique dolore unde? Quae ipsum
-        corrupti magnam voluptatum maxime similique magni dolore provident
-        veritatis esse repudiandae assumenda asperiores ab accusamus odit,
-        placeat expedita. Alias consectetur ipsa facere. Rerum repudiandae
-        officiis ratione harum qui obcaecati, ipsam voluptatibus eum.
-      </p>
-    </div>
+    <>
+      <Carousel
+        carouselIndex={carouselIndex}
+        setCarouselIndex={setCarouselIndex}
+      />
+      <section>
+        <h1 className={`${title}`}>
+          Trailers for all film and entertainment needs
+        </h1>
+        <div className={`contentWrapper ${sellingPoints}`}>
+          <h3>What we provide:</h3>
+          <ul>
+            <HR />
+            <li>
+              Rugged trucks and trailers capable of traversing tough terrain
+            </li>
+            <HR />
+            <li>17 Years of film and entertainment industry experience</li>
+            <HR />
+            <li>24 Hour access to our maintenance team</li>
+          </ul>
+        </div>
+      </section>
+      <nav className={`${quickLinks}`}>
+        <h2>Quick Links</h2>
+        <ul className="contentWrapper">
+          <HR inverse={true} />
+          <li>
+            <Link href="">
+              <a>Gallery</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="">
+              <a>About Us</a>
+            </Link>
+          </li>
+          <HR inverse={true} />
+        </ul>
+      </nav>
+      <section className={tempMapContainer}>
+        <div>
+          <h6>Where to find us</h6>
+          <div></div>
+        </div>
+      </section>
+    </>
   );
 }

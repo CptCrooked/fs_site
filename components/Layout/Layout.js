@@ -28,23 +28,12 @@ const Layout = ({ children }) => {
     }
   };
 
-  let show = false;
-  show = true;
-
-  const showLayoutBounds = () => {
-    if (show) {
-      return { boxShadow: "inset 0 0 0 2px red" };
-    }
-  };
-
   return (
     <>
       <Header lockScroll={lockScroll} />
       <Nav />
       <main className={`${primary} page`} ref={pageRef}>
-        <div className="contentWrapper" style={showLayoutBounds()}>
-          {children}
-        </div>
+        {children}
       </main>
     </>
   );

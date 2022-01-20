@@ -1,0 +1,133 @@
+@import "./mixins";
+
+.title {
+  background-image: var(--solid-bg);
+  font-size: clamp(1.5rem, 5vw, 2.7rem);
+  padding: var(--p-3) 5%;
+  text-align: center;
+  box-shadow: var(--sm-md-shadow);
+  text-shadow: 0 2px 2px var(--shadow-colour);
+
+  @media screen and (min-width: 320px) {
+    letter-spacing: 0.18rem;
+  }
+  @media screen and (min-width: 768px) {
+    letter-spacing: 0.4rem;
+    padding: var(--p-5) 15%;
+  }
+}
+
+.sellingPoints {
+  text-align: center;
+  margin-bottom: var(--m-5);
+  & h3 {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-top: var(--m-5);
+    text-shadow: 0 2px 4px var(--shadow-colour);
+  }
+
+  & ul {
+    width: calc(100% - var(--m-5));
+    margin: 0 auto;
+    text-shadow: var(--normal-text-shadow);
+  }
+
+  & li {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    max-width: 15rem;
+    margin: 0 auto;
+  }
+}
+
+.quickLinks {
+  background-image: var(--solid-bg);
+  box-shadow: var(--sm-md-shadow);
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+
+  & h2 {
+    padding: var(--p-3);
+    padding-bottom: 0;
+    text-align: center;
+  }
+
+  & ul {
+    padding-bottom: var(--p-2);
+  }
+
+  & li {
+    border-radius: var(--button-border-radius);
+    box-shadow: var(--sm-md-shadow);
+    width: 12rem;
+    margin: 0 auto;
+    margin-bottom: var(--m-2);
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+      margin-right: var(--m-3);
+    }
+
+    & a {
+      border-radius: var(--button-border-radius);
+      font-size: clamp(1.1rem, 2vw, 2rem);
+      letter-spacing: 0.15rem;
+      border: 1px ridge var(--grey);
+      background-image: var(--inverse-solid-bg);
+      color: var(--inverse-font-colour);
+      display: block;
+      width: 12rem;
+      height: 3rem;
+      text-shadow: 0 2px 2px var(--inverse-shadow-colour);
+      @include XYCenterChildren;
+    }
+  }
+
+  font-size: clamp(1.2rem, 3vw, 2.8rem);
+}
+
+.tempMapContainer {
+  width: 100%;
+  position: relative;
+  border-radius: 0;
+  z-index: 5;
+  overflow: hidden;
+
+  & > div {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    & > h6 {
+      position: relative;
+      font-size: 1.6rem;
+      padding: var(--p-4);
+      z-index: 1;
+      background-image: none;
+      text-align: center;
+      box-shadow: var(--sm-md-shadow);
+      font-size: clamp(1.2rem, 3vw, 2.8rem);
+
+      @media screen and (min-width: 768px) {
+        background-image: var(--solid-bg);
+      }
+    }
+
+    & > div {
+      position: relative;
+      display: block;
+      padding-bottom: 300px;
+      background-image: url("/imgs/test/filler.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      position: relative;
+      border-radius: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+}

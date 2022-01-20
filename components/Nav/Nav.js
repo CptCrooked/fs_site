@@ -13,9 +13,9 @@ const Nav = () => {
   } = useContext(ThemeContext);
 
   return (
-    <nav className={`${nav} ${primary}`}>
+    <nav className={`${primary} ${nav}`} aria-label="Main Navigation">
       <div aria-hidden="true" className={overlay}></div>
-      <ul className={`card`}>
+      <ul className={`${primary} card`}>
         <div aria-hidden="true" className={`card`}>
           <Image src={logo} alt="" />
         </div>

@@ -38,6 +38,7 @@ body {
   --m-7: 3rem;
 
   --sm-border-radius: 0.4rem;
+  --md-border-radius: 0.5rem;
   --button-border-radius: 2rem 2rem 10rem 10rem;
   --light-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.2);
   --dark-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
@@ -69,8 +70,8 @@ body {
 }
 
 .light {
-  --font-colour: rgb(6, 25, 55);
-  --inverse-font-colour: rgb(218, 218, 218);
+  --font-colour: rgb(15, 50, 107);
+  --inverse-font-colour: rgb(226, 226, 226);
   --xs-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.3);
   --sm-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
   --sm-md-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
@@ -82,6 +83,7 @@ body {
   --inset-lg-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
   --shadow-colour: rgba(0, 0, 0, 0.3);
   --inverse-shadow-colour: rgba(0, 0, 0, 0.8);
+  --normal-text-shadow: 0 2px 2px var(--shadow-colour);
 
   --glass-bg: linear-gradient(
     180deg,
@@ -169,8 +171,8 @@ body {
 }
 
 .dark {
-  --logo-font-colour: rgb(184, 184, 184);
-  --font-colour: rgb(184, 184, 184);
+  --logo-font-colour: rgb(226, 226, 226);
+  --font-colour: rgb(226, 226, 226);
   --inverse-font-colour: rgb(6, 25, 55);
   --xs-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
   --sm-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
@@ -183,6 +185,7 @@ body {
   --inset-lg-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0, 0.8);
   --shadow-colour: rgba(0, 0, 0, 0.8);
   --inverse-shadow-colour: rgba(0, 0, 0, 0.3);
+  --normal-text-shadow: 0 2px 2px var(--shadow-colour);
 
   --glass-bg: linear-gradient(
     180deg,
@@ -344,11 +347,9 @@ label.pressed {
 .contentWrapper {
   margin: 0 auto;
   max-width: 100%;
-  padding: var(--p-2);
 
   @media screen and (min-width: 500px) {
     max-width: 90%;
-    padding: 0;
   }
 
   @media screen and (min-width: 768px) {

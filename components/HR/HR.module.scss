@@ -1,0 +1,13 @@
+.hr {
+  padding-bottom: 4px;
+  background-image: var(--solid-bg);
+  width: 60%;
+  max-width: 200px;
+  margin: var(--m-3) auto;
+  border-radius: var(--sm-border-radius);
+  box-shadow: var(--sm-shadow);
+}
+
+.hrAlt {
+  background-image: var(--inverse-solid-bg);
+}

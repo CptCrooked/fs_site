@@ -1,7 +1,8 @@
 @import "../../styles/mixins";
 
 // Class to toggle nav will be found in Header.module.scss
-// as the class was defined there.
+// as the class was defined there. Checkbox is at the 'root' of the header component
+// ( it is the first node )
 
 nav.nav {
   background-image: url("../../public/imgs/bg_light.png");
@@ -17,15 +18,13 @@ nav.nav {
   @include XYCenterChildren;
   flex-direction: column;
 
-  // Shows nav at 768px
-
   @media screen and (min-width: 500px) {
     margin: 0 auto;
     width: 90%;
   }
+
+  // Shows nav at 768px
   @media screen and (min-width: 768px) {
-    // box-shadow: inset 0 0 0 2px red;
-    position: absolute;
     top: 0;
     right: 0;
     width: 80%;
@@ -92,6 +91,7 @@ nav.nav {
 
         // Shows nav at 768px
         @media screen and (min-width: 768px) {
+          border-radius: var(--md-border-radius);
           width: 7.5rem;
           height: 2.5rem;
           padding-bottom: var(--p-1);
