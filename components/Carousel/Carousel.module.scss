@@ -12,12 +12,14 @@
   margin: 0 auto;
 
   @media screen and (min-width: 768px) {
-    height: 55vw;
+    height: 50vw;
     width: 80%;
+    // max-height: ;
   }
 
   @media screen and (min-width: 1800px) {
     max-width: 1366px;
+    max-height: 1366px * 0.6;
   }
 }
 

@@ -3,7 +3,12 @@ import { useState, useContext } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import HR from "../components/HR/HR";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
+import {
+  title,
+  sellingPoints,
+  quickLinks,
+  blurb,
+} from "../styles/Home.module.scss";
 
 //! development
 // import testImage from "../public/imgs/test/filler.png";
@@ -27,17 +32,16 @@ export default function Home() {
         <h1 className={`${title}`}>
           Trailers for all film and entertainment needs
         </h1>
-        <div className={`contentWrapper ${sellingPoints}`}>
-          <h3>What we provide:</h3>
-          <ul>
-            <HR />
+        <div className={`${sellingPoints}`}>
+          <h3 className={`contentWrapper secondaryTitle`}>What we provide:</h3>
+          <ul className={`contentWrapper`}>
+            <li>24 Hour access to our maintenance team</li>
+            <HR responsive={true} />
             <li>
               Rugged trucks and trailers capable of traversing tough terrain
             </li>
-            <HR />
+            <HR responsive={true} />
             <li>17 Years of film and entertainment industry experience</li>
-            <HR />
-            <li>24 Hour access to our maintenance team</li>
           </ul>
         </div>
       </section>
@@ -46,24 +50,40 @@ export default function Home() {
         <ul className="contentWrapper">
           <HR inverse={true} />
           <li>
-            <Link href="">
+            <Link href="/">
               <a>Gallery</a>
             </Link>
           </li>
           <li>
-            <Link href="">
+            <Link href="/">
               <a>About Us</a>
             </Link>
           </li>
           <HR inverse={true} />
         </ul>
       </nav>
-      <section className={tempMapContainer}>
+      <section className={`contentWrapper ${blurb}`}>
+        <h4 className={`secondaryTitle`}>Lorem ipsum dolor sit?</h4>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam
+          voluptatum laborum id ratione? Fugit totam impedit quia, quos
+          aspernatur aliquam magni delectus minus doloribus ea tempora, aliquid
+          assumenda? Dignissimos consequatur magni exercitationem repudiandae
+          deleniti laborum repellat qui beatae, quae enim assumenda ratione
+          laboriosam magnam molestiae commodi debitis aspernatur at, totam vero
+          ipsum a quam voluptatibus. Ab magni mollitia rem dolorum distinctio
+          asperiores quisquam illum unde autem esse porro doloremque quis
+          ratione dicta doloribus amet omnis quo, provident accusantium sed nisi
+          velit ad eaque. Nemo perspiciatis dolorum dolor minima illo, adipisci
+          dolores soluta eligendi expedita cum repudiandae sint quam quis neque.
+        </p>
+      </section>
+      {/* <section className={tempMapContainer}>
         <div>
           <h6>Where to find us</h6>
           <div></div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

@@ -360,3 +360,15 @@ label.pressed {
     max-width: 1366px;
   }
 }
+
+.secondaryTitle {
+  background-color: var(--sheet);
+  padding: var(--p-3);
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  text-shadow: var(--normal-text-shadow);
+  box-shadow: var(--sm-md-shadow);
+  border-radius: 0 0 100px 100px;
+  margin: 0 auto;
+  margin-bottom: var(--m-3);
+  width: min(90%, 90vw, 500px);
+}

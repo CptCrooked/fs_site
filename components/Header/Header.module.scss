@@ -66,7 +66,7 @@ label.menuButton {
   flex-direction: column;
   padding: var(--p-1);
   border-radius: var(--sm-border-radius);
-  transition: box-shadow 0.1s, right 0.3s;
+  transition: box-shadow 0.1s;
   z-index: 11;
 
   @media screen and (min-width: 500px) {
@@ -86,7 +86,7 @@ label.menuButton {
     z-index: 10;
     border-radius: 1rem;
     pointer-events: none;
-    transition: all 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     box-shadow: var(--light-sm-shadow);
 
     &:nth-of-type(2) {
@@ -101,7 +101,7 @@ label.menuButton {
 
   &:checked {
     & ~ nav {
-      top: 0;
+      transform: translateY(0%);
     }
 
     & ~ label > div {

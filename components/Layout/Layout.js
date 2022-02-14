@@ -1,12 +1,9 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import Header from "../Header/Header";
 import Nav from "../Nav/Nav";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { footer } from "./Layout.module.scss";
 
 const Layout = ({ children }) => {
   const {
@@ -35,6 +32,9 @@ const Layout = ({ children }) => {
       <main className={`${primary} page`} ref={pageRef}>
         {children}
       </main>
+      <footer className={`${primary} ${footer}`}>
+        Fleet Star Pty LTD &copy; {new Date().getFullYear()}
+      </footer>
     </>
   );
 };

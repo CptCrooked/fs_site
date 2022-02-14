@@ -25,19 +25,19 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 4.5%;
+    // left: 4.5%;
     width: $size;
     height: $size;
     background-image: var(--solid-bg);
     box-shadow: var(--sm-shadow);
     border-radius: 50%;
-    transform: translateY(-50%);
-    transition: left 0.3s;
+    transform: translate(-65%, -50%);
+    transition: transform 0.3s;
   }
 }
 
 .darkModeClass {
   &::after {
-    left: 55.5%;
+    transform: translate(65%, -50%);
   }
 }

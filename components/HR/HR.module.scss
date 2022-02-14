@@ -8,6 +8,13 @@
   box-shadow: var(--sm-shadow);
 }
 
+.responsiveHr {
+  @media screen and (min-width: 768px) {
+    width: 4px;
+    height: 5rem;
+  }
+}
+
 .hrAlt {
   background-image: var(--inverse-solid-bg);
 }
