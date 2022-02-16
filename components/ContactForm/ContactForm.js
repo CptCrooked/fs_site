@@ -1,5 +1,6 @@
 import React from "react";
 import { form } from "./ContactForm.module.scss";
+
 const ContactForm = () => {
   return (
     <section className={`contentWrapper ${form}`}>
