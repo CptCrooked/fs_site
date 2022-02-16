@@ -274,7 +274,7 @@ body {
 .dark,
 .light {
   color: var(--font-colour);
-  transition: color 0.5s, background-color 0.3s, box-shadow 0.3s;
+  transition: color 0.5s, background-color 0.3s;
 }
 
 .flex {
@@ -328,6 +328,7 @@ label.pressed {
     top: 0;
     z-index: -1;
     background-color: var(--sheet);
+    transition: background-color 0.3s;
   }
 }
 
@@ -364,11 +365,12 @@ label.pressed {
 .secondaryTitle {
   background-color: var(--sheet);
   padding: var(--p-3);
-  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.3vw, 2rem);
   text-shadow: var(--normal-text-shadow);
   box-shadow: var(--sm-md-shadow);
   border-radius: 0 0 100px 100px;
   margin: 0 auto;
   margin-bottom: var(--m-3);
   width: min(90%, 90vw, 500px);
+  font-weight: normal;
 }

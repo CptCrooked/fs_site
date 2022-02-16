@@ -30,7 +30,7 @@ export default function Home() {
       />
       <section>
         <h1 className={`${title}`}>
-          Trailers for all film and entertainment needs
+          Trailers for all film and <span>entertainment needs</span>
         </h1>
         <div className={`${sellingPoints}`}>
           <h3 className={`contentWrapper secondaryTitle`}>What we provide:</h3>
@@ -63,20 +63,37 @@ export default function Home() {
         </ul>
       </nav>
       <section className={`contentWrapper ${blurb}`}>
-        <h4 className={`secondaryTitle`}>Lorem ipsum dolor sit?</h4>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam
-          voluptatum laborum id ratione? Fugit totam impedit quia, quos
-          aspernatur aliquam magni delectus minus doloribus ea tempora, aliquid
-          assumenda? Dignissimos consequatur magni exercitationem repudiandae
-          deleniti laborum repellat qui beatae, quae enim assumenda ratione
-          laboriosam magnam molestiae commodi debitis aspernatur at, totam vero
-          ipsum a quam voluptatibus. Ab magni mollitia rem dolorum distinctio
-          asperiores quisquam illum unde autem esse porro doloremque quis
-          ratione dicta doloribus amet omnis quo, provident accusantium sed nisi
-          velit ad eaque. Nemo perspiciatis dolorum dolor minima illo, adipisci
-          dolores soluta eligendi expedita cum repudiandae sint quam quis neque.
-        </p>
+        <h4 className={`secondaryTitle`}>Contact Us</h4>
+        <p>Leave us a message and we will contact you.</p>
+        <form>
+          <input type="text" name="name" placeholder="Name" aria-label="Name" />
+          <input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            aria-label="E-mail"
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Contact Number"
+            aria-label="Contact Number"
+          />
+          <textarea
+            name="message"
+            id="message"
+            cols="30"
+            rows="10"
+            placeholder="Message..."
+            aria-label="Message"
+          ></textarea>
+          <input
+            type="submit"
+            value="Send"
+            onClick={(e) => e.preventDefault()}
+            aria-label="Send"
+          />
+        </form>
       </section>
       {/* <section className={tempMapContainer}>
         <div>
