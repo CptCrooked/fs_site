@@ -29,40 +29,96 @@
       background-color: var(--sheet);
       font-family: inherit;
       color: var(--font-colour);
-      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-size: clamp(1.2rem, 1.5vw, 1.7rem);
       padding: 1rem;
       border-radius: var(--md-border-radius);
       margin-bottom: clamp(var(--m-2), 4%, var(--m-5));
       border: none;
-      box-shadow: var(--sm-shadow), var(--inset-sm-shadow);
+      box-shadow: inset 0 2px 8px var(--shadow-colour);
       letter-spacing: 0.1rem;
-      transition: box-shadow 0.5s;
-
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus {
-        -webkit-text-fill-color: var(--font-colour) !important;
-      }
+      transition: box-shadow 1s;
 
       &:focus {
         outline: none;
-        box-shadow: var(--sm-md-shadow), var(--inset-sm-shadow),
-          inset 0 -4px 32px -8px var(--font-colour);
+        box-shadow: var(--inset-sm-shadow),
+          inset 0 -4px 32px -8px var(--inverse-font-colour),
+          inset 0 0 200px 1000px var(--font-colour);
+
+        &::placeholder {
+          opacity: 0.7;
+          color: var(--inverse-font-colour);
+        }
       }
 
       &::placeholder {
-        text-shadow: var(--normal-text-shadow);
+        text-shadow: 0 2px 2px var(--shadow-colour);
         color: var(--font-colour);
-        opacity: 0.5;
+        font-style: italic;
+        transition: opacity 0.2s;
       }
     }
 
+    textarea {
+      resize: none;
+    }
+
     input[type="submit"] {
+      display: inline-block;
       background-color: var(--font-colour);
       color: var(--inverse-font-colour);
       background-image: var(--inverse-solid-bg);
       text-shadow: 0 2px 2px var(--inverse-shadow-colour);
-      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      font-size: clamp(1.4rem, 1.75vw, 2rem);
+      box-shadow: var(--sm-md-shadow);
+      transition: box-shadow 0.3s;
+
+      &:active {
+        box-shadow: var(--sm-shadow);
+      }
+    }
+  }
+}
+
+.recapture {
+  // ! Development purposes
+  // height: 77px;
+  // margin-bottom: var(--m-2);
+  // line-height: 78px;
+  // background-color: #eee;
+  // background-image: url("../../public/imgs/test/reCapture.png");
+  // background-position: center center;
+  // background-size: contain;
+  // box-shadow: var(--sm-shadow);
+  // border-radius: 4px;
+  // width: 303px;
+  // margin: 0 auto auto;
+  // margin-bottom: clamp(var(--m-2), 4%, var(--m-5));
+
+  & > div > div {
+    height: 78px;
+    margin-bottom: clamp(var(--m-2), 4%, var(--m-5));
+    display: inline-block;
+    & > div {
+      position: relative;
+      margin-bottom: var(--m-2);
+
+      & > div {
+        display: block;
+        border-radius: 4px;
+        width: 303px;
+        height: 76px;
+        box-shadow: var(--sm-shadow);
+      }
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--sheet);
+        z-index: 1;
+      }
     }
   }
 }

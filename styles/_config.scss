@@ -365,7 +365,7 @@ label.pressed {
 .secondaryTitle {
   background-color: var(--sheet);
   padding: var(--p-3);
-  font-size: clamp(1.4rem, 2.3vw, 2rem);
+  font-size: clamp(1.4rem, 1.75vw, 2rem);
   text-shadow: var(--normal-text-shadow);
   box-shadow: var(--sm-md-shadow);
   border-radius: 0 0 100px 100px;

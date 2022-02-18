@@ -3,7 +3,7 @@
 .title {
   position: relative;
   background-image: var(--solid-bg);
-  font-size: clamp(1.65rem, 5vw, 2.7rem);
+  font-size: clamp(1.65rem, 2.5vw, 2.7rem);
   padding: var(--p-3) 5%;
   text-align: center;
   box-shadow: var(--sm-md-shadow);
@@ -13,6 +13,7 @@
   @media screen and (min-width: 320px) {
     letter-spacing: 0.18rem;
   }
+
   @media screen and (min-width: 768px) {
     letter-spacing: 0.4rem;
     padding: var(--p-5) 15%;
@@ -89,7 +90,7 @@
 
     & a {
       border-radius: var(--button-border-radius);
-      font-size: clamp(1.3rem, 2vw, 2rem);
+      font-size: clamp(1.3rem, 1.75vw, 2rem);
       letter-spacing: 0.15rem;
       border: 1px ridge var(--grey);
       background-image: var(--inverse-solid-bg);
@@ -102,7 +103,7 @@
       @include XYCenterChildren;
 
       @media screen and (min-width: 1200px) {
-        padding: 0.9rem;
+        padding: 0.7rem;
       }
     }
   }

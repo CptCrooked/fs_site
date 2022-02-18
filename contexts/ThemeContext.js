@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 
 export const ThemeContext = createContext();
 
@@ -13,6 +13,13 @@ const ThemeContextProvider = ({ children }) => {
     secondary: darkMode ? "light" : "dark",
     darkMode: darkMode,
   };
+
+  // useEffect(() => {
+  //   if (condition) {
+
+  //   }
+  // }, [darkmode])
+
   return (
     <ThemeContext.Provider value={{ currentTheme, toggleDarkMode }}>
       {children}
