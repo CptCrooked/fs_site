@@ -57,7 +57,7 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
             src={url}
             alt=""
             layout="fill"
-            priority="true"
+            priority={elementIndex < 3 ? "true" : "false"}
           />
         );
       })}

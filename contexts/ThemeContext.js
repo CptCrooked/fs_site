@@ -14,12 +14,6 @@ const ThemeContextProvider = ({ children }) => {
     darkMode: darkMode,
   };
 
-  // useEffect(() => {
-  //   if (condition) {
-
-  //   }
-  // }, [darkmode])
-
   return (
     <ThemeContext.Provider value={{ currentTheme, toggleDarkMode }}>
       {children}

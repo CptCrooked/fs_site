@@ -7,11 +7,15 @@
     }
   }
 
-  & p {
+  & h5 {
+    font-weight: normal;
     margin: var(--m-2) auto var(--m-3);
     max-width: 16rem;
     font-size: clamp(1.1rem, 1.9vw, 1.5rem);
     text-shadow: var(--normal-text-shadow);
+    & + p {
+      margin-bottom: var(--m-3);
+    }
 
     @media screen and (min-width: 768px) {
     }
@@ -36,16 +40,17 @@
       border: none;
       box-shadow: inset 0 2px 8px var(--shadow-colour);
       letter-spacing: 0.1rem;
-      transition: box-shadow 1s;
+      transition: box-shadow 1s, color 1s;
 
       &:focus {
         outline: none;
+        color: var(--inverse-font-colour) !important;
         box-shadow: var(--inset-sm-shadow),
           inset 0 -4px 32px -8px var(--inverse-font-colour),
           inset 0 0 200px 1000px var(--font-colour);
 
         &::placeholder {
-          opacity: 0.7;
+          opacity: 0.5;
           color: var(--inverse-font-colour);
         }
       }
@@ -54,6 +59,7 @@
         text-shadow: 0 2px 2px var(--shadow-colour);
         color: var(--font-colour);
         font-style: italic;
+        opacity: 0.7;
         transition: opacity 0.2s;
       }
     }
@@ -65,12 +71,13 @@
     input[type="submit"] {
       display: inline-block;
       background-color: var(--font-colour);
-      color: var(--inverse-font-colour);
       background-image: var(--inverse-solid-bg);
+      color: var(--inverse-font-colour);
       text-shadow: 0 2px 2px var(--inverse-shadow-colour);
       font-size: clamp(1.4rem, 1.75vw, 2rem);
       box-shadow: var(--sm-md-shadow);
       transition: box-shadow 0.3s;
+      margin-bottom: var(--m-6);
 
       &:active {
         box-shadow: var(--sm-shadow);

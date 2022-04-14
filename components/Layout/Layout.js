@@ -4,11 +4,14 @@ import Header from "../Header/Header";
 import Nav from "../Nav/Nav";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { footer } from "./Layout.module.scss";
+import AlertList from "../Alert/AlertList";
 
 const Layout = ({ children }) => {
   const {
     currentTheme: { primary },
   } = useContext(ThemeContext);
+
+  // This prevent's the body from scrolling when the navigation is open
 
   const pageRef = useRef(null);
 
@@ -30,6 +33,7 @@ const Layout = ({ children }) => {
       <Header lockScroll={lockScroll} />
       <Nav />
       <main className={`${primary} page`} ref={pageRef}>
+        <AlertList />
         {children}
       </main>
       <footer className={`${primary} ${footer}`}>

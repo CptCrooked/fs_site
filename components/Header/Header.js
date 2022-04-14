@@ -41,22 +41,21 @@ const Header = ({ lockScroll }) => {
         id="navigationToggle"
       />
       <header className={`${primary} ${header}`}>
-        <div role="presentation" className="wrapper flex">
-          <div className={`${imageWrapper} card card-light`}>
-            <Link href="/">
-              <a>
-                <Image
-                  src={logo}
-                  alt="Fleet Star Logo"
-                  layout="fixed"
-                  width={120}
-                  priority="true"
-                />
-              </a>
-            </Link>
-          </div>
+        <div className={`${imageWrapper} card card-light`}>
+          <Link href="/">
+            <a>
+              <Image
+                src={logo}
+                alt="Fleet Star Logo"
+                layout="fixed"
+                width={120}
+                priority="true"
+              />
+            </a>
+          </Link>
         </div>
       </header>
+      {/* Menu Button on mobile */}
       <label
         role="button"
         className={`${primary} ${menuButton}`}

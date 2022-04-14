@@ -1,0 +1,29 @@
+@import "../../styles/_mixins.scss";
+
+.gallery_container {
+  position: relative;
+  height: 38vh;
+}
+
+.image_wrapper {
+  width: 100%;
+}
+
+.image_caption {
+  position: absolute;
+  top: 0;
+  right: 200vw;
+}
+
+.carousel_controls {
+  height: 4rem;
+  box-shadow: inset 0 0 0 2px red;
+  width: 100%;
+  background-image: var(--solid-bg);
+
+  @include XYCenterChildren;
+
+  & button {
+    padding: var(--p-2) var(--p-5);
+  }
+}

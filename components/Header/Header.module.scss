@@ -13,34 +13,21 @@
   padding: var(--p-6) 0;
   z-index: 5;
 
-  & > div[role="presentation"] {
-    position: relative;
-    padding: var(--p-2);
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-
-    @media screen and (min-width: 500px) {
-      padding: 0;
-      width: 90%;
-    }
-
-    @media screen and (min-width: 768px) {
-      width: 80%;
-    }
-
-    @media screen and (min-width: 1800px) {
-      max-width: 1366px;
-    }
-  }
-
   & .imageWrapper {
     background-image: var(--grey-gradient);
     width: 130px;
     position: relative;
     height: 52px;
     @include XYCenterChildren;
+    left: var(--p-2);
+
+    @media screen and (min-width: 500px) {
+      left: 5%;
+    }
+
+    @media screen and (min-width: 768px) {
+      left: 10%;
+    }
 
     & > a > span {
       position: absolute !important;
@@ -61,12 +48,12 @@ label.menuButton {
   height: 40px;
   font-size: 0;
   box-shadow: var(--sm-shadow), inset 0 0 0 0 transparent;
-  @include XYCenterChildren;
   flex-direction: column;
   padding: var(--p-1);
   border-radius: var(--sm-border-radius);
   transition: box-shadow 0.1s;
   z-index: 11;
+  @include XYCenterChildren;
 
   @media screen and (min-width: 500px) {
     right: 5%;
@@ -90,6 +77,7 @@ label.menuButton {
 
     &:nth-of-type(2) {
       margin: 4px 0;
+      opacity: 1;
     }
   }
 }
@@ -97,6 +85,28 @@ label.menuButton {
 .checkbox {
   position: absolute;
   left: -10000%;
+
+  & ~ nav {
+    transform: translateY(-100%);
+  }
+
+  & ~ label > div {
+    $angle: 40deg;
+    &:first-of-type {
+      transform-origin: center right;
+      transform: rotate(0px) translateX(-0px) translateY(0px);
+    }
+
+    &:nth-of-type(2) {
+      transform: rotateZ(0deg);
+      opacity: 1;
+    }
+
+    &:last-of-type {
+      transform-origin: center right;
+      transform: rotate(0) translateX(-0px) translateY(0px);
+    }
+  }
 
   &:checked {
     & ~ nav {
