@@ -3,13 +3,16 @@
 .title {
   position: relative;
   background-image: var(--solid-bg);
-  font-size: clamp(1.65rem, 2.5vw, 2.7rem);
+  font-size: clamp(1.65rem, 2.7vw, 3rem);
   padding: var(--p-3) 5%;
   text-align: center;
   box-shadow: var(--sm-md-shadow);
   text-shadow: 0 2px 2px var(--shadow-colour);
   z-index: 1;
-  font-weight: bol;
+  font-weight: bold;
+  & span {
+    display: block;
+  }
 
   @media screen and (min-width: 320px) {
     letter-spacing: 0.18rem;
@@ -18,9 +21,6 @@
   @media screen and (min-width: 768px) {
     letter-spacing: 0.4rem;
     padding: var(--p-5) 15%;
-    & span {
-      display: block;
-    }
   }
 }
 

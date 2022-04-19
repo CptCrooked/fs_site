@@ -9,22 +9,16 @@ import {
 } from "./Carousel.module.scss";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { ImageContext } from "../../contexts/ImageContext";
 
 const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   const {
     currentTheme: { primary },
   } = useContext(ThemeContext);
 
-  const carouselImages = [
-    { url: "/imgs/stars/elevenMeterAfrican/11mafrbasin1000px.png" },
-    { url: "/imgs/stars/elevenMeterAfrican/11mafrbed1000px.png" },
-    { url: "/imgs/stars/nineMeterAfrican/9mafrbasin1000px.png" },
-    { url: "/imgs/stars/nineMeterAfrican/9mafrbed1000px.png" },
-    { url: "/imgs/doubles/doublebedanddesk1000px.png" },
-    { url: "/imgs/doubles/doublelarge1000px.png" },
-    { url: "/imgs/makeup/muplarge1000px.png" },
-    { url: "/imgs/production/prodlarge1000pxfixed.png" },
-  ];
+  const {
+    imgs: { carouselImages },
+  } = useContext(ImageContext);
 
   const auto = () => {
     const timer = setTimeout(() => {
@@ -44,17 +38,17 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   });
 
   return (
-    <section className={`${carouselContainer} ${primary}-shadow`} style={{}}>
+    <section className={`${carouselContainer} ${primary}-shadow`}>
       <div role="presentation" className={carouselBottomShadow}></div>
       <div role="presentation" className={scrollIndicator}></div>
-      {carouselImages.map(({ url }, elementIndex) => {
+      {carouselImages.map(({ src }, elementIndex) => {
         return (
           <Image
             className={`${carouselImage} ${
               elementIndex === carouselIndex ? showImage : ""
             }`}
-            key={url}
-            src={url}
+            key={src}
+            src={src}
             alt=""
             layout="fill"
             priority={elementIndex < 3 ? "true" : "false"}

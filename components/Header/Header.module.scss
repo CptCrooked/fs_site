@@ -72,7 +72,7 @@ label.menuButton {
     z-index: 10;
     border-radius: 1rem;
     pointer-events: none;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, opacity 0.15s;
     box-shadow: var(--light-sm-shadow);
 
     &:nth-of-type(2) {
@@ -98,7 +98,6 @@ label.menuButton {
     }
 
     &:nth-of-type(2) {
-      transform: rotateZ(0deg);
       opacity: 1;
     }
 
@@ -121,7 +120,6 @@ label.menuButton {
       }
 
       &:nth-of-type(2) {
-        transform: rotateZ(360deg);
         opacity: 0;
       }
 
