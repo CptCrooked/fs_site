@@ -1,15 +1,15 @@
 import { useEffect, useContext } from "react";
 import Image from "next/image";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { ImageContext } from "../../contexts/ImageContext";
+import { v4 as uuid } from "uuid";
 import {
   carouselContainer,
   carouselBottomShadow,
   carouselImage,
   showImage,
-  scrollIndicator,
 } from "./Carousel.module.scss";
 import PropTypes from "prop-types";
-import { ThemeContext } from "../../contexts/ThemeContext";
-import { ImageContext } from "../../contexts/ImageContext";
 
 const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   const {
@@ -38,20 +38,19 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   });
 
   return (
-    <section className={`${carouselContainer} ${primary}-shadow`}>
+    <section className={`${carouselContainer} ${primary}-shadow`} style={{}}>
       <div role="presentation" className={carouselBottomShadow}></div>
-      <div role="presentation" className={scrollIndicator}></div>
       {carouselImages.map(({ src }, elementIndex) => {
         return (
           <Image
             className={`${carouselImage} ${
               elementIndex === carouselIndex ? showImage : ""
             }`}
-            key={src}
+            key={`${src.src}`}
             src={src}
             alt=""
             layout="fill"
-            priority={elementIndex < 3 ? "true" : "false"}
+            priority={elementIndex < 2 ? "true" : "false"}
           />
         );
       })}

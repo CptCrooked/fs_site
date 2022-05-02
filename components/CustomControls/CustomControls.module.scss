@@ -1,0 +1,44 @@
+@import "../../styles/mixins";
+
+.custom_select {
+    background-color: var(--sheet);
+    height: 4rem;
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    position: relative;
+    overflow: scroll;
+
+    &>div {
+        line-height: 4rem;
+        text-align: center;
+    }
+}
+
+.carousel_controls {
+    width: 100%;
+    background-image: var(--solid-bg);
+    position: relative;
+    z-index: 1;
+
+    & select {
+        display: block;
+        height: 4rem;
+        margin: 0 auto;
+        padding: 1rem;
+        display: none;
+    }
+
+}
+.carousel_buttons {
+    height: 4rem;
+    @include XYCenterChildren;
+
+    & button {
+        padding: var(--p-2) var(--p-5);
+        border-radius: var(--sm-border-radius);
+
+        &:not(:first-of-type),
+        &:not(:last-of-type) {
+            margin: 0 var(--p-1);
+        }
+    }
+}

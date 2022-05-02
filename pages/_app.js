@@ -8,15 +8,15 @@ import "../styles/globals.scss";
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeContextProvider>
-      <ImageContextProvider>
-        <AlertContextProvider>
-          <FormContextProvider>
+      <AlertContextProvider>
+        <FormContextProvider>
+          <ImageContextProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </FormContextProvider>
-        </AlertContextProvider>
-      </ImageContextProvider>
+          </ImageContextProvider>
+        </FormContextProvider>
+      </AlertContextProvider>
     </ThemeContextProvider>
   );
 }
