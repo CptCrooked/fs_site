@@ -62,11 +62,11 @@ const Gallery = () => {
         fns={{ forward, back }}
       />
       <p className={carousel_info}>
-        This trailer imported from USA has sides that "pop-out" to create ample
-        space. The trailer has a bedroom, en suite bathroom, ample cupboards, a
-        kitchen, a dining room, a spacious lounge and air-conditioning
-        throughout. For entertainment, there is a 36" Plasma TV, a DVD/CD
-        player.
+        This trailer imported from USA has sides that &ldquo;pop-out&ldquo; to
+        create ample space. The trailer has a bedroom, en suite bathroom, ample
+        cupboards, a kitchen, a dining room, a spacious lounge and
+        air-conditioning throughout. For entertainment, there is a 36&ldquo;
+        Plasma TV, a DVD/CD player.
       </p>
     </section>
   );
