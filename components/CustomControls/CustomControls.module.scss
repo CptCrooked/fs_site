@@ -2,12 +2,12 @@
 
 .custom_select {
     background-color: var(--sheet);
-    height: 4rem;
+    // height: 4rem;
     font-size: clamp(1.5rem, 3vw, 3rem);
     position: relative;
     overflow: scroll;
-
-    &>div {
+    
+    & > div {
         line-height: 4rem;
         text-align: center;
     }
@@ -18,16 +18,42 @@
     background-image: var(--solid-bg);
     position: relative;
     z-index: 1;
-
+    padding: 0 var(--p-2);
+    
     & select {
+        border-radius: var(--md-border-radius);
         display: block;
         height: 4rem;
-        margin: 0 auto;
         padding: 1rem;
-        display: none;
+        // display: none;
+        appearance: none;
+        line-height: normal;
+        position: relative;
+        // background-position: right 10px top 50%;
+        background-repeat: no-repeat;
+        width: 100%;
     }
-
+    
 }
+
+.custom_select {
+    height: 4rem;
+    
+    & > div {
+        position: relative;
+        
+        > span {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-image: var(--solid-bg);
+            box-shadow: var(--sm-md-shadow);
+        }
+    }
+}
+
 .carousel_buttons {
     height: 4rem;
     @include XYCenterChildren;
@@ -35,6 +61,7 @@
     & button {
         padding: var(--p-2) var(--p-5);
         border-radius: var(--sm-border-radius);
+        border: none;
 
         &:not(:first-of-type),
         &:not(:last-of-type) {
