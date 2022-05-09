@@ -18,6 +18,7 @@ const Gallery = () => {
   const [currentImageArr, setCurrentImageArr] = useState(imgs.carouselImages);
   const selectRefValue = useRef(null);
   const galleryContainerRef = useRef(null);
+  const classAdded = useRef(false);
 
   const forward = (arr) => {
     if (index < arr.length - 1) {
@@ -41,22 +42,14 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    let shown;
-    [...galleryContainerRef.current.children].forEach((figureEl) => {
-      if (figureEl.children[0].children[0].classList.value.length > 1) {
-        console.dir(`HAS class`);
-        console.dir(figureEl.children[0].children[0].classList);
-        shown = true;
-      } else if (
-        figureEl.children[0].children[0].classList.value.length === 0
-      ) {
-        console.dir(`DOESN'T HAVE class`);
-        console.dir(figureEl.children[0].children[0].classList);
-      }
-    });
-    console.log(`selectRefValue.current:`, selectRefValue.current);
-    console.log(`Shown:`, shown);
-  }, [currentImageArr]);
+    const galleryChildren = [...galleryContainerRef.current.children];
+    const shown = galleryChildren.filter(
+      (figureEl) => figureEl.children[0].children[0].classList.value.length > 1
+    );
+    if (shown.length !== 1) {
+      galleryChildren[0].children[0].children[0].classList.add(showImage);
+    }
+  });
 
   return (
     <section>

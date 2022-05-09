@@ -26,12 +26,16 @@
         height: 4rem;
         padding: 1rem;
         // display: none;
+        border: none;
         appearance: none;
         line-height: normal;
         position: relative;
         // background-position: right 10px top 50%;
         background-repeat: no-repeat;
         width: 100%;
+        background-image: var(--inverse-solid-bg);
+        color: var(--inverse-font-colour);
+        box-shadow: var(--sm-md-shadow);
     }
     
 }
@@ -55,17 +59,24 @@
 }
 
 .carousel_buttons {
-    height: 4rem;
-    @include XYCenterChildren;
+    // @include XYCenterChildren;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--p-2) 0;
 
     & button {
-        padding: var(--p-2) var(--p-5);
+        height: 3rem;
+        color: var(--inverse-font-colour);
+        background-image: var(--inverse-solid-bg);
         border-radius: var(--sm-border-radius);
+        box-shadow: var(--sm-md-shadow);
         border: none;
+        width: 5rem;
+        margin: 0;
 
         &:not(:first-of-type),
         &:not(:last-of-type) {
-            margin: 0 var(--p-1);
+            // margin: 0 auto;
         }
     }
 }

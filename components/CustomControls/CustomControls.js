@@ -18,9 +18,6 @@ const CustomControls = ({
     label: "Select A Unit...",
   };
 
-  useEffect(() => {
-    console.log([{ defaultDisabledOption }, ...trailerData]);
-  }, []);
   return (
     <div className={carousel_controls}>
       <div className={carousel_buttons}>

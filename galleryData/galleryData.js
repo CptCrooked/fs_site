@@ -93,20 +93,21 @@ const trailerData = [
       },
     ],
   },
-  {
-    type: "makeupWardrobe",
-    label: "Make-Up / Wardrobe",
-    subDivisions: [
-      {
-        division: "african",
-        label: "African Triple",
-      },
-      {
-        division: "popout",
-        label: "Pop-Out Triple",
-      },
-    ],
-  },
+  //# This is for when all the new photos are taken
+  // {
+  //   type: "makeupWardrobe",
+  //   label: "Make-Up / Wardrobe",
+  //   subDivisions: [
+  //     {
+  //       division: "african",
+  //       label: "African Triple",
+  //     },
+  //     {
+  //       division: "popout",
+  //       label: "Pop-Out Triple",
+  //     },
+  //   ],
+  // },
 ];
 
 export default trailerData;
