@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { recapture } from "../ContactForm/ContactForm.module.scss";
+import { recapture } from "../Contact/ContactForm/ContactForm.module.scss";
 
 const ReCapture = () => {
   const handleChange = (value) => {

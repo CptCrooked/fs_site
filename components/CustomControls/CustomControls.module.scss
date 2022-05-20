@@ -1,82 +1,87 @@
 @import "../../styles/mixins";
 
-.custom_select {
-    background-color: var(--sheet);
-    // height: 4rem;
-    font-size: clamp(1.5rem, 3vw, 3rem);
-    position: relative;
-    overflow: scroll;
-    
-    & > div {
-        line-height: 4rem;
-        text-align: center;
-    }
-}
-
 .carousel_controls {
-    width: 100%;
     background-image: var(--solid-bg);
+    box-shadow: var(--sm-md-shadow);
+    padding: var(--p-3) var(--p-2);
     position: relative;
+    width: 100%;
     z-index: 1;
-    padding: 0 var(--p-2);
+
+    & button, & select {
+        font-family: inherit;
+        letter-spacing: inherit;
+
+        //! Temporary font size
+        font-size: 1.3rem;
+    }
+
+    
+    & option:not(:first-of-type) {
+        color: var(--blue);
+        
+    }
     
     & select {
-        border-radius: var(--md-border-radius);
+        appearance: none;
+        background-image: var(--inverse-solid-bg);
+        border: none;
+        background-repeat: no-repeat;
+        border-radius: var(--button-border-radius);
+        box-shadow: var(--sm-md-shadow);
+        color: var(--inverse-font-colour);
         display: block;
         height: 4rem;
-        padding: 1rem;
-        // display: none;
-        border: none;
-        appearance: none;
         line-height: normal;
+        padding: 1rem;
+        text-align: center;
         position: relative;
-        // background-position: right 10px top 50%;
-        background-repeat: no-repeat;
         width: 100%;
-        background-image: var(--inverse-solid-bg);
-        color: var(--inverse-font-colour);
-        box-shadow: var(--sm-md-shadow);
+        margin: 0 auto;
+        max-width: 25rem;
     }
     
-}
-
-.custom_select {
-    height: 4rem;
-    
-    & > div {
-        position: relative;
-        
-        > span {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-image: var(--solid-bg);
-            box-shadow: var(--sm-md-shadow);
-        }
+    option {
+        display: block;
+        padding: var(--p-5);
+        line-height: 2rem;
     }
+    
 }
 
 .carousel_buttons {
-    // @include XYCenterChildren;
     display: flex;
     justify-content: space-between;
-    padding: var(--p-2) 0;
+    margin: 0 auto;
+    max-width: 25rem;
+    margin-bottom: var(--m-2);
 
     & button {
-        height: 3rem;
-        color: var(--inverse-font-colour);
         background-image: var(--inverse-solid-bg);
+        border: none;
         border-radius: var(--sm-border-radius);
         box-shadow: var(--sm-md-shadow);
-        border: none;
-        width: 5rem;
+        color: var(--inverse-font-colour);
+        height: 3rem;
         margin: 0;
+        width: 5rem;
 
-        &:not(:first-of-type),
-        &:not(:last-of-type) {
-            // margin: 0 auto;
+        &:first-of-type {
+            border-radius: var(--md-border-radius) var(--md-border-radius) var(--md-border-radius) 4rem;
+        }
+
+        &:last-of-type {
+            border-radius: var(--md-border-radius) var(--md-border-radius) 4rem var(--md-border-radius);
+        }
+        
+        &[data-btn] {
+            width: 80%;
+            margin: 0 var(--m-2);
+            max-width: 15rem;
+
+            a {
+                display: block;
+            }
         }
     }
 }

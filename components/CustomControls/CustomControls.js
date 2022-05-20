@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { v4 as uuid } from "uuid";
+import Link from "next/link";
 import {
   carousel_controls,
-  custom_select,
   carousel_buttons,
 } from "./CustomControls.module.scss";
 
@@ -22,8 +20,11 @@ const CustomControls = ({
     <div className={carousel_controls}>
       <div className={carousel_buttons}>
         <button onClick={() => back(currentArr)}>{`<`}</button>
-        <button>Menu</button>
-        <button>F/S</button>
+        <button data-btn="home">
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        </button>
         <button onClick={() => forward(currentArr)}>{`>`}</button>
       </div>
       {/* Semantic JSX */}
@@ -46,19 +47,6 @@ const CustomControls = ({
           );
         })}
       </select>
-      {/* UI JSX */}
-      {/* <div role="presentation" className={custom_select}>
-        <div>
-          <span>Select a unit...</span>
-        </div>
-        {trailerData.reverse().map(({ type, label }) => {
-          return (
-            <div key={uuid()} value={`${type}`}>
-              <span>{label}</span>
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 };

@@ -48,8 +48,8 @@
   transition: opacity 1s;
 }
 
-img.showImage {
-  opacity: 1;
+img.showImage, span.showImage {
+  opacity: 1 !important;
 }
 
 

@@ -6,7 +6,7 @@ import logo from "../../public/imgs/fs_logo2.png";
 import Toggle from "../Toggle/Toggle";
 import { nav, overlay } from "./Nav.module.scss";
 
-const Nav = () => {
+const Nav = ({ closeNavOnLinkClick }) => {
   const {
     currentTheme: { primary, secondary },
     toggleDarkMode,
@@ -21,17 +21,17 @@ const Nav = () => {
         </div>
         <li>
           <Link href="/">
-            <a>Home</a>
+            <a onClick={closeNavOnLinkClick}>Home</a>
           </Link>
         </li>
         <li>
           <Link href="/gallery">
-            <a>Gallery</a>
+            <a onClick={closeNavOnLinkClick}>Gallery</a>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <a>About</a>
+            <a onClick={closeNavOnLinkClick}>About</a>
           </Link>
         </li>
         <Toggle />

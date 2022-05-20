@@ -2,16 +2,10 @@ import Link from "next/link";
 import { useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import HR from "../components/HR/HR";
-import {
-  title,
-  sellingPoints,
-  quickLinks,
-  alternative_contact_office,
-  alternative_contact_sales,
-  contact_section,
-  division,
-} from "../styles/Home.module.scss";
-import ContactForm from "../components/ContactForm/ContactForm";
+import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
+import ContactForm from "../components/Contact/ContactForm/ContactForm";
+import ContactInfo from "../components/Contact/ContactInfo/ContactInfo";
+import Contact from "../components/Contact/Contact";
 
 //! development
 
@@ -58,21 +52,7 @@ export default function Home() {
           <HR inverse={true} />
         </ul>
       </nav>
-      <section className={contact_section}>
-        <ContactForm />
-        <h6>Alternatively...</h6>
-        <p className={`secondaryTitle`}>Call Us</p>
-        <p>
-          <span>Office</span>
-        </p>
-        <span className={alternative_contact_office}>307</span>
-        <HR />
-        <p>
-          <span>Martin Offersen</span> <span className={division}>(Sales)</span>
-        </p>
-        <p></p>
-        <span className={alternative_contact_sales}>059</span>
-      </section>
+      <Contact />
     </>
   );
 }

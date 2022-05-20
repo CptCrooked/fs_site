@@ -16,10 +16,11 @@ const Layout = ({ children }) => {
   const pageRef = useRef(null);
 
   const lockScroll = () => {
-    if (document) {
+    console.log(document.body.clientWidth);
+    if (document && document.body.clientWidth < 768) {
       const input = document.querySelector("#navigationToggle");
       setTimeout(() => {
-        if (input.checked) {
+        if (input.checked === true) {
           disableBodyScroll(pageRef.current);
         } else {
           enableBodyScroll(pageRef.current);
@@ -28,10 +29,16 @@ const Layout = ({ children }) => {
     }
   };
 
+  const closeNavOnLinkClick = () => {
+    const input = document.querySelector("#navigationToggle");
+    input.checked = input.checked ? false : true;
+    lockScroll();
+  };
+
   return (
     <>
       <Header lockScroll={lockScroll} />
-      <Nav />
+      <Nav closeNavOnLinkClick={closeNavOnLinkClick} />
       <main className={`${primary} page`} ref={pageRef}>
         <AlertList />
         {children}

@@ -1,9 +1,9 @@
 @import "../../styles/_mixins.scss";
 
 .gallery_container {
+  $heightByAR: calc(100vw / 4 * 2.6);
   position: relative;
-  height: 38vh;
-  
+  min-height: $heightByAR;
 }
 
 .image_wrapper {
@@ -14,10 +14,27 @@
   height: 100%;
   width: 100%;
 
+  & > span > img {
+    position: relative;
+  }
+  
   & img {
     opacity: 0;
     transition: opacity 0.3s !important;
+    display:block;
   }
+
+}
+
+.image_label {
+  position: relative;
+  opacity: 0;
+  z-index: 1;
+  background-image: var(--solid-bg);
+  padding: var(--p-2) var(--p-5);
+  top: var(--m-3);
+  border-radius: 0 var(--p-2) var(--p-7) 0;
+  box-shadow: var(--sm-shadow);
 }
 
 .image_caption {
