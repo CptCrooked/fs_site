@@ -5,6 +5,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import logo from "../../public/imgs/fs_logo2.png";
 import {
   header,
+  header_wrapper,
   imageWrapper,
   checkbox,
   menuButton,
@@ -41,18 +42,20 @@ const Header = ({ lockScroll }) => {
         id="navigationToggle"
       />
       <header className={`${primary} ${header}`}>
-        <div className={`${imageWrapper} card card-light`}>
-          <Link href="/">
-            <a>
-              <Image
-                src={logo}
-                alt="Fleet Star Logo"
-                layout="fixed"
-                width={120}
-                priority="true"
-              />
-            </a>
-          </Link>
+        <div className={header_wrapper}>
+          <div className={`${imageWrapper} card card-light`}>
+            <Link href="/">
+              <a>
+                <Image
+                  src={logo}
+                  alt="Fleet Star Logo"
+                  layout="fixed"
+                  width={120}
+                  priority="true"
+                />
+              </a>
+            </Link>
+          </div>
         </div>
       </header>
       {/* Menu Button on mobile */}

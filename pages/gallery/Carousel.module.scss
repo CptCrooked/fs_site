@@ -1,9 +1,29 @@
 @import "../../styles/_mixins.scss";
 
+.gallery_imgAndControls {
+  position: relative;
+}
+
 .gallery_container {
   $heightByAR: calc(100vw / 4 * 2.6);
   position: relative;
   min-height: $heightByAR;
+  
+  @media screen and (min-width: 768px) {
+    $heightByAR: calc(100vw / 4 * 2);
+    // height: 50vw;
+    width: 80%;
+    margin: 0 auto;
+    min-height: $heightByAR;
+  }
+  
+  @media screen and (min-width: 1800px) {
+    max-width: 1366px;
+    min-height: 1366px * 0.6;
+      max-height: 1366px * 0.6;
+    }
+
+    
 }
 
 .image_wrapper {

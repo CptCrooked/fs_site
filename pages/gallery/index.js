@@ -2,10 +2,10 @@ import { useState, useContext, useEffect, useRef } from "react";
 import Image from "next/image";
 import { carouselContainer } from "../../components/Carousel/Carousel.module.scss";
 import {
+  gallery_imgAndControls,
   gallery_container,
   image_wrapper,
   image_caption,
-  carousel_info,
   image_label,
 } from "./Carousel.module.scss";
 import { showImage } from "../../components/Carousel/Carousel.module.scss";
@@ -47,8 +47,8 @@ const Gallery = () => {
   // Checks the nested image in the next image wrapper for the 'showImage' class
   // and applies it to the first image in the array.
   useEffect(() => {
+    const galleryChildren = [...galleryContainerRef.current.children];
     showImageRef.current = setTimeout(() => {
-      const galleryChildren = [...galleryContainerRef.current.children];
       const shown = galleryChildren.filter(
         (figureEl) =>
           figureEl.children[0].children[0].classList.value.length > 1
@@ -57,51 +57,59 @@ const Gallery = () => {
         galleryChildren[0].children[0].children[0].classList.add(showImage);
       }
     }, 0);
-    return () => clearTimeout(showImageRef.current);
+    // AGAIN Checks the nested image in the next image wrapper for the 'showImage' class
+    // and applies it to the first image in the array.
+    return () => {
+      const shown = galleryChildren.filter(
+        (figureEl) =>
+          figureEl.children[0].children[0].classList.value.length > 1
+      );
+      if (shown.length !== 1) {
+        galleryChildren[0].children[0].children[0].classList.add(showImage);
+      }
+      clearTimeout(showImageRef.current);
+    };
   });
 
   return (
     <section>
-      <div className={gallery_container} ref={galleryContainerRef}>
-        {currentImageArr.map((imgObj, i) => {
-          const shownIndex = i === index ? showImage : "";
-          return (
-            <figure className={image_wrapper} key={`${imgObj.src}${i}`}>
-              <Image
-                src={imgObj.src}
-                alt={imgObj.alt}
-                layout="fill"
-                // objectFit="contain"
-                className={shownIndex}
-                priority={i < 3 ? "true" : "false"}
-              />
-              <span
-                className={
-                  i === index ? `${image_label} ${showImage}` : `${image_label}`
-                }
-              >
-                {imgObj.type}
-              </span>
-              <figcaption className={image_caption}>{imgObj.alt}</figcaption>
-            </figure>
-          );
-        })}
+      <div className={gallery_imgAndControls}>
+        <div className={gallery_container} ref={galleryContainerRef}>
+          {currentImageArr.map((imgObj, i) => {
+            const shownIndex = i === index ? showImage : "";
+            return (
+              <figure className={image_wrapper} key={`${imgObj.src}${i}`}>
+                <Image
+                  src={imgObj.src}
+                  alt={imgObj.alt}
+                  layout="fill"
+                  // objectFit="contain"
+                  className={shownIndex}
+                  priority={i < 3 ? "true" : "false"}
+                />
+                <span
+                  className={
+                    i === index
+                      ? `${image_label} ${showImage}`
+                      : `${image_label}`
+                  }
+                >
+                  {imgObj.type}
+                </span>
+                <figcaption className={image_caption}>{imgObj.alt}</figcaption>
+              </figure>
+            );
+          })}
+        </div>
+        <CustomControls
+          trailerData={trailerData}
+          currentArr={currentImageArr}
+          handleUnitChange={handleUnitChange}
+          fns={{ forward, back }}
+          selectRefValue={selectRefValue}
+        />
       </div>
-      <CustomControls
-        trailerData={trailerData}
-        currentArr={currentImageArr}
-        handleUnitChange={handleUnitChange}
-        fns={{ forward, back }}
-        selectRefValue={selectRefValue}
-      />
       <Contact />
-      {/* <p className={carousel_info}>
-        This trailer imported from USA has sides that &ldquo;pop-out&ldquo; to
-        create ample space. The trailer has a bedroom, en suite bathroom, ample
-        cupboards, a kitchen, a dining room, a spacious lounge and
-        air-conditioning throughout. For entertainment, there is a 36&ldquo;
-        Plasma TV, a DVD/CD player.
-      </p> */}
     </section>
   );
 };

@@ -13,20 +13,52 @@
   padding: var(--p-6) 0;
   z-index: 5;
 
-  & .imageWrapper {
+  & .header_wrapper {
+    display: flex;
+    padding: var(--p-2);
+    
+    @media screen and (min-width: 500px) {
+      padding: 0 5%;
+    }
+    
+    // Shows nav at 768px
+    @media screen and (min-width: 768px) {
+      padding: 0;
+      margin: 0 auto;
+        transform: translateX(0);
+        right: 0;
+        width: 80%;
+        align-items: flex-end;
+        background-image: none;
+        height: var(--header-height);
+        background-color: transparent;
+      }
+    
+      @media screen and (min-width: 1800px) {
+        max-width: 1366px;
+      }
+    }
+    
+    & .imageWrapper {
     background-image: var(--grey-gradient);
     width: 130px;
     position: relative;
     height: 52px;
     @include XYCenterChildren;
-    left: var(--p-2);
+    z-index: 100;
+    align-self: flex-start;
 
     @media screen and (min-width: 500px) {
-      left: 5%;
+      align-self: center;
     }
 
     @media screen and (min-width: 768px) {
-      left: 10%;
+      // left: 10%;
+    }
+
+    @media screen and (min-width: 1800px) {
+      $width: calc(100vw - 1366px);
+      // left: calc($width / 2);
     }
 
     & > a > span {
@@ -34,6 +66,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 100%;
       height: 40px !important;
     }
   }
