@@ -17,6 +17,7 @@ nav.nav {
   @include XYCenterChildren;
   flex-direction: column;
   z-index: 5;
+  box-shadow: inset 0 0 0 1px red;
 
   @media screen and (min-width: 500px) {
     margin: 0 auto;
@@ -24,18 +25,22 @@ nav.nav {
 
   // Shows nav at 768px
   @media screen and (min-width: 768px) {
+    left: auto;
+    margin: 0;
     transform: translateX(0);
-    right: 0;
-    width: 80%;
+    right: 10%;
+    width: 60%;
     align-items: flex-end;
     background-image: none;
     height: var(--header-height);
     background-color: transparent;
     padding-right: 0;
   }
-
+  
   @media screen and (min-width: 1800px) {
-    max-width: 1366px;
+    $navWidth: calc(100vw - 1366px);
+    right: calc($navWidth / 2);
+    max-width: 1236px;
   }
 
   & ul {

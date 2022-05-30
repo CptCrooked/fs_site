@@ -12,11 +12,9 @@ const Layout = ({ children }) => {
   } = useContext(ThemeContext);
 
   // This prevent's the body from scrolling when the navigation is open
-
   const pageRef = useRef(null);
 
   const lockScroll = () => {
-    console.log(document.body.clientWidth);
     if (document && document.body.clientWidth < 768) {
       const input = document.querySelector("#navigationToggle");
       setTimeout(() => {
