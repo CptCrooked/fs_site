@@ -6,15 +6,23 @@
     padding: var(--p-3) var(--p-2);
     width: 100%;
     z-index: 1;
-
+    
     & button, & select {
         font-family: inherit;
         letter-spacing: inherit;
-
+        
         //! Temporary font size
         font-size: 1.3rem;
-    }
+        text-shadow: var(--normal-text-shadow);
 
+        cursor: pointer;
+        transition: box-shadow 0.3s !important;
+
+        &:hover {
+            box-shadow: inset 0 3rem 0 16px var(--font-colour), var(--md-shadow);
+        }
+    }
+    
     
     & option:not(:first-of-type) {
         color: var(--blue);
@@ -46,6 +54,25 @@
         line-height: 2rem;
     }
     
+}
+
+.changeImageButton {
+    & > div {
+        height: 60%;
+        width: 60%;
+        margin: 0 auto;
+        border-radius: inherit;
+        border-top: 3px solid var(--inverse-font-colour);
+        
+    }
+    &[data-btn-type="back"] > div {
+        border-left: 3px solid var(--inverse-font-colour);
+    }
+    
+    &[data-btn-type="next"] > div {
+        border-right: 3px solid var(--inverse-font-colour);
+        
+    }
 }
 
 .carousel_buttons {

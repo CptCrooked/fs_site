@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   carousel_controls,
   carousel_buttons,
+  changeImageButton,
 } from "./CustomControls.module.scss";
 
 const CustomControls = ({
@@ -19,13 +20,25 @@ const CustomControls = ({
   return (
     <div className={carousel_controls}>
       <div className={carousel_buttons}>
-        <button onClick={() => back(currentArr)}>{`<`}</button>
+        <button
+          onClick={() => back(currentArr)}
+          data-btn-type="back"
+          className={changeImageButton}
+        >
+          <div></div>
+        </button>
         <button data-btn="home">
           <Link href="/">
             <a>Home</a>
           </Link>
         </button>
-        <button onClick={() => forward(currentArr)}>{`>`}</button>
+        <button
+          onClick={() => forward(currentArr)}
+          data-btn-type="next"
+          className={changeImageButton}
+        >
+          <div></div>
+        </button>
       </div>
       {/* Semantic JSX */}
       <select

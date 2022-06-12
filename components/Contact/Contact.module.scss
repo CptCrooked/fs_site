@@ -61,3 +61,13 @@
 p span.division {
     font-size: clamp(1rem, 1.5vw, 1.5rem);
 }
+
+.googleMapLink {
+    display: block;
+    width: 20rem;
+    margin: var(--m-3) auto 0 auto;
+    border-radius: var(--button-border-radius);
+    background-image: var(--inverse-solid-bg);
+    color: var(--inverse-font-colour);
+    padding: var(--p-3);
+}

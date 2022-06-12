@@ -16,6 +16,13 @@
     margin: 0 auto;
     min-height: $heightByAR;
   }
+
+  @media screen and (min-width: 1300px) {
+    $heightByAR: calc(100vw / 4 * 1.75);
+    width: 80%;
+    margin: 0 auto;
+    min-height: $heightByAR;
+  }
   
   @media screen and (min-width: 1800px) {
     max-width: 1366px;
@@ -55,6 +62,7 @@
   top: var(--m-3);
   border-radius: 0 var(--p-2) var(--p-7) 0;
   box-shadow: var(--sm-shadow);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
 }
 
 .image_caption {
@@ -66,5 +74,4 @@
 .carousel_info {
   padding: var(--p-5);
   text-align: center;
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
 }

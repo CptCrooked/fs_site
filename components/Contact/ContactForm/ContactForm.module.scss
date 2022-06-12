@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
 
-    input,
+    input:not([type="submit"]),
     textarea {
       background-color: var(--sheet);
       font-family: inherit;
@@ -61,23 +61,16 @@
 
     textarea {
       resize: none;
+      margin-bottom: 0;
     }
 
     input[type="submit"] {
-      display: inline-block;
+      width: 100%;
       background-color: var(--font-colour);
-      background-image: var(--inverse-solid-bg);
-      color: var(--inverse-font-colour);
       text-shadow: 0 2px 2px var(--inverse-shadow-colour);
       font-size: clamp(1.4rem, 1.75vw, 2rem);
-      box-shadow: var(--sm-md-shadow);
-      transition: box-shadow 0.3s;
       margin-bottom: var(--m-6);
       cursor: pointer;
-
-      &:active {
-        box-shadow: var(--sm-shadow);
-      }
     }
   }
 }

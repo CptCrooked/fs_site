@@ -130,7 +130,13 @@ const ContactForm = () => {
           onChange={handleInputChange}
         ></textarea>
         {/* <ReCapture /> */}
-        <input type="submit" id="submit" value="Send" aria-label="Send" />
+        <input
+          type="submit"
+          id="submit"
+          value="Send"
+          aria-label="Send"
+          className={`myButton`}
+        />
       </form>
     </section>
   );
