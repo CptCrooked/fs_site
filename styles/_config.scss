@@ -395,23 +395,23 @@ form[autocomplete="off"] > .highlight {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
-$lighterShadeSpread: 3rem;
-$darkerShadeSpread: 1rem;
+$lighterShadeBlur: 3rem;
+$darkerShadeBlur: 4rem;
 
 .error {
   box-shadow: var(--md-shadow),
-    inset 0 -0.25rem $lighterShadeSpread rgb(137, 1, 1),
-    inset 0 -0.3rem $darkerShadeSpread -0.5rem rgb(110, 0, 0);
+  inset 0 -0.3rem $darkerShadeBlur -0.5rem rgb(185, 89, 89),
+  inset 0 -0.25rem $lighterShadeBlur rgb(134, 1, 1);
 }
 
 .success {
   box-shadow: var(--md-shadow),
-    inset 0 -0.25rem $lighterShadeSpread rgb(10, 209, 0),
-    inset 0 -0.3rem $darkerShadeSpread -0.5rem rgb(0, 169, 14);
+    inset 0 -0.25rem $lighterShadeBlur rgb(132, 221, 127),
+    inset 0 -0.3rem $darkerShadeBlur -0.5rem rgb(1, 134, 1);
 }
 
 .info {
   box-shadow: var(--md-shadow),
-    inset 0 -0.25rem $lighterShadeSpread rgb(217, 228, 0),
-    inset 0 -0.3rem $darkerShadeSpread -0.5rem rgb(169, 149, 0);
+    inset 0 -0.25rem $lighterShadeBlur rgb(201, 206, 109),
+    inset 0 -0.3rem $darkerShadeBlur -0.5rem rgb(124, 110, 1);
 }

@@ -1,9 +1,6 @@
 .form {
   text-align: center;
   background-image: none;
-  & h4 {
-    
-  }
 
   & h5 {
     font-weight: normal;
@@ -76,6 +73,7 @@
       box-shadow: var(--sm-md-shadow);
       transition: box-shadow 0.3s;
       margin-bottom: var(--m-6);
+      cursor: pointer;
 
       &:active {
         box-shadow: var(--sm-shadow);

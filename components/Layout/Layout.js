@@ -1,3 +1,5 @@
+import Head from "next/head";
+import favicon from "../../public/favicon.svg";
 import { useContext, useRef } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import Header from "../Header/Header";
@@ -35,6 +37,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Head>
+        <link rel="icon" type="image" href="/favicon.svg" />
+      </Head>
       <Header lockScroll={lockScroll} />
       <Nav closeNavOnLinkClick={closeNavOnLinkClick} />
       <main className={`${primary} page`} ref={pageRef}>

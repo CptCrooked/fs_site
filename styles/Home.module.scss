@@ -80,6 +80,8 @@
     margin: 0 auto;
     margin-bottom: var(--m-2);
     font-size: clamp(1.2rem, 3vw, 2.8rem);
+    transition: box-shadow 0.4s, color 0.5s;
+    @include btnState;
 
     @media screen and (min-width: 768px) {
       margin: 0 auto;
@@ -101,6 +103,7 @@
       min-height: 3rem;
       text-shadow: 0 2px 2px var(--inverse-shadow-colour);
       padding-bottom: 0.2rem;
+      transition: inherit;
       @include XYCenterChildren;
 
       @media screen and (min-width: 1200px) {

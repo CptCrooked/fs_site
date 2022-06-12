@@ -9,22 +9,31 @@ const ContactForm = () => {
   const { alertArray, setAlertArray } = useContext(AlertContext);
   const { handleInputChange } = useContext(FormContext);
 
-  const newAlertObject = (inputElement, type, message) => {
-    return {
-      type,
-      message: () =>
-        `${
-          inputElement?.name[0].toUpperCase() + inputElement?.name.slice(1)
-        } ${message}`,
-    };
+  const newAlertObject = (type, message, inputElement = null) => {
+    let newObject;
+    if (inputElement !== null) {
+      newObject = {
+        type,
+        message: () =>
+          `${
+            inputElement?.name[0].toUpperCase() + inputElement?.name.slice(1)
+          } ${message}`,
+      };
+    } else {
+      newObject = {
+        type,
+        message: () => `${message}`,
+      };
+    }
+    return newObject;
   };
 
   const sendEmail = (e) => {
     e.preventDefault();
-    //. Clears the alert state before a new check                                               '
-    if (alertArray.length > 0) {
-      setAlertArray([]);
-    }
+    // //. Clears the alert state before a new check                                               '
+    // if (alertArray.length > 0) {
+    //   setAlertArray([]);
+    // }
     const formInputs = e.target.children;
     //. Create array of only the text inputs in the form.                                       '
     const editableInputs = [...formInputs].filter((child) => {
@@ -33,17 +42,23 @@ const ContactForm = () => {
       }
     });
 
-    //. For each text input that is empty and has a "*" in the placeholder text (required),    '
-    //. create an alert object and add to alertArray state.                                    '
+    //. If the required inputs are empty, create a new alert object and add it to the temporary array,
+    //. Once all the relevant inputs have been checked, update the alertArray state.
+
+    const newAlertState = [];
     editableInputs.forEach((input) => {
-      if (input.value.length <= 0 && /\*/.test(input.placeholder)) {
+      if (/\*/.test(input.placeholder) && input.value.length <= 0) {
+        console.log(`looping through inputs`);
         input.classList.add("highlight");
-        setAlertArray((prevAlerts) => [
-          ...prevAlerts,
-          newAlertObject(input, "error", "is required"),
-        ]);
+        newAlertState.push(newAlertObject("error", "is required", input));
       }
     });
+
+    if (newAlertState.length < 1) {
+      setAlertArray([newAlertObject("success", "Message sent!")]);
+    } else {
+      setAlertArray(newAlertState);
+    }
 
     /*
     emailjs

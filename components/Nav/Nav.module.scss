@@ -17,7 +17,6 @@ nav.nav {
   @include XYCenterChildren;
   flex-direction: column;
   z-index: 5;
-  box-shadow: inset 0 0 0 1px red;
 
   @media screen and (min-width: 500px) {
     margin: 0 auto;
@@ -74,23 +73,27 @@ nav.nav {
       margin-bottom: var(--m-2);
       border-radius: var(--button-border-radius);
       box-shadow: var(--sm-md-shadow);
+      transition: box-shadow 0.4s, color 0.5s;
+      @include btnState;
 
       @media screen and (min-width: 768px) {
         margin-bottom: 0;
         margin-right: var(--m-3);
+        border-radius: var(--md-border-radius);
       }
 
       & a {
         border-radius: var(--button-border-radius);
         font-size: 1.2rem;
         letter-spacing: 0.15rem;
-        border: 1px ridge var(--grey);
+        // border: 1px ridge var(--grey);
         background-image: var(--inverse-solid-bg);
         color: var(--inverse-font-colour);
         display: block;
         width: 12rem;
         height: 3rem;
         text-shadow: 0 2px 2px var(--inverse-shadow-colour);
+        transition: inherit;
         @include XYCenterChildren;
 
         // Shows nav at 768px
@@ -117,5 +120,14 @@ nav.nav {
 
   @media screen and (min-width: 768px) {
     background-color: transparent;
+  }
+}
+
+.activeLink {
+  box-shadow: 0 0 0 0px #000 !important;
+
+  & > a {
+    box-shadow: 0 0px 8px var(--font-colour);
+    text-decoration: underline;
   }
 }

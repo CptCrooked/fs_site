@@ -16,7 +16,6 @@
   & .header_wrapper {
     display: flex;
     padding: var(--p-2);
-    box-shadow: inset 0 0 0 2px blue;
     
     @media screen and (min-width: 500px) {
       padding: 0 5%;
