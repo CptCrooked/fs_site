@@ -3,8 +3,6 @@ import { useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import HR from "../components/HR/HR";
 import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
-import ContactForm from "../components/Contact/ContactForm/ContactForm";
-import ContactInfo from "../components/Contact/ContactInfo/ContactInfo";
 import Contact from "../components/Contact/Contact";
 
 //! development
@@ -45,14 +43,13 @@ export default function Home() {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/about">
               <a>About Us</a>
             </Link>
           </li>
           <HR inverse={true} />
         </ul>
       </nav>
-      <Contact />
     </>
   );
 }

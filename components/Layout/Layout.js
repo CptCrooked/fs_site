@@ -7,6 +7,7 @@ import Nav from "../Nav/Nav";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { footer } from "./Layout.module.scss";
 import AlertList from "../Alert/AlertList";
+import Contact from "../Contact/Contact";
 
 const Layout = ({ children }) => {
   const {
@@ -45,6 +46,7 @@ const Layout = ({ children }) => {
       <main className={`${primary} page`} ref={pageRef}>
         <AlertList />
         {children}
+        <Contact />
       </main>
       <footer className={`${primary} ${footer}`}>
         Fleet Star Pty LTD &copy; {new Date().getFullYear()}

@@ -3,6 +3,8 @@ import {
   carousel_controls,
   carousel_buttons,
   changeImageButton,
+  select_sm_screen,
+  select_mdToLrg_screen,
 } from "./CustomControls.module.scss";
 
 const CustomControls = ({
@@ -27,11 +29,26 @@ const CustomControls = ({
         >
           <div></div>
         </button>
-        <button data-btn="home">
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </button>
+        <select
+          name="trailerType"
+          id="trailerType1"
+          className={select_sm_screen}
+          onChange={handleUnitChange}
+          value={selectRefValue.value}
+          defaultValue={defaultDisabledOption.type}
+        >
+          {[defaultDisabledOption, ...trailerData].map(({ type, label }, i) => {
+            return (
+              <option
+                key={`${type}${label}`}
+                value={`${type}`}
+                disabled={i < 1 && true}
+              >
+                {label}
+              </option>
+            );
+          })}
+        </select>
         <button
           onClick={() => forward(currentArr)}
           data-btn-type="next"
@@ -40,10 +57,10 @@ const CustomControls = ({
           <div></div>
         </button>
       </div>
-      {/* Semantic JSX */}
       <select
         name="trailerType"
-        id="trailerType"
+        id="trailerType2"
+        className={select_mdToLrg_screen}
         onChange={handleUnitChange}
         value={selectRefValue.value}
         defaultValue={defaultDisabledOption.type}
@@ -60,6 +77,7 @@ const CustomControls = ({
           );
         })}
       </select>
+      {/* Semantic JSX */}
     </div>
   );
 };

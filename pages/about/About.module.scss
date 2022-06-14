@@ -1,0 +1,24 @@
+@import "../../styles/mixins";
+
+.about_title {
+    margin-top: var(--m-5);
+
+    & + div {
+        width: calc(100% - var(--m-5));
+            max-width: 30rem;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding: var(--p-5) 0;
+
+            & p {
+                font-size: clamp(1.2rem, 2.5vw, 2rem);
+                text-shadow: var(--normal-text-shadow);
+                text-align: center;
+            }
+
+            & p:not(:first-of-type), & p:not(:last-of-type) {
+                margin: var(--m-2);
+            }
+    }
+}

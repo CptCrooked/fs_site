@@ -34,16 +34,15 @@
         background-image: var(--inverse-solid-bg);
         border: none;
         background-repeat: no-repeat;
-        border-radius: var(--button-border-radius);
+        border-radius: var(--md-border-radius);
         box-shadow: var(--sm-md-shadow);
         color: var(--inverse-font-colour);
         display: block;
-        height: 4rem;
-        line-height: normal;
+        line-height: 1rem;
         padding: 1rem;
         text-align: center;
         position: relative;
-        width: 100%;
+        width: 70%;
         margin: 0 auto;
         max-width: 25rem;
     }
@@ -51,12 +50,13 @@
     option {
         display: block;
         padding: var(--p-5);
-        line-height: 2rem;
+        // line-height: 2rem;
     }
     
 }
 
 .changeImageButton {
+    
     & > div {
         height: 60%;
         width: 60%;
@@ -80,13 +80,12 @@
     justify-content: space-between;
     margin: 0 auto;
     max-width: 25rem;
-    margin-bottom: var(--m-2);
     
     @media screen and (min-width: 768px) {
         position: absolute;
         top: 45%;
-        left: var(--m-2);
-        right: var(--m-2);
+        left: 1%;
+        right: 1%;
         transform: translateY(-100%);
         max-width: unset;
     }
@@ -127,21 +126,22 @@
         &:last-of-type {
             border-radius: var(--md-border-radius) var(--md-border-radius) 4rem var(--md-border-radius);
         }
-        
-        // ? Home button on gallery controls
-        &[data-btn] {
-            width: 80%;
-            margin: 0 var(--m-2);
-            max-width: 15rem;
+    }
+}
 
-            a {
-                display: block;
-            }
-
-            @media screen and (min-width: 768px) {
-                display: none;
-                
-            }
+select.select_sm_screen {
+    display: block;
+    margin: 0 var(--m-2);
+    
+        @media screen and (min-width: 768px) {
+            display: none;
         }
+}
+
+select.select_mdToLrg_screen {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+        display: block;
     }
 }

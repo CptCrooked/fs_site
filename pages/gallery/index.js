@@ -109,7 +109,6 @@ const Gallery = () => {
           selectRefValue={selectRefValue}
         />
       </div>
-      <Contact />
     </section>
   );
 };

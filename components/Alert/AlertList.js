@@ -24,7 +24,6 @@ const AlertList = () => {
       if (alertArray > 0) {
         setAlertArray([]);
       }
-      console.log(alertArray);
     };
   }, [alertArray, setAlertArray]);
 

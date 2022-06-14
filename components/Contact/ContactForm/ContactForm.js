@@ -1,13 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AlertContext } from "../../../contexts/AlertContext";
 import emailjs from "@emailjs/browser";
 import { form } from "./ContactForm.module.scss";
-import ReCapture from "../../ReCapture/ReCapture";
 import { FormContext } from "../../../contexts/FormContext";
 
 const ContactForm = () => {
   const { alertArray, setAlertArray } = useContext(AlertContext);
   const { handleInputChange } = useContext(FormContext);
+  const [customCapture, setCustomCapture] = useState(false);
 
   const newAlertObject = (type, message, inputElement = null) => {
     let newObject;
@@ -46,44 +46,45 @@ const ContactForm = () => {
     //. Once all the relevant inputs have been checked, update the alertArray state.
 
     const newAlertState = [];
-    editableInputs.forEach((input) => {
-      if (/\*/.test(input.placeholder) && input.value.length <= 0) {
-        console.log(`looping through inputs`);
-        input.classList.add("highlight");
-        newAlertState.push(newAlertObject("error", "is required", input));
-      }
-    });
-
-    if (newAlertState.length < 1) {
-      setAlertArray([newAlertObject("success", "Message sent!")]);
-    } else {
-      setAlertArray(newAlertState);
-    }
-
-    /*
-    emailjs
-      .sendForm(
-        "service_9p73ljj",
-        "template_ehxejvr",
-        e.target,
-        "user_K49o11aaGCnunDj7TA7FJ"
-      )
-      .then(
-        (result) => {
-          console.log(result);
-          setFormData({
-            name: "",
-            company: "",
-            email: "",
-            phone: "",
-            message: "",
-          })
-        },
-        (error) => {
-          console.log(error);
+    if (customCapture !== true) {
+      editableInputs.forEach((input) => {
+        if (/\*/.test(input.placeholder) && input.value.length <= 0) {
+          input.classList.add("highlight");
+          newAlertState.push(newAlertObject("error", "is required", input));
         }
-      );
-      */
+      });
+
+      if (newAlertState.length < 1) {
+        setAlertArray([newAlertObject("success", "Message sent!")]);
+      } else {
+        setAlertArray(newAlertState);
+      }
+
+      /*
+      emailjs
+        .sendForm(
+          "service_9p73ljj",
+          "template_ehxejvr",
+          e.target,
+          "user_K49o11aaGCnunDj7TA7FJ"
+        )
+        .then(
+          (result) => {
+            console.log(result);
+            setFormData({
+              name: "",
+              company: "",
+              email: "",
+              phone: "",
+              message: "",
+            })
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+        */
+    }
   };
 
   return (
@@ -129,7 +130,6 @@ const ContactForm = () => {
           aria-label="Message"
           onChange={handleInputChange}
         ></textarea>
-        {/* <ReCapture /> */}
         <input
           type="submit"
           id="submit"

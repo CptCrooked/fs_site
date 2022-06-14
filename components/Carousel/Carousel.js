@@ -2,7 +2,6 @@ import { useEffect, useContext } from "react";
 import Image from "next/image";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { ImageContext } from "../../contexts/ImageContext";
-import { v4 as uuid } from "uuid";
 import {
   carouselContainer,
   carouselBottomShadow,

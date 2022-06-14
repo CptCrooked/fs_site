@@ -17,7 +17,7 @@
     min-height: $heightByAR;
   }
 
-  @media screen and (min-width: 1300px) {
+  @media screen and (min-width: 1366px) {
     $heightByAR: calc(100vw / 4 * 1.75);
     width: 80%;
     margin: 0 auto;

@@ -30,7 +30,7 @@ const ContactInfo = () => {
           target="_blank"
           rel="noreferrer"
         >
-          Fleet Star (Google Maps)
+          Fleet Star Location
         </a>
       </p>
     </>
