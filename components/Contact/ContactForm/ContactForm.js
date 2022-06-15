@@ -1,13 +1,19 @@
 import { useContext, useState } from "react";
 import { AlertContext } from "../../../contexts/AlertContext";
 import emailjs from "@emailjs/browser";
-import { form } from "./ContactForm.module.scss";
+import {
+  form,
+  customCaptureInput,
+  captureInputDisplay,
+} from "./ContactForm.module.scss";
 import { FormContext } from "../../../contexts/FormContext";
 
 const ContactForm = () => {
   const { alertArray, setAlertArray } = useContext(AlertContext);
-  const { handleInputChange } = useContext(FormContext);
+  const { formData, setFormData, handleInputChange } = useContext(FormContext);
   const [customCapture, setCustomCapture] = useState(false);
+
+  const confirmCapture = () => setCustomCapture((prevState) => !prevState);
 
   const newAlertObject = (type, message, inputElement = null) => {
     let newObject;
@@ -46,7 +52,7 @@ const ContactForm = () => {
     //. Once all the relevant inputs have been checked, update the alertArray state.
 
     const newAlertState = [];
-    if (customCapture !== true) {
+    if (customCapture === true) {
       editableInputs.forEach((input) => {
         if (/\*/.test(input.placeholder) && input.value.length <= 0) {
           input.classList.add("highlight");
@@ -56,6 +62,14 @@ const ContactForm = () => {
 
       if (newAlertState.length < 1) {
         setAlertArray([newAlertObject("success", "Message sent!")]);
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        confirmCapture();
       } else {
         setAlertArray(newAlertState);
       }
@@ -84,6 +98,8 @@ const ContactForm = () => {
           }
         );
         */
+    } else {
+      setAlertArray([newAlertObject("error", 'Please check box above "Send"')]);
     }
   };
 
@@ -99,6 +115,7 @@ const ContactForm = () => {
           placeholder="Name*"
           aria-label="Name"
           onChange={handleInputChange}
+          value={formData.name}
         />
         <input
           type="text"
@@ -106,6 +123,7 @@ const ContactForm = () => {
           placeholder="Company"
           aria-label="Company (optional)"
           onChange={handleInputChange}
+          value={formData.company}
         />
         <input
           type="email"
@@ -113,6 +131,7 @@ const ContactForm = () => {
           placeholder="E-mail Address*"
           aria-label="E-mail Address"
           onChange={handleInputChange}
+          value={formData.email}
         />
         <input
           type="text"
@@ -120,6 +139,7 @@ const ContactForm = () => {
           placeholder="Contact Number"
           aria-label="Contact Number"
           onChange={handleInputChange}
+          value={formData.phone}
         />
         <textarea
           name="message"
@@ -129,7 +149,23 @@ const ContactForm = () => {
           placeholder="Message..."
           aria-label="Message"
           onChange={handleInputChange}
+          value={formData.message}
         ></textarea>
+        <input
+          type="checkbox"
+          name="customCapture"
+          id="customCapture"
+          onChange={confirmCapture}
+          className={customCaptureInput}
+          checked={customCapture}
+        />
+        <label
+          className={captureInputDisplay}
+          name="customCapture"
+          htmlFor="customCapture"
+        >
+          Check the box if you are a human.
+        </label>
         <input
           type="submit"
           id="submit"

@@ -49,6 +49,11 @@ const Layout = ({ children }) => {
         <Contact />
       </main>
       <footer className={`${primary} ${footer}`}>
+        <h6>Terms and Conditions:</h6>
+        <ul>
+          <li>* Interior and exterior of units are subject to change</li>
+          <li>* Units are subject to availability</li>
+        </ul>
         Fleet Star Pty LTD &copy; {new Date().getFullYear()}
       </footer>
     </>

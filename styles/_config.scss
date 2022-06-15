@@ -443,3 +443,16 @@ a:focus, button:focus, select:focus, input[type="submit"]:focus {
         box-shadow: var(--sm-shadow), inset 0 3rem 0 16px var(--inverse-font-colour);
       }
 }
+
+p.tsandcs_banner {
+  font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0.05rem 0.5rem;
+    background-color: var(--sheet);
+    border-radius: var(--sm-border-radius) 0 0 0;
+    box-shadow: 0 0 4px var(--sheet);
+    opacity: 0.7;
+}

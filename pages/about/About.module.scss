@@ -1,7 +1,7 @@
 @import "../../styles/mixins";
 
 .about_title {
-    margin-top: var(--m-5);
+    margin-top: var(--m-3);
 
     & + div {
         width: calc(100% - var(--m-5));

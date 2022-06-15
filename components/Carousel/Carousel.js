@@ -53,6 +53,7 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
           />
         );
       })}
+      <p className="tsandcs_banner">* T&apos;s and C&apos;s Apply</p>
     </section>
   );
 };
