@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import Image from "next/image";
-import { carouselContainer } from "../../components/Carousel/Carousel.module.scss";
 import {
   gallery_imgAndControls,
   gallery_container,
@@ -12,8 +11,6 @@ import { showImage } from "../../components/Carousel/Carousel.module.scss";
 import { ImageContext } from "../../contexts/ImageContext";
 import trailerData from "../../galleryData/galleryData";
 import CustomControls from "../../components/CustomControls/CustomControls";
-import ContactInfo from "../../components/Contact/ContactInfo/ContactInfo";
-import Contact from "../../components/Contact/Contact";
 
 const Gallery = () => {
   const { imgs } = useContext(ImageContext);
@@ -23,6 +20,7 @@ const Gallery = () => {
   const galleryContainerRef = useRef(null);
   const showImageRef = useRef();
 
+  // Cycle forward through currentImageArr
   const forward = (arr) => {
     if (index < arr.length - 1) {
       setIndex((index) => index + 1);
@@ -31,6 +29,7 @@ const Gallery = () => {
     }
   };
 
+  // Cycle back through currentImageArr
   const back = (arr) => {
     if (index > 0) {
       setIndex((index) => index - 1);
@@ -39,6 +38,7 @@ const Gallery = () => {
     }
   };
 
+  // Changes currentImageArr to the selected unit
   const handleUnitChange = (e) => {
     selectRefValue.current = e.target.value;
     setCurrentImageArr(imgs[`${selectRefValue.current}`]);
@@ -84,7 +84,7 @@ const Gallery = () => {
                   src={imgObj.src}
                   alt={imgObj.alt}
                   layout="fill"
-                  objectFit={isPortrait ? `contain` : `none`}
+                  objectFit={isPortrait ? `contain` : `fill`}
                   className={shownIndex}
                   priority={i < 3 ? "true" : "false"}
                 />
