@@ -8,6 +8,7 @@
   $heightByAR: calc(100vw / 4 * 2.6);
   position: relative;
   min-height: $heightByAR;
+  box-shadow: var(--sm-md-shadow);
   
   @media screen and (min-width: 768px) {
     $heightByAR: calc(100vw / 4 * 2);

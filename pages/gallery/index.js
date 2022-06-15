@@ -77,13 +77,14 @@ const Gallery = () => {
         <div className={gallery_container} ref={galleryContainerRef}>
           {currentImageArr.map((imgObj, i) => {
             const shownIndex = i === index ? showImage : "";
+            const isPortrait = imgObj.height > imgObj.width ? true : false;
             return (
               <figure className={image_wrapper} key={`${imgObj.src}${i}`}>
                 <Image
                   src={imgObj.src}
                   alt={imgObj.alt}
                   layout="fill"
-                  // objectFit="contain"
+                  objectFit={isPortrait ? `contain` : `none`}
                   className={shownIndex}
                   priority={i < 3 ? "true" : "false"}
                 />
