@@ -78,15 +78,6 @@ import triple2 from "../public/imgs/triples/TB/_DSC0066.JPG";
 import triple3 from "../public/imgs/triples/TB/afrtrpl1.JPG";
 import triple4 from "../public/imgs/triples/TB/afrtrpl2.JPG";
 import triple5 from "../public/imgs/triples/TB/afrtrpl3.JPG";
-import triple6 from "../public/imgs/triples/TB/afrtrpl4.jpg";
-import triple7 from "../public/imgs/triples/TB/afrtrpl5.jpg";
-import triple8 from "../public/imgs/triples/TB/afrtrpl6.jpg";
-import triple9 from "../public/imgs/triples/TB/afrtrpl7.jpg";
-import triple10 from "../public/imgs/triples/TB/afrtrpl8.jpg";
-import triple11 from "../public/imgs/triples/TB/afrtrpl9.jpg";
-import triple12 from "../public/imgs/triples/TB/afrtrpl10.jpg";
-import triple13 from "../public/imgs/triples/TB/afrtrpl11.jpg";
-import triple14 from "../public/imgs/triples/TB/afrtrpl12.jpg";
 
 // ? Pop-out triples
 //! NEED PHOTOS!
