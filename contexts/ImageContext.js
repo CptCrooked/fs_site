@@ -72,12 +72,21 @@ import dblLight from "../public/imgs/doubles/afrDblLight.jpg";
 // ? African Triples
 //! NEED PHOTOS!
 
-// import triple from "../public/imgs/triples/TB/Last-Triple-image.png";
-// import triple1 from "../public/imgs/triples/TB/_DSC0074.JPG";
-// import triple2 from "../public/imgs/triples/TB/_DSC0066.JPG";
-// import triple3 from "../public/imgs/triples/TB/afrtrpl1.JPG";
-// import triple4 from "../public/imgs/triples/TB/afrtrpl2.JPG";
-// import triple5 from "../public/imgs/triples/TB/afrtrpl3.JPG";
+import triple from "../public/imgs/triples/TB/Last-Triple-image.png";
+import triple1 from "../public/imgs/triples/TB/_DSC0074.JPG";
+import triple2 from "../public/imgs/triples/TB/_DSC0066.JPG";
+import triple3 from "../public/imgs/triples/TB/afrtrpl1.JPG";
+import triple4 from "../public/imgs/triples/TB/afrtrpl2.JPG";
+import triple5 from "../public/imgs/triples/TB/afrtrpl3.JPG";
+import triple6 from "../public/imgs/triples/TB/afrtrpl4.jpg";
+import triple7 from "../public/imgs/triples/TB/afrtrpl5.jpg";
+import triple8 from "../public/imgs/triples/TB/afrtrpl6.jpg";
+import triple9 from "../public/imgs/triples/TB/afrtrpl7.jpg";
+import triple10 from "../public/imgs/triples/TB/afrtrpl8.jpg";
+import triple11 from "../public/imgs/triples/TB/afrtrpl9.jpg";
+import triple12 from "../public/imgs/triples/TB/afrtrpl10.jpg";
+import triple13 from "../public/imgs/triples/TB/afrtrpl11.jpg";
+import triple14 from "../public/imgs/triples/TB/afrtrpl12.jpg";
 
 // ? Pop-out triples
 //! NEED PHOTOS!
@@ -474,69 +483,69 @@ const ImageContextProvider = ({ children }) => {
         width: 2320,
         type: "Standard Triple (6)",
       },
-      // {
-      //   src: triple6,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (7)",
-      // },
-      // {
-      //   src: triple7,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (8)",
-      // },
-      // {
-      //   src: triple8,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (9)",
-      // },
-      // {
-      //   src: triple9,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (10)",
-      // },
-      // {
-      //   src: triple10,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (12)",
-      // },
-      // {
-      //   src: triple11,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (13)",
-      // },
-      // {
-      //   src: triple12,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 2560,
-      //   width: 1184,
-      //   type: "Standard Triple (14)",
-      // },
-      // {
-      //   src: triple13,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 4128,
-      //   width: 1908,
-      //   type: "Standard Triple (15)",
-      // },
-      // {
-      //   src: triple14,
-      //   alt: "Interior of a standard triple banger trailer",
-      //   height: 4128,
-      //   width: 1908,
-      //   type: "Standard Triple (16)",
-      // },
+      {
+        src: triple6,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (7)",
+      },
+      {
+        src: triple7,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (8)",
+      },
+      {
+        src: triple8,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (9)",
+      },
+      {
+        src: triple9,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (10)",
+      },
+      {
+        src: triple10,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (12)",
+      },
+      {
+        src: triple11,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (13)",
+      },
+      {
+        src: triple12,
+        alt: "Interior of a standard triple banger trailer",
+        height: 2560,
+        width: 1184,
+        type: "Standard Triple (14)",
+      },
+      {
+        src: triple13,
+        alt: "Interior of a standard triple banger trailer",
+        height: 4128,
+        width: 1908,
+        type: "Standard Triple (15)",
+      },
+      {
+        src: triple14,
+        alt: "Interior of a standard triple banger trailer",
+        height: 4128,
+        width: 1908,
+        type: "Standard Triple (16)",
+      },
     ],
     production: [
       {
