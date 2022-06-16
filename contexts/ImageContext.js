@@ -72,12 +72,12 @@ import dblLight from "../public/imgs/doubles/afrDblLight.jpg";
 // ? African Triples
 //! NEED PHOTOS!
 
-import triple from "../public/imgs/triples/TB/Last-Triple-image.png";
-import triple1 from "../public/imgs/triples/TB/_DSC0074.JPG";
-import triple2 from "../public/imgs/triples/TB/_DSC0066.JPG";
-import triple3 from "../public/imgs/triples/TB/afrtrpl1.JPG";
-import triple4 from "../public/imgs/triples/TB/afrtrpl2.JPG";
-import triple5 from "../public/imgs/triples/TB/afrtrpl3.JPG";
+// import triple from "../public/imgs/triples/TB/Last-Triple-image.png";
+// import triple1 from "../public/imgs/triples/TB/_DSC0074.JPG";
+// import triple2 from "../public/imgs/triples/TB/_DSC0066.JPG";
+// import triple3 from "../public/imgs/triples/TB/afrtrpl1.JPG";
+// import triple4 from "../public/imgs/triples/TB/afrtrpl2.JPG";
+// import triple5 from "../public/imgs/triples/TB/afrtrpl3.JPG";
 
 // ? Pop-out triples
 //! NEED PHOTOS!
