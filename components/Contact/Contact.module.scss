@@ -63,8 +63,10 @@ p span.division {
 }
 
 .googleMapLink {
+    $elementMargin: calc(var(--m-3) * 2);
+    width: calc(100vw - $elementMargin);
     display: block;
-    width: 20rem;
+    max-width: 30rem;
     margin: var(--m-3) auto 0 auto;
     border-radius: var(--button-border-radius);
     background-image: var(--inverse-solid-bg);
