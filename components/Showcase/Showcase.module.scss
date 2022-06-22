@@ -1,0 +1,190 @@
+.showcase_container {
+    display: block;
+    width: 100%;
+}
+
+.img_container {
+    $heightByAR: calc(100vw / 4 * 2.6);
+    position: relative;
+    width: 100%;
+    height: $heightByAR;
+    
+    & figure {
+        position: absolute;
+        opacity: 0;
+        // opacity: 1;
+        transition: opacity 0.2s !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        & > span > img {
+            width: 100%;
+            height: inherit;
+        }
+    }
+
+    & figcaption {
+        position: absolute;
+        top: var(--m-2);
+        left: 0;
+        background-image: var(--solid-bg);
+        padding: var(--p-1) var(--p-2);
+        padding-right: var(--p-3);
+        border-radius: 0 var(--sm-border-radius) 2rem 0;
+        box-shadow: var(--sm-md-shadow);
+        text-shadow: var(--normal-text-shadow);
+    }
+
+    & div[role="presentation"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-150%);
+        transition: transform 1s;
+        background-image: url("../../public/imgs/bg_light.png");
+        z-index: 1;
+        box-shadow: var(--md-shadow);
+        // animation: slideCover 1s ease-in-out 0s 1 normal forwards;
+    }
+    
+    & div[role="presentation"]::before, & div[role="presentation"]::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    & div[role="presentation"]::before {
+        content: "";
+        background-color: var(--sheet);
+        z-index: 1;
+    }
+    
+    & div[role="presentation"]::after {
+        content: "";
+        background-image: url("../../public/imgs/fs_logo2.png");
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: center center;
+        z-index: 1;
+    }
+}
+
+.showcase_controls {
+    display: flex;
+    justify-content: space-between;
+    background-image: var(--solid-bg);
+    box-shadow: var(--sm-md-shadow);
+    padding: var(--p-3) var(--p-2);
+    width: 100%;
+        z-index: 1;
+    // at larger screens (> 768px) this should be position: absolute;
+    & button, & select {
+        display: block;
+        font-family: inherit;
+        cursor: pointer;
+    }
+    
+    & button {
+        background-image: var(--inverse-solid-bg);
+        border: none;
+        border-radius: var(--sm-border-radius);
+        box-shadow: var(--sm-md-shadow);
+        color: var(--inverse-font-colour);
+        height: 3rem;
+        margin: 0;
+        width: 4rem;
+        
+        &:first-of-type,
+        &:last-of-type {
+            @media screen and (min-width: 768px) {
+                max-width: 4rem;
+            }
+            
+        }
+        
+        &:first-of-type {
+            border-radius: var(--md-border-radius) var(--md-border-radius) var(--md-border-radius) 4rem;
+        }
+        
+        &:last-of-type {
+            border-radius: var(--md-border-radius) var(--md-border-radius) 4rem var(--md-border-radius);
+        }
+    }
+    
+    & select {
+        
+        appearance: none;
+        background-image: var(--inverse-solid-bg);
+        border: none;
+        background-repeat: no-repeat;
+        border-radius: var(--md-border-radius);
+        box-shadow: var(--sm-md-shadow);
+        color: var(--inverse-font-colour);
+        height: 3rem;
+        text-align: center;
+        position: relative;
+        width: 70%;
+        margin: 0 auto;
+        max-width: 25rem;
+        font-size: clamp(1.3rem, 1.75vw, 2rem);
+        letter-spacing: inherit;
+        padding: var(--p-2);
+        text-shadow: var(--inverse-text-shadow);
+        
+        &:not(:first-child) {
+        }
+    }
+    
+    & option {
+        font-size: clamp(1.3rem, 1.75vw, 2rem);
+        text-align: center;
+        padding-left: var(--p-2);
+        color: var(--blue);
+        text-shadow: var(--light-sm-shadow);
+        letter-spacing: 0.15rem;
+    }
+
+}
+
+.showImage {
+    opacity: 1 !important;
+}
+
+.changeImageButton {
+
+    & > div {
+        height: 60%;
+        width: 60%;
+        margin: 0 auto;
+        border-radius: inherit;
+        border-top: 3px solid var(--inverse-font-colour);
+
+    }
+
+    &[data-btn-type="back"]>div {
+        border-left: 3px solid var(--inverse-font-colour);
+    }
+
+    &[data-btn-type="next"]>div {
+        border-right: 3px solid var(--inverse-font-colour);
+
+    }
+}
+
+// .nextButton {}
+
+// .previousButton {}
+
+// div[role="presentation"].selectChangeAnimation {
+//     transform: translateY(0%);
+// }
+
+div[role="presentation"].selectChangeAnimation {
+    transform: translateY(0%);
+}

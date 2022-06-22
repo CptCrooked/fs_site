@@ -51,6 +51,9 @@
         display: block;
         padding: var(--p-5);
         // line-height: 2rem;
+        &:not(:first-of-type) {
+            color: var(--inverse-font-colour);
+        }
     }
     
 }
@@ -143,6 +146,7 @@ select.select_mdToLrg_screen {
 
     @media screen and (min-width: 768px) {
         display: block;
+        line-height: 1.5rem;
     }
 }
 
