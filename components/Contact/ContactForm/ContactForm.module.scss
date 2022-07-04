@@ -98,16 +98,19 @@
   padding-right: 4rem;
   text-align: left;
   display: flex;
+  align-items: center;
   
   
   &::before {
     content: "";
     border-radius: 0 0 0 0.3rem;
     position: absolute;
-    top: 0%;
+    top: 50%;
     width: 1.5rem;
     height: 0.8rem;
-    transform: rotateZ(-50deg) translate(-1.1rem, 0.3rem);
+    margin-top: -0.4rem;
+    margin-right: 0.1rem;
+    transform: rotateZ(-50deg) translateY(-50%);
     border-bottom: 0px solid rgba(0, 0, 0, 0);
     border-left: 0px solid rgba(0, 0, 0, 0);
     right: var(--p-3);

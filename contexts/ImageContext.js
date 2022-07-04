@@ -112,21 +112,7 @@ export const ImageContext = createContext();
 
 const ImageContextProvider = ({ children }) => {
   const [imgs, setImgs] = useState({
-    carouselImages: [
-      {
-        src: afr9mBasin,
-        alt: "Interior of 9 meter standard star trailer",
-        height: 667,
-        width: 1000,
-        type: "9m Standard",
-      },
-      {
-        src: afr9mBed,
-        alt: "Interior of 9 meter standard star trailer",
-        height: 667,
-        width: 1000,
-        type: "9m Standard",
-      },
+    ["Choose Unit"]: [
       {
         src: afr11mBasin,
         alt: "Interior of 11 meter standard star trailer",
@@ -140,6 +126,20 @@ const ImageContextProvider = ({ children }) => {
         height: 666,
         width: 1000,
         type: "11m Standard",
+      },
+      {
+        src: afr9mBasin,
+        alt: "Interior of 9 meter standard star trailer",
+        height: 667,
+        width: 1000,
+        type: "9m Standard",
+      },
+      {
+        src: afr9mBed,
+        alt: "Interior of 9 meter standard star trailer",
+        height: 667,
+        width: 1000,
+        type: "9m Standard",
       },
       {
         src: doubleBedAndDesk,
@@ -570,7 +570,7 @@ const ImageContextProvider = ({ children }) => {
         type: "Production (3)",
       },
     ],
-    makeup: [
+    ["make-up"]: [
       {
         src: mUpLarge,
         alt: "Interior of Make up trailer",

@@ -43,6 +43,8 @@ body {
   --light-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.3);
   --dark-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
   --light-sm-shadow-colour: rgba(0, 0, 0, 0.5);
+  --grey-sheet: hsl(0, 0%, 100%, 50%);
+  --blue-sheet: hsla(216, 100%, 13%, 0.782);
 
   --blue-gradient: linear-gradient(
     180deg,

@@ -15,14 +15,22 @@ import { v4 as uuidv4 } from "uuid";
 
 const Showcase = () => {
   const { imgs } = useContext(ImageContext);
-  const [index, setIndex] = useState(0);
+  //! The state below is for when a user changes the type of
+  //! trailer that they would like to view.
+  //! Currently, the select element flashes and it has to do
+  //! with the fact that the value on the select is tied to
+  //! a ref which only updates on
   const [currentArr, setCurrentArr] = useState([]);
+  const [index, setIndex] = useState(0);
   const imageContainer = useRef(null);
   const figureArray = useRef(null);
   const selectValueRef = useRef();
   const timeoutRef = useRef();
   const animatedGalleryCover = useRef(null);
   const galleryCoverTimeoutRef = useRef();
+  const numOfRendersRef = useRef(0);
+  const selectElementRef = useRef(null);
+  const selectTextRef = useRef(null);
 
   const changeImageFn = (array, action) => {
     figureArray.current[index].classList.remove("showImage");
@@ -46,6 +54,11 @@ const Showcase = () => {
         break;
     }
   };
+
+  const returnAllFigureEls = () =>
+    [...imageContainer.current.children].filter(
+      (child) => child.tagName === "FIGURE"
+    );
 
   // Cycle forward through currentImageArr
   const nextImage = (arr) => {
@@ -77,33 +90,54 @@ const Showcase = () => {
     }
     if (animatedGalleryCover.current.classList.length > 0) {
       return (galleryCoverTimeoutRef.current = setTimeout(() => {
-        console.log(`running`);
         animatedGalleryCover.current.classList.remove(selectChangeAnimation);
       }, timeout));
     }
   };
 
-  const changeCurrentArray = (e) => {
-    animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    selectValueRef.current = e.target.value;
+  const delayedArrayChange = (timeout = 1000) => {
     timeoutRef.current = setTimeout(() => {
-      setCurrentArr(imgs[`${selectValueRef.current}`]);
-    }, 1000);
-  };
-
-  useEffect(() => {
-    figureArray.current = [...imageContainer.current.children].filter(
-      (child, i) => i !== 0
-    );
-    removeGalleryCover();
-    timeoutRef.current = setTimeout(() => {
-      if (selectValueRef.current) {
+      if (selectValueRef.current !== "carouselImages") {
         setCurrentArr(imgs[selectValueRef.current]);
       } else {
         setCurrentArr(imgs.carouselImages);
       }
-    }, 500);
+    }, timeout);
+  };
+
+  const changeCurrentArray = (e) => {
+    if (e.target.value === selectValueRef.current) return;
+    animatedGalleryCover.current.classList.add(selectChangeAnimation);
+    selectValueRef.current = e.target.value;
+    delayedArrayChange(500);
+  };
+
+  useEffect(() => {
+    animatedGalleryCover.current.classList.add(selectChangeAnimation);
+    selectValueRef.current = "carouselImages";
+    numOfRendersRef.current = numOfRendersRef.current++;
+    delayedArrayChange(500);
     //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    console.log(numOfRendersRef.current);
+    figureArray.current = returnAllFigureEls();
+    if (numOfRendersRef.current > 2) {
+      console.log(selectValueRef.current);
+      if (selectValueRef.current !== "carouselImages") {
+        // selectElementRef.current.value = selectValueRef.current;
+        selectTextRef.current.setAttribute(
+          "data-select-text",
+          selectValueRef.current
+        );
+      }
+      removeGalleryCover();
+      delayedArrayChange(500);
+      numOfRendersRef.current = numOfRendersRef.current++;
+    } else {
+      removeGalleryCover(1000);
+    }
     return () => clearTimeout(timeoutRef.current);
   });
 
@@ -128,7 +162,11 @@ const Showcase = () => {
           );
         })}
       </div>
-      <div className={`${showcase_controls}`}>
+      <div
+        className={`${showcase_controls}`}
+        ref={selectTextRef}
+        data-select-text=""
+      >
         <button
           className={`${changeImageButton} ${previousButton}`}
           data-btn-type="back"
@@ -140,15 +178,19 @@ const Showcase = () => {
           name="type"
           id="trailerSelect"
           onChange={(e) => changeCurrentArray(e)}
-          value={selectValueRef.current}
-          defaultValue=""
+          ref={selectElementRef}
+          defaultValue="Choose Unit"
         >
-          <option value="" disabled={true}>
+          <option value="Choose Unit" disabled={true}>
             Choose Unit
           </option>
-          {trailerData.map((trailerType, i) => {
+          {trailerData.map((trailerType) => {
             return (
-              <option key={uuidv4()} value={trailerType.type}>
+              <option
+                key={uuidv4()}
+                value={trailerType.type}
+                onClick={() => console.log("hello")}
+              >
                 {trailerType.label}
               </option>
             );

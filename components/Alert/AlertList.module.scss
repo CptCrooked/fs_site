@@ -28,6 +28,10 @@
 
 .alert {
   $alertHeight: 8%;
+  @media screen and (max-width: 280px){
+    $alertHeight: 10%;
+    
+  }
   margin: 0 auto;
   text-align: center;
   height: $alertHeight;
@@ -42,8 +46,9 @@
   align-items: center;
   opacity: 0;
   transition: opacity 1s;
-  width: fit-content;
-  padding: 0 var(--p-7);
-  max-height: 4rem;
+  width: 90%;
+  max-width: 15rem;
+  // padding: 0 var(--p-7);
+  max-height: 6rem;
   text-shadow: var(--normal-text-shadow);
 }

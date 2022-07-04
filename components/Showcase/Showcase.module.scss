@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
+
 .showcase_container {
     display: block;
     width: 100%;
@@ -45,10 +47,10 @@
         height: 100%;
         transform: translateY(-150%);
         transition: transform 1s;
-        background-image: url("../../public/imgs/bg_light.png");
         z-index: 1;
+        overflow: hidden;
         box-shadow: var(--md-shadow);
-        // animation: slideCover 1s ease-in-out 0s 1 normal forwards;
+        background-image: url("../../public/imgs/bg_light.png");
     }
     
     & div[role="presentation"]::before, & div[role="presentation"]::after {
@@ -61,8 +63,9 @@
     
     & div[role="presentation"]::before {
         content: "";
-        background-color: var(--sheet);
         z-index: 1;
+        box-shadow: inset 0 0 5rem 5rem var(--sheet),
+            inset 0 0 5rem 1rem var(--grey), inset 0 0 10rem 1rem rgba(0, 0, 0, 0), inset 0 0 10rem 1rem rgba(0, 0, 0, 0);
     }
     
     & div[role="presentation"]::after {
@@ -76,6 +79,7 @@
 }
 
 .showcase_controls {
+    position: relative;
     display: flex;
     justify-content: space-between;
     background-image: var(--solid-bg);
@@ -84,6 +88,22 @@
     width: 100%;
         z-index: 1;
     // at larger screens (> 768px) this should be position: absolute;
+
+    &::after {
+        content: attr(data-select-text);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        // background-color: rgba(255, 0, 0, 0.5);
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        font-size: clamp(1.1rem, 1.75vw, 2rem);
+        color: var(--inverse-font-colour);
+        text-shadow: var(--inverse-text-shadow);
+        @include XYCenterChildren;
+    }
+
     & button, & select {
         display: block;
         font-family: inherit;
@@ -125,29 +145,43 @@
         background-repeat: no-repeat;
         border-radius: var(--md-border-radius);
         box-shadow: var(--sm-md-shadow);
-        color: var(--inverse-font-colour);
         height: 3rem;
         text-align: center;
         position: relative;
-        width: 70%;
-        margin: 0 auto;
-        max-width: 25rem;
-        font-size: clamp(1.3rem, 1.75vw, 2rem);
+        width: clamp(5.6rem, 60%, 20rem);
+        margin: 0 var(--m-2);
+        font-size: clamp(1.1rem, 1.75vw, 2rem);
         letter-spacing: inherit;
         padding: var(--p-2);
         text-shadow: var(--inverse-text-shadow);
         
-        &:not(:first-child) {
+        color: var(--inverse-font-colour);
+        color: rgba(0, 0, 0, 0);
+        text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+
+        &::after {
+            content: "";
+            top: 0;
+            left: 0;
+            position: absolute;
+            background-color: red;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
+        
     }
     
     & option {
-        font-size: clamp(1.3rem, 1.75vw, 2rem);
+        font-size: clamp(1.2rem, 1.75vw, 2rem);
         text-align: center;
         padding-left: var(--p-2);
-        color: var(--blue);
-        text-shadow: var(--light-sm-shadow);
         letter-spacing: 0.15rem;
+        
+        &:not(:first-of-type) {
+            color: var(--blue);
+            text-shadow: var(--light-sm-shadow);
+        }
     }
 
 }

@@ -9,30 +9,31 @@ import {
 import { FormContext } from "../../../contexts/FormContext";
 
 const ContactForm = () => {
-  const { alertArray, setAlertArray } = useContext(AlertContext);
+  const { alertArray, setAlertArray, newAlertObject } =
+    useContext(AlertContext);
   const { formData, setFormData, handleInputChange } = useContext(FormContext);
   const [customCapture, setCustomCapture] = useState(false);
 
   const confirmCapture = () => setCustomCapture((prevState) => !prevState);
 
-  const newAlertObject = (type, message, inputElement = null) => {
-    let newObject;
-    if (inputElement !== null) {
-      newObject = {
-        type,
-        message: () =>
-          `${
-            inputElement?.name[0].toUpperCase() + inputElement?.name.slice(1)
-          } ${message}`,
-      };
-    } else {
-      newObject = {
-        type,
-        message: () => `${message}`,
-      };
-    }
-    return newObject;
-  };
+  // const newAlertObject = (type, message, inputElement = null) => {
+  //   let newObject;
+  //   if (inputElement !== null) {
+  //     newObject = {
+  //       type,
+  //       message: () =>
+  //         `${
+  //           inputElement?.name[0].toUpperCase() + inputElement?.name.slice(1)
+  //         } ${message}`,
+  //     };
+  //   } else {
+  //     newObject = {
+  //       type,
+  //       message: () => `${message}`,
+  //     };
+  //   }
+  //   return newObject;
+  // };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -99,7 +100,7 @@ const ContactForm = () => {
         );
         */
     } else {
-      setAlertArray([newAlertObject("error", 'Please check box above "Send"')]);
+      setAlertArray([newAlertObject("error", 'Check box above "Send"')]);
     }
   };
 

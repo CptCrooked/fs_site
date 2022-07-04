@@ -76,7 +76,7 @@ const trailerData = [
     ],
   },
   {
-    type: "makeup",
+    type: "make-up",
     label: "Make-Up",
     subDivisions: [
       {

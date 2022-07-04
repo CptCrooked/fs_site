@@ -15,9 +15,9 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
     currentTheme: { primary },
   } = useContext(ThemeContext);
 
-  const {
-    imgs: { carouselImages },
-  } = useContext(ImageContext);
+  const { imgs } = useContext(ImageContext);
+
+  const carouselImages = imgs["Choose Unit"];
 
   const auto = () => {
     const timer = setTimeout(() => {
@@ -42,11 +42,11 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
       {carouselImages.map(({ src }, elementIndex) => {
         return (
           <Image
+            key={`${src.src}`}
+            src={src}
             className={`${carouselImage} ${
               elementIndex === carouselIndex ? showImage : ""
             }`}
-            key={`${src.src}`}
-            src={src}
             alt=""
             layout="fill"
             priority={elementIndex < 2 ? "true" : "false"}
