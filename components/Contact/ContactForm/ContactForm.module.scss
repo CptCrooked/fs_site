@@ -85,9 +85,6 @@
       border-left: 3px solid var(--font-colour);
       box-shadow: -3px 2px 2px var(--shadow-colour);
   }
-
-  &:checked + label::after {
-  }
 }
 
 .captureInputDisplay {
