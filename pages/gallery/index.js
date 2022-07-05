@@ -7,7 +7,7 @@ import Showcase from "../../components/Showcase/Showcase";
 import Showcase2 from "../../dev/Showcase2";
 
 const Gallery = () => {
-  return <Showcase2 />;
+  return <Showcase />;
 };
 
 export default Gallery;

@@ -6,32 +6,32 @@ import {
   img_container,
   showcase_controls,
   changeImageButton,
-  nextButton,
-  previousButton,
   selectChangeAnimation,
 } from "./Showcase.module.scss";
 import trailerData from "../../galleryData/galleryData";
 import { v4 as uuidv4 } from "uuid";
 
-const Showcase = () => {
+const Showcase2 = () => {
   const { imgs } = useContext(ImageContext);
-  //! The state below is for when a user changes the type of
-  //! trailer that they would like to view.
-  //! Currently, the select element flashes and it has to do
-  //! with the fact that the value on the select is tied to
-  //! a ref which only updates on
+  //. The state below is for when a user changes the type of                '
+  //. trailer that they would like to view.                                 '
+  //. Currently, the select element flashes do to the fact                  '
+  //. that the value on the select is tied to a ref which only updates on   '
   const [currentArr, setCurrentArr] = useState([]);
   const [index, setIndex] = useState(0);
   const imageContainer = useRef(null);
   const figureArray = useRef(null);
-  const selectValueRef = useRef();
   const timeoutRef = useRef();
   const animatedGalleryCover = useRef(null);
-  const galleryCoverTimeoutRef = useRef();
-  const numOfRendersRef = useRef(0);
   const selectElementRef = useRef(null);
   const selectTextRef = useRef(null);
+  const selectPrevValueRef = useRef();
 
+  const STR_INITIAL_ARRAY_STRING = "Choose Unit";
+
+  //. 1) Remove class of currently rendered image                           '
+  //. 2) Depending on the 'direction' of the change, add the "showImage"    '
+  //.    class to the image to be viewed in the next render                 '
   const changeImageFn = (array, action) => {
     figureArray.current[index].classList.remove("showImage");
 
@@ -60,7 +60,16 @@ const Showcase = () => {
       (child) => child.tagName === "FIGURE"
     );
 
-  // Cycle forward through currentImageArr
+  const setSelectText = (rawText) => {
+    //. Sets the text in the "showcase controls" ::after pseudo element.  '
+    //. Prevents the select's "flashing". Changes a ref (No re-render)/   '
+    const firstLetter = rawText.slice(0, 1).toUpperCase();
+    const rest = rawText.slice(1);
+    const text = `${firstLetter}${rest}`;
+    selectTextRef.current.setAttribute("data-select-text", text);
+  };
+
+  //. Cycle forward through currentImageArr
   const nextImage = (arr) => {
     changeImageFn(arr, "next");
     timeoutRef.current = setTimeout(() => {
@@ -72,7 +81,7 @@ const Showcase = () => {
     }, 300);
   };
 
-  // Cycle back through currentImageArr
+  //. Cycle back through currentImageArr
   const prevImage = (arr) => {
     changeImageFn(arr, "prev");
     timeoutRef.current = setTimeout(() => {
@@ -88,65 +97,64 @@ const Showcase = () => {
     if (index > currentArr.length - 1 || index < 0) {
       setIndex(0);
     }
-    if (animatedGalleryCover.current.classList.length > 0) {
-      return (galleryCoverTimeoutRef.current = setTimeout(() => {
+    if (animatedGalleryCover?.current === null) return;
+    if (animatedGalleryCover?.current.classList.length > 0) {
+      timeoutRef.current = setTimeout(() => {
         animatedGalleryCover.current.classList.remove(selectChangeAnimation);
-      }, timeout));
+      }, timeout);
     }
   };
 
-  const delayedArrayChange = (timeout = 1000) => {
+  const delayedArrayChange = (e, timeout = 0) => {
+    //. Allows delay for animations to finish
+    //. part or all movement before rerender. (Event loop)
     timeoutRef.current = setTimeout(() => {
-      if (selectValueRef.current !== "carouselImages") {
-        setCurrentArr(imgs[selectValueRef.current]);
+      if (e && e.target.value !== STR_INITIAL_ARRAY_STRING) {
+        setSelectText(selectPrevValueRef.current);
+        //. Changes state (re-render)
+        setCurrentArr(imgs[e.target.value]);
       } else {
-        setCurrentArr(imgs.carouselImages);
+        setSelectText(STR_INITIAL_ARRAY_STRING);
+        //. Changes state (re-render)
+        setCurrentArr(imgs[STR_INITIAL_ARRAY_STRING]);
       }
     }, timeout);
   };
 
   const changeCurrentArray = (e) => {
-    if (e.target.value === selectValueRef.current) return;
+    //. This fn fires on an <option>'s click event as there
+    //. was an issue with the first option.
+    //. (It would not allow being selected after the first state change)
+    if (e.target.value === selectPrevValueRef.current) return;
     animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    selectValueRef.current = e.target.value;
-    delayedArrayChange(500);
+    selectPrevValueRef.current = e.target.value;
+    delayedArrayChange(e, 500);
   };
 
   useEffect(() => {
-    animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    selectValueRef.current = "carouselImages";
-    numOfRendersRef.current = numOfRendersRef.current++;
-    delayedArrayChange(500);
+    delayedArrayChange();
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    console.log(numOfRendersRef.current);
     figureArray.current = returnAllFigureEls();
-    if (numOfRendersRef.current > 2) {
-      console.log(selectValueRef.current);
-      if (selectValueRef.current !== "carouselImages") {
-        // selectElementRef.current.value = selectValueRef.current;
-        selectTextRef.current.setAttribute(
-          "data-select-text",
-          selectValueRef.current
-        );
-      }
-      removeGalleryCover();
-      delayedArrayChange(500);
-      numOfRendersRef.current = numOfRendersRef.current++;
-    } else {
-      removeGalleryCover(1000);
-    }
-    return () => clearTimeout(timeoutRef.current);
+    removeGalleryCover(0);
+    return () => {
+      removeGalleryCover(0);
+      clearTimeout(timeoutRef.current);
+    };
   });
 
   return (
     <section className={showcase_container}>
       <div className={img_container} ref={imageContainer}>
-        <div role="presentation" ref={animatedGalleryCover}></div>
+        <div
+          role="presentation"
+          ref={animatedGalleryCover}
+          className={selectChangeAnimation}
+        ></div>
         {[...currentArr].map(({ src, alt, width, height, type }, i) => {
-          const newId = Math.random() * i;
+          const newId = `${Math.random() * i}-${Date.now()}`;
           const showCurrentImage = () => (i === index ? "showImage" : "");
           return (
             <figure role="group" key={newId} className={showCurrentImage()}>
@@ -168,7 +176,7 @@ const Showcase = () => {
         data-select-text=""
       >
         <button
-          className={`${changeImageButton} ${previousButton}`}
+          className={`${changeImageButton}`}
           data-btn-type="back"
           onClick={() => prevImage(currentArr)}
         >
@@ -177,11 +185,10 @@ const Showcase = () => {
         <select
           name="type"
           id="trailerSelect"
-          onChange={(e) => changeCurrentArray(e)}
           ref={selectElementRef}
-          defaultValue="Choose Unit"
+          defaultValue={STR_INITIAL_ARRAY_STRING}
         >
-          <option value="Choose Unit" disabled={true}>
+          <option value={STR_INITIAL_ARRAY_STRING} disabled={true}>
             Choose Unit
           </option>
           {trailerData.map((trailerType) => {
@@ -189,7 +196,7 @@ const Showcase = () => {
               <option
                 key={uuidv4()}
                 value={trailerType.type}
-                onClick={() => console.log("hello")}
+                onClick={(e) => changeCurrentArray(e)}
               >
                 {trailerType.label}
               </option>
@@ -197,7 +204,7 @@ const Showcase = () => {
           })}
         </select>
         <button
-          className={`${changeImageButton} ${nextButton}`}
+          className={`${changeImageButton}`}
           data-btn-type="next"
           onClick={() => nextImage(currentArr)}
         >
@@ -208,4 +215,4 @@ const Showcase = () => {
   );
 };
 
-export default Showcase;
+export default Showcase2;
