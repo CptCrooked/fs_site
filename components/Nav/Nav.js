@@ -29,7 +29,7 @@ const Nav = ({ closeNavOnLinkClick }) => {
         </li>
         <li className={router.asPath === "/gallery" ? activeLink : ""}>
           <Link href="/gallery">
-            <a onClick={closeNavOnLinkClick}>Gallery</a>
+            <a onClick={closeNavOnLinkClick}>Trailers</a>
           </Link>
         </li>
         <li className={router.asPath === "/about" ? activeLink : ""}>

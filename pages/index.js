@@ -39,7 +39,7 @@ export default function Home() {
           <HR inverse={true} />
           <li>
             <Link href="/gallery">
-              <a>Gallery</a>
+              <a>Trailers</a>
             </Link>
           </li>
           <li>
