@@ -90,14 +90,7 @@ const Showcase = () => {
     if (index > currentArr.length - 1 || index < 0) {
       setIndex(0);
     }
-    if (animatedGalleryCover.current === null) {
-      console.log(
-        `animatedGalleryCover?.current === null : ${
-          animatedGalleryCover.current === null
-        }`
-      );
-      return;
-    }
+    if (animatedGalleryCover.current === null) return;
     if (animatedGalleryCover?.current.classList.length > 0) {
       timeoutRef.current = setTimeout(() => {
         animatedGalleryCover.current.classList.remove(selectChangeAnimation);
@@ -105,8 +98,7 @@ const Showcase = () => {
     }
   };
 
-  const setSelectText = (e) => {
-    if (e.target.value === selectPrevValueRef.current) return;
+  const setSelectText = (rawText) => {
     //. Sets the text in the "showcase controls" ::after pseudo element.  '
     //. Prevents the select's "flashing". Changes a ref (No re-render)    '
     const firstLetter = rawText.slice(0, 1).toUpperCase();
@@ -116,10 +108,10 @@ const Showcase = () => {
   };
 
   const delayedArrayChange = (key = STR_INITIAL_ARRAY_STRING, timeout = 0) => {
+    if (key === `${selectPrevValueRef.current}`) return;
     animatedGalleryCover.current.classList.add(selectChangeAnimation);
     timeoutRef.current = setTimeout(() => {
       setCurrentArr(imgs[key]);
-      console.log(`1.1.1--------------------------------------------`);
     }, timeout);
   };
 
@@ -180,7 +172,10 @@ const Showcase = () => {
             name="type"
             id="trailerSelect"
             ref={selectElementRef}
-            onChange={(e) => delayedArrayChange(e.target.value, 500)}
+            onChange={(e) => {
+              setSelectText(e.target.value);
+              delayedArrayChange(e.target.value, 500);
+            }}
           >
             <option value="" aria-disabled="true">
               Choose Unit
