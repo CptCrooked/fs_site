@@ -86,10 +86,18 @@ const Showcase = () => {
   };
 
   const removeGalleryCover = (timeout = 0) => {
+    console.log(`Remove cover`);
     if (index > currentArr.length - 1 || index < 0) {
       setIndex(0);
     }
-    if (animatedGalleryCover?.current === null) return;
+    if (animatedGalleryCover.current === null) {
+      console.log(
+        `animatedGalleryCover?.current === null : ${
+          animatedGalleryCover.current === null
+        }`
+      );
+      return;
+    }
     if (animatedGalleryCover?.current.classList.length > 0) {
       timeoutRef.current = setTimeout(() => {
         animatedGalleryCover.current.classList.remove(selectChangeAnimation);
@@ -97,7 +105,8 @@ const Showcase = () => {
     }
   };
 
-  const setSelectText = (rawText) => {
+  const setSelectText = (e) => {
+    if (e.target.value === selectPrevValueRef.current) return;
     //. Sets the text in the "showcase controls" ::after pseudo element.  '
     //. Prevents the select's "flashing". Changes a ref (No re-render)    '
     const firstLetter = rawText.slice(0, 1).toUpperCase();
@@ -106,46 +115,24 @@ const Showcase = () => {
     selectTextRef.current.setAttribute("data-select-text", text);
   };
 
-  const delayedArrayChange = (timeout = 0) => {
+  const delayedArrayChange = (key = STR_INITIAL_ARRAY_STRING, timeout = 0) => {
     animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    //. Allows delay for animations to finish
-    //. part or all movement before rerender. (Event loop)
     timeoutRef.current = setTimeout(() => {
-      if (
-        selectTextRef.current &&
-        selectPrevValueRef.current &&
-        selectPrevValueRef.current !== STR_INITIAL_ARRAY_STRING
-      ) {
-        setSelectText(selectPrevValueRef.current);
-        //. Changes state (re-render)
-        setCurrentArr(imgs[selectPrevValueRef.current]);
-      } else {
-        setSelectText(STR_INITIAL_ARRAY_STRING);
-        //. Changes state (re-render)
-        setCurrentArr(imgs[STR_INITIAL_ARRAY_STRING]);
-      }
+      setCurrentArr(imgs[key]);
+      console.log(`1.1.1--------------------------------------------`);
     }, timeout);
   };
 
-  const changeCurrentArray = (e) => {
-    //. This fn fires on an <option>'s click event as there
-    //. was an issue with the first option.
-    //. (It would not allow being selected after the first state change)
-    if (e.target.value === selectPrevValueRef.current) return;
-
-    delayedArrayChange(500);
-  };
-
   useEffect(() => {
-    delayedArrayChange();
+    delayedArrayChange(STR_INITIAL_ARRAY_STRING, 500);
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     figureArray.current = returnAllFigureEls();
-    removeGalleryCover(0);
+    removeGalleryCover(500);
     return () => {
-      removeGalleryCover(0);
+      removeGalleryCover(500);
       clearTimeout(timeoutRef.current);
     };
   });
@@ -193,7 +180,7 @@ const Showcase = () => {
             name="type"
             id="trailerSelect"
             ref={selectElementRef}
-            onChange={changeCurrentArray}
+            onChange={(e) => delayedArrayChange(e.target.value, 500)}
           >
             <option value="" aria-disabled="true">
               Choose Unit
