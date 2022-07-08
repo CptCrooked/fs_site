@@ -107,8 +107,8 @@ const Showcase = () => {
     selectTextRef.current.setAttribute("data-select-text", text);
   };
 
-  const delayedArrayChange = (key = STR_INITIAL_ARRAY_STRING, timeout = 0) => {
-    if (key === `${selectPrevValueRef.current}`) return;
+  const delayedArrayChange = (key, timeout = 0) => {
+    if (key === undefined || key === `${selectPrevValueRef.current}`) return;
     animatedGalleryCover.current.classList.add(selectChangeAnimation);
     timeoutRef.current = setTimeout(() => {
       setCurrentArr(imgs[key]);
