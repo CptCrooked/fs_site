@@ -85,8 +85,38 @@ const Showcase = () => {
     }, 300);
   };
 
-  const removeGalleryCover = (timeout = 0) => {
-    console.log(`Remove cover`);
+  const setSelectText = (rawText) => {
+    //. Sets the text in the "showcase controls" ::after pseudo element.  '
+    //. Prevents the select's "flashing". Changes a ref (No re-render)    '
+    const firstLetter = rawText.slice(0, 1).toUpperCase();
+    const rest = rawText.slice(1);
+    const text = `${firstLetter}${rest}`;
+    selectTextRef.current.setAttribute("data-select-text", text);
+  };
+
+  const delayedArrayChange = (key, timeout = 400) => {
+    console.log(selectElementRef.current);
+    if (key === undefined) {
+      setSelectText(STR_INITIAL_ARRAY_STRING);
+      return;
+    }
+    console.log(`key:`, key);
+    console.log(`selectPrevValueRef.current:`, selectPrevValueRef.current);
+    if (
+      key !== selectPrevValueRef.current ||
+      key !== `${selectPrevValueRef.current}`
+    ) {
+      setSelectText(key);
+      animatedGalleryCover.current.classList.add(selectChangeAnimation);
+      timeoutRef.current = setTimeout(() => {
+        setCurrentArr(imgs[key]);
+      }, timeout);
+      return;
+    }
+    return;
+  };
+
+  const removeGalleryCover = (timeout = 500) => {
     if (index > currentArr.length - 1 || index < 0) {
       setIndex(0);
     }
@@ -98,33 +128,16 @@ const Showcase = () => {
     }
   };
 
-  const setSelectText = (rawText) => {
-    //. Sets the text in the "showcase controls" ::after pseudo element.  '
-    //. Prevents the select's "flashing". Changes a ref (No re-render)    '
-    const firstLetter = rawText.slice(0, 1).toUpperCase();
-    const rest = rawText.slice(1);
-    const text = `${firstLetter}${rest}`;
-    selectTextRef.current.setAttribute("data-select-text", text);
-  };
-
-  const delayedArrayChange = (key, timeout = 0) => {
-    if (key === undefined || key === `${selectPrevValueRef.current}`) return;
-    animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    timeoutRef.current = setTimeout(() => {
-      setCurrentArr(imgs[key]);
-    }, timeout);
-  };
-
   useEffect(() => {
-    delayedArrayChange(STR_INITIAL_ARRAY_STRING, 500);
+    delayedArrayChange(STR_INITIAL_ARRAY_STRING);
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     figureArray.current = returnAllFigureEls();
-    removeGalleryCover(500);
+    removeGalleryCover();
     return () => {
-      removeGalleryCover(500);
+      removeGalleryCover();
       clearTimeout(timeoutRef.current);
     };
   });
@@ -172,10 +185,7 @@ const Showcase = () => {
             name="type"
             id="trailerSelect"
             ref={selectElementRef}
-            onChange={(e) => {
-              setSelectText(e.target.value);
-              delayedArrayChange(e.target.value, 500);
-            }}
+            onChange={(e) => delayedArrayChange(e.target.value)}
           >
             <option value="" aria-disabled="true">
               Choose Unit
