@@ -11,7 +11,6 @@ import {
 } from "./Showcase.module.scss";
 import trailerData from "../../galleryData/galleryData";
 import { v4 as uuidv4 } from "uuid";
-import Test from "../../dev/Test";
 
 const Showcase = () => {
   const { imgs } = useContext(ImageContext);
