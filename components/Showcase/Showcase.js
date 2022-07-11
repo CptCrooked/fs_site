@@ -11,6 +11,7 @@ import {
 } from "./Showcase.module.scss";
 import trailerData from "../../galleryData/galleryData";
 import { v4 as uuidv4 } from "uuid";
+import Test from "../../dev/Test";
 
 const Showcase = () => {
   const { imgs } = useContext(ImageContext);
@@ -94,18 +95,22 @@ const Showcase = () => {
     selectTextRef.current.setAttribute("data-select-text", text);
   };
 
-  const delayedArrayChange = (key, timeout = 400) => {
-    console.log(selectElementRef.current);
+  /*
+    ! This work fine on the pc browser but when you select the same option      '
+    ! twice, the gallery cover goes down and then nothing happens               '
+    ! I think it has something to do with the fact that maybe the android       '
+    ! chrome is skipping the preventative if statement.                         '
+  */
+  const delayedArrayChange = (key, timeout = 400, evt = { target: "" }) => {
+    if (
+      evt.target.value ===
+      selectTextRef.current.getAttribute("data-select-text").toLowerCase()
+    )
+      return;
     if (key === undefined) {
       setSelectText(STR_INITIAL_ARRAY_STRING);
       return;
-    }
-    console.log(`key:`, key);
-    console.log(`selectPrevValueRef.current:`, selectPrevValueRef.current);
-    if (
-      key !== selectPrevValueRef.current ||
-      key !== `${selectPrevValueRef.current}`
-    ) {
+    } else {
       setSelectText(key);
       animatedGalleryCover.current.classList.add(selectChangeAnimation);
       timeoutRef.current = setTimeout(() => {
@@ -137,7 +142,7 @@ const Showcase = () => {
     figureArray.current = returnAllFigureEls();
     removeGalleryCover();
     return () => {
-      removeGalleryCover();
+      // removeGalleryCover();
       clearTimeout(timeoutRef.current);
     };
   });
@@ -185,7 +190,7 @@ const Showcase = () => {
             name="type"
             id="trailerSelect"
             ref={selectElementRef}
-            onChange={(e) => delayedArrayChange(e.target.value)}
+            onChange={(e) => delayedArrayChange(e.target.value, 400, e)}
           >
             <option value="" aria-disabled="true">
               Choose Unit
@@ -196,7 +201,7 @@ const Showcase = () => {
                   key={uuidv4()}
                   value={trailerType.type}
                   onClick={(e) => {
-                    selectPrevValueRef.current = e.target.value;
+                    selectPrevValueRef.current = e.target.textContent;
                   }}
                 >
                   {trailerType.label}
