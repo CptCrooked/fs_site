@@ -91,7 +91,7 @@ const Showcase = () => {
     const firstLetter = rawText.slice(0, 1).toUpperCase();
     const rest = rawText.slice(1);
     const text = `${firstLetter}${rest}`;
-    selectTextRef.current.setAttribute("data-select-text", text);
+    selectTextRef.current.setAttribute("data-select-text", `${text}`);
   };
 
   /*

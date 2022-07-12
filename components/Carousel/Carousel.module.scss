@@ -35,6 +35,21 @@
   );
   height: 8px;
   z-index: 6;
+
+  &::after, &::before {
+    content: '';
+    position: absolute;
+    // bottom: var(--m-5);
+    width: 0.5rem;
+    height: 3rem;
+    transform-origin: bottom center;
+    border-radius: 1rem;
+    background-color:var(--grey);
+  }
+}
+
+.scrollIndicator {
+
 }
 
 .carouselImage {

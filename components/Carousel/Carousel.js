@@ -5,10 +5,12 @@ import { ImageContext } from "../../contexts/ImageContext";
 import {
   carouselContainer,
   carouselBottomShadow,
+  scrollIndicator,
   carouselImage,
   showImage,
 } from "./Carousel.module.scss";
 import PropTypes from "prop-types";
+import Arrow from "../Arrow/Arrow";
 
 const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   const {
@@ -39,6 +41,7 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   return (
     <section className={`${carouselContainer} ${primary}-shadow`} style={{}}>
       <div role="presentation" className={carouselBottomShadow}></div>
+      <Arrow />
       {carouselImages.map(({ src }, elementIndex) => {
         return (
           <Image
