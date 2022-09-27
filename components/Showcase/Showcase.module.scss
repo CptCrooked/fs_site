@@ -6,53 +6,44 @@
 }
 
 $heightByAR: calc(100vw / 4 * 2.6);
-$control-div-padding-top-and-bottom: calc(var(--p-3) * 2);
+
 .img_container {
     position: relative;
     width: 100%;
     height: $heightByAR;
     margin: 0 auto;
 
-    & figure {
-        position: absolute;
-        opacity: 0;
-        transition: opacity 0.2s !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
-        &>span>img {
-            width: 100%;
-            height: inherit;
-        }
+    @media screen and (min-width: 768px) {
+        height: 45vw;
+        width: 80%;
+        aspect-ratio: 16 / 9;
     }
 
-        @media screen and (min-width: 768px) {
-            height: 50vw;
-            width: 80%;
-        }
+    @media screen and (min-width: 1280px) {
+        $width: 1000px;
+        $heightByAR: calc($width / 16 * 9);
+        max-width: $width;
+        height: $heightByAR;
 
-        @media screen and (min-width: 1280px) {
-            aspect-ratio: 16 / 9;
-        }
-    
-        @media screen and (min-width: 1800px) {
-            max-width: 1366px;
-            max-height: 1366px * 0.6;
-        }
-
-    & figcaption {
-        position: absolute;
-        top: var(--m-2);
-        left: 0;
-        background-image: var(--solid-bg);
-        padding: var(--p-1) var(--p-2);
-        padding-right: var(--p-3);
-        border-radius: 0 var(--sm-border-radius) 2rem 0;
-        box-shadow: var(--sm-md-shadow);
-        text-shadow: var(--normal-text-shadow);
     }
+
+    @media screen and (min-width: 1800px) {
+        $width: 1366px;
+        $heightByAR: calc($width / 16 * 9);
+        max-width: $width;
+        height: $heightByAR;
+    }
+
+    // Hide all checkboxes within the parent
+    & input[type="checkbox"] {
+        position: absolute;
+        left: -1000vw;
+        z-index: -1;
+    }
+
+    // div[role="presentation"] is the gallery cover that slides up
+    // on first render and open and closes when the user switches
+    // the type of trailer selected.
 
     & div[role="presentation"] {
         position: absolute;
@@ -64,33 +55,188 @@ $control-div-padding-top-and-bottom: calc(var(--p-3) * 2);
         transition: transform 0.5s;
         z-index: 1;
         overflow: hidden;
-        box-shadow: var(--md-shadow);
         background-image: url("/imgs/bg_light.png");
     }
 
     & div[role="presentation"]::before,
     & div[role="presentation"]::after {
         position: absolute;
+        content: "";
+        z-index: 1;
+    }
+
+    & div[role="presentation"]::before {
         top: 0;
         left: 0;
+        background-color: var(--sheet);
         width: 100%;
         height: 100%;
     }
 
-    & div[role="presentation"]::before {
-        content: "";
-        z-index: 1;
-        box-shadow: inset 0 0 5rem 5rem var(--sheet),
-            inset 0 0 5rem 1rem var(--grey), inset 0 0 10rem 1rem rgba(0, 0, 0, 0), inset 0 0 10rem 1rem rgba(0, 0, 0, 0);
+    & div[role="presentation"]::after {
+        background-image: url("/imgs/fs_logo2.png");
+        background-color: rgba(255, 255, 255, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: center center;
+        width: 50%;
+        height: 30%;
+        left: 50%;
+        top: 50%;
+        padding: 2rem;
+        border-radius: var(--md-border-radius);
+        transform: translate(-50%, -50%);
+        box-shadow: var(--sm-md-shadow);
     }
 
-    & div[role="presentation"]::after {
-        content: "";
-        background-image: url("/imgs/fs_logo2.png");
-        background-repeat: no-repeat;
-        background-size: 50%;
-        background-position: center center;
+    /* This is the "info button" in the top right of the gallery */
+    & label:first-of-type {
+        line-height: 2rem;
+        position: absolute;
+        width: 2rem;
+        height: 2rem;
+        top: var(--m-2);
+        right: var(--m-2);
+        z-index: 2;
+        display: block;
+        background-image: var(--inverse-solid-bg);
+        color: var(--inverse-font-colour);
+        border-radius: 50%;
+        text-align: center;
+        font-family: serif;
+        font-weight: bold;
+        font-style: italic;
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        text-shadow: var(--inverse-text-shadow);
+        box-shadow: var(--sm-md-shadow);
+        @include btnState;
+
+        @media screen and (min-width: 500px) {
+            right: 5%;
+        }
+
+        @media screen and (min-width: 500px) {
+            right: var(--m-2);
+        }
+    }
+
+    /* Image Description Toggle */
+    & input[type="checkbox"]:first-of-type {
+        position: absolute;
+        left: -1000vw;
+        z-index: -1;
+
+        &:checked~figure {
+            overflow: scroll;
+
+            & p {
+                z-index: 1;
+                min-height: 100%;
+                padding: clamp(2.7rem, 8vw, 4rem) clamp(0.5rem, 4vw, 1.5rem);
+                border-top: 2px ridge #ccc;
+                transform: translateY(0);
+            }
+        }
+    }
+
+    & figure {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.2s !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0.25rem 0.5rem var(--shadow-colour);
+        overflow: hidden;
+
+        &>span>img {
+            width: 100%;
+            height: inherit;
+        }
+    }
+
+    & figcaption {
+        position: absolute;
+        top: var(--m-2);
+        left: 0;
+        background-image: var(--solid-bg);
+        padding: var(--p-1) var(--p-2);
+        padding-right: clamp(var(--p-3), 3vw, var(--p-4));
+        border-radius: 0 var(--sm-border-radius) 2rem 0;
+        box-shadow: var(--sm-md-shadow);
+        text-shadow: var(--normal-text-shadow);
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        z-index: 5;
+
+        @media screen and (min-width: 500px) {
+            padding-left: 5%;
+        }
+
+        @media screen and (min-width: 768px) {
+            padding-left: var(--p-3);
+        }
+    }
+
+    & p {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
         z-index: 1;
+        border-top: 2px ridge #ccc;
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        background-color: var(--sheet);
+        text-shadow: var(--normal-text-shadow);
+        border-radius: var(--normal-border-radius);
+        transform: translateY(200%);
+        transition: transform 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        min-height: 100vh;
+        overflow: hidden;
+        // opacity: 0.3;
+
+        @media screen and (min-width: 500px) {
+            --paddingOnSides: 5%;
+            padding-left: var(--paddingOnSides);
+            padding-right: var(--paddingOnSides);
+            transform: translateY(120vw);
+        }
+
+        @media screen and (min-width: 768px) {
+            --element-border-radius: var(--md-border-radius) var(--md-border-radius) 0 0;
+            border-radius: var(--element-border-radius);
+            border-bottom: 0;
+            box-shadow: inset 0 -1rem 0.25rem var(--shadow-colour);
+            display: flex;
+            align-items: center;
+            transform: translateY(200vw);
+
+            &::after,
+            &::before {
+                border-radius: var(--element-border-radius);
+                pointer-events: none;
+                z-index: -1;
+            }
+
+        }
+
+        &::after {
+            box-shadow: inset 0 -0.25rem 0.5rem -0.1rem var(--shadow-colour);
+        }
+
+        &::before {
+            background-image: var(--background-image);
+        }
+
+        &::after,
+        &::before {
+            @include pseudoEl;
+            width: 100%;
+            left: 0;
+            height: 100%;
+            background-color: var(--sheet);
+            z-index: -1;
+        }
     }
 }
 
@@ -107,67 +253,38 @@ $control-div-padding-top-and-bottom: calc(var(--p-3) * 2);
     padding: var(--p-3) var(--p-2);
     width: 100%;
     z-index: 1;
-    
+
+
+    //! This has to change to space between when on full screen.
     @media screen and (min-width: 500px) {
         justify-content: center
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width:768px) {
         position: unset;
+
+    }
+
+    @media screen and (min-width: 1280px) {
         justify-content: space-between;
     }
-    
-    // at larger screens (> 768px) this should be position: absolute;
-
-    &::after {
-        content: attr(data-select-text);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        font-size: clamp(1.1rem, 2vw, 1.6rem);
-        color: var(--inverse-font-colour);
-        text-shadow: var(--inverse-text-shadow);
-        @include XYCenterChildren;
-    }
-
-
-    &::after {
-        @media screen and (min-width: 1280px){   
-            height: 3rem;
-            top: unset;
-            bottom: calc($control-div-padding-top-and-bottom + 3rem);
-        }
-    }
-
-
 
     & button,
     & select {
-        display: block;
         font-family: inherit;
         cursor: pointer;
     }
 
     & button {
-        background-image: var(--inverse-solid-bg);
-        border: none;
-        border-radius: var(--sm-border-radius);
-        box-shadow: var(--sm-md-shadow);
-        color: var(--inverse-font-colour);
+        display: block;
+        transition: box-shadow 0.3s, color 0.3s;
+    }
+
+    & button {
+        width: 4rem;
         height: 3rem;
         margin: 0;
-        width: 4rem;
-
-        &:first-of-type,
-        &:last-of-type {
-            @media screen and (min-width: 768px) {
-                max-width: 4rem;
-            }
-
-        }
+        z-index: 10;
 
         &:first-of-type {
             border-radius: var(--md-border-radius) var(--md-border-radius) var(--md-border-radius) 4rem;
@@ -176,37 +293,88 @@ $control-div-padding-top-and-bottom: calc(var(--p-3) * 2);
         &:last-of-type {
             border-radius: var(--md-border-radius) var(--md-border-radius) 4rem var(--md-border-radius);
         }
+
+        @media screen and (min-width: 768px) {
+            $allMargin: calc(100vw - 80%);
+            $oneSide: calc($allMargin / 2);
+            position: absolute;
+            bottom: 50%;
+            height: 4rem;
+            width: 4rem;
+
+            &:first-of-type {
+                left: $oneSide;
+                transform: translateX(-50%);
+                border-radius: 50%;
+            }
+
+            &:last-of-type {
+                right: $oneSide;
+                transform: translateX(50%);
+                border-radius: 50%;
+            }
+
+        }
+
+        @media screen and (min-width: 1280px) {
+            $allMargin: calc(100vw - 1000px);
+            $oneSide: calc($allMargin / 2);
+
+            &:first-of-type {
+                left: $oneSide;
+                transform: translateY(-50%) translateX(-50%)
+            }
+
+            &:last-of-type {
+                right: $oneSide;
+                transform: translateY(-50%) translateX(50%)
+            }
+        }
+
+        @media screen and (min-width: 1800px) {
+            $allMargin: calc(100vw - 1366px);
+            $oneSide: calc($allMargin / 2);
+
+            &:first-of-type {
+                left: $oneSide;
+                transform: translateY(-50%) translateX(-50%)
+            }
+
+            &:last-of-type {
+                right: $oneSide;
+                transform: translateY(-50%) translateX(50%)
+            }
+
+        }
     }
 
     & select {
-
+        $allMargin: calc(100vw - 1366px);
         appearance: none;
         background-image: var(--inverse-solid-bg);
-        border: none;
         background-repeat: no-repeat;
         border-radius: var(--md-border-radius);
-        box-shadow: var(--sm-md-shadow);
-        height: 3rem;
-        text-align: center;
-        width: clamp(5.6rem, 60%, 20rem);
-        margin: 0 var(--m-2);
-        font-size: clamp(1.1rem, 1.75vw, 2rem);
-        letter-spacing: inherit;
-        padding: var(--p-2);
-        text-shadow: var(--inverse-text-shadow);
-
+        border: var(--button-border);
+        box-shadow: var(--sm-md-shadow), inset 0 0 1rem 3rem rgba(0, 0, 0, 0);
         color: var(--inverse-font-colour);
-        color: rgba(0, 0, 0, 0);
-        text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        height: 3rem;
+        letter-spacing: inherit;
+        margin: 0 var(--m-2);
+        padding: var(--p-2);
+        position: relative;
+        text-align: center;
+        text-shadow: var(--inverse-text-shadow);
+        transition: box-shadow 0.3s, color 0.3s;
+        width: clamp(5.6rem, 60%, 20rem);
+        @include hoverStyles;
+
 
         @media screen and (min-width: 1280px) {
-            position: absolute;
-            bottom: calc($control-div-padding-top-and-bottom + 3rem);
-            left: 50%;
-            margin: 0;
-            transform: translateX(-50%);
-            border-radius: 3rem 3rem 0 0;
+            $oneSide: calc($allMargin / 2);
+            margin: 0 auto;
         }
+
 
     }
 
@@ -220,40 +388,152 @@ $control-div-padding-top-and-bottom: calc(var(--p-3) * 2);
             color: var(--blue);
             text-shadow: var(--light-sm-shadow);
         }
-        
+
         &:first-of-type {
             pointer-events: none;
             color: rgba(0, 0, 0, 0.5);
+            text-shadow: var(--light-sm-shadow);
         }
     }
 
+}
+
+.fullscreenBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: block;
+    position: absolute;
+    bottom: var(--m-2);
+    right: var(--m-2);
+    background-image: var(--inverse-solid-bg);
+    border-radius: var(--md-border-radius);
+    box-shadow: var(--sm-md-shadow);
+    z-index: 100;
+    @include btnState;
+
+
+
+    & span {
+        position: absolute;
+        left: -1000vw;
+        z-index: -1;
+    }
+
+    & svg {
+        position: relative;
+        height: 100%;
+        width: 80%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+
+        & path {
+            fill: var(--sheet);
+        }
+    }
+
+    @media screen and (min-width:1280px) {
+        display: none;
+    }
 }
 
 .showImage {
     opacity: 1 !important;
 }
 
-.changeImageButton {
-
-    &>div {
-        height: 60%;
-        width: 60%;
-        margin: 0 auto;
-        border-radius: inherit;
-        border-top: 3px solid var(--inverse-font-colour);
-
-    }
-
-    &[data-btn-type="back"]>div {
-        border-left: 3px solid var(--inverse-font-colour);
-    }
-
-    &[data-btn-type="next"]>div {
-        border-right: 3px solid var(--inverse-font-colour);
-
-    }
-}
-
 div[role="presentation"].selectChangeAnimation {
     transform: translateY(0%);
+}
+
+/* Applied to controls_wrapper_for_large_screens */
+
+.shiftBtnUp {
+    top: var(--m-2);
+}
+
+label.shiftOnFullScreen:first-of-type {
+   right: 4rem;
+}
+
+.fullScreenStyles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 110;
+    background-color: var(--sheet);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    &::before, &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+    }
+    
+    &::before {
+        background-image: var(--background-image);
+    }
+    
+    &::after {
+        background-color: var(--sheet);
+    }
+    
+    /* Image Container */
+    & div:first-of-type {
+        box-shadow: inset 0 0 1rem var(--shadow-colour);
+        height: 100%;
+        width: 100%;
+        
+        & > figure {
+            position: absolute;
+            box-shadow: none;
+
+            /* Next JS Image component nested span */
+            & span {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        
+        & > figure[data-isportrait="portrait"] {
+            & span {
+                top: 0%;
+                transform: translateY(0%);
+            }
+        }
+    }
+
+    // Showcase Controls
+    & div:last-of-type {
+        background-image: none;
+        box-shadow: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & select {
+            display: none;
+        }
+
+        & button {
+            border-radius: 50%;
+            height: 3.5rem;
+            width: 3.5rem;
+            opacity: 0.7;
+        }
+    }
 }

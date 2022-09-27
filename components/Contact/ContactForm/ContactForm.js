@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { AlertContext } from "../../../contexts/AlertContext";
 import emailjs from "@emailjs/browser";
 import {
@@ -13,27 +13,9 @@ const ContactForm = () => {
     useContext(AlertContext);
   const { formData, setFormData, handleInputChange } = useContext(FormContext);
   const [customCapture, setCustomCapture] = useState(false);
+  const formRef = useRef(null);
 
   const confirmCapture = () => setCustomCapture((prevState) => !prevState);
-
-  // const newAlertObject = (type, message, inputElement = null) => {
-  //   let newObject;
-  //   if (inputElement !== null) {
-  //     newObject = {
-  //       type,
-  //       message: () =>
-  //         `${
-  //           inputElement?.name[0].toUpperCase() + inputElement?.name.slice(1)
-  //         } ${message}`,
-  //     };
-  //   } else {
-  //     newObject = {
-  //       type,
-  //       message: () => `${message}`,
-  //     };
-  //   }
-  //   return newObject;
-  // };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -41,10 +23,11 @@ const ContactForm = () => {
     // if (alertArray.length > 0) {
     //   setAlertArray([]);
     // }
-    const formInputs = e.target.children;
+    const formInputs = formRef.current.children;
     //. Create array of only the text inputs in the form.                                       '
     const editableInputs = [...formInputs].filter((child) => {
-      if (child.type !== "submit") {
+      if (child.name === "customCapture" || child.name === "" || !child.name) {
+      } else {
         return child;
       }
     });
@@ -62,7 +45,6 @@ const ContactForm = () => {
       });
 
       if (newAlertState.length < 1) {
-        setAlertArray([newAlertObject("success", "Message sent!")]);
         setFormData({
           name: "",
           company: "",
@@ -71,6 +53,7 @@ const ContactForm = () => {
           message: "",
         });
         confirmCapture();
+        setAlertArray([newAlertObject("success", "Message sent!")]);
       } else {
         setAlertArray(newAlertState);
       }
@@ -109,7 +92,7 @@ const ContactForm = () => {
       <h4 className={`secondaryTitle`}>Contact Us</h4>
       <h5>Leave us a message and we will contact you.</h5>
       <p>Fields marked with * are required</p>
-      <form onSubmit={(e) => sendEmail(e)} autoComplete="off">
+      <form onSubmit={(e) => sendEmail(e)} autoComplete="off" ref={formRef}>
         <input
           type="text"
           name="name"
@@ -172,7 +155,7 @@ const ContactForm = () => {
           id="submit"
           value="Send"
           aria-label="Send"
-          className={`myButton`}
+          className={`customButton`}
         />
       </form>
     </section>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, useCallback } from "react";
 import Image from "next/image";
 import { ImageContext } from "../../contexts/ImageContext";
 import {
@@ -6,47 +6,54 @@ import {
   controls_wrapper_for_large_screens,
   img_container,
   showcase_controls,
-  changeImageButton,
   selectChangeAnimation,
+  fullscreenBtn,
+  fullScreenStyles,
+  shiftBtnUp,
+  shiftOnFullScreen,
 } from "./Showcase.module.scss";
+
 import trailerData from "../../galleryData/galleryData";
 import { v4 as uuidv4 } from "uuid";
+import Arrow from "../../components/Arrow/Arrow";
+import {
+  cylceImageBtn,
+  back,
+  next,
+} from "../../components/Arrow/Arrow.module.scss";
+import FullScreenIcon from "../../components/FullScreenIcon/FullScreenIcon";
 
 const Showcase = () => {
   const { imgs } = useContext(ImageContext);
-  //. The state below is for when a user changes the type of                '
-  //. trailer that they would like to view.                                 '
-  //. Currently, the select element flashes do to the fact                  '
-  //. that the value on the select is tied to a ref which only updates on   '
   const [currentArr, setCurrentArr] = useState([]);
+  const [fullScreen, setFullScreen] = useState();
+  const [selectValue, setSelectValue] = useState("");
   const [index, setIndex] = useState(0);
   const imageContainer = useRef(null);
   const figureArray = useRef(null);
-  const timeoutRef = useRef();
   const animatedGalleryCover = useRef(null);
-  const selectElementRef = useRef(null);
-  const selectTextRef = useRef(null);
-  const selectPrevValueRef = useRef();
+  const timeoutRef = useRef();
+  const delayedStateChangeRef = useRef();
 
-  const STR_INITIAL_ARRAY_STRING = "Choose Unit";
+  const STR_INITIAL_ARRAY_STRING = "Select Unit";
 
   //. 1) Remove class of currently rendered image                           '
   //. 2) Depending on the 'direction' of the change, add the "showImage"    '
   //.    class to the image to be viewed in the next render                 '
-  const changeImageFn = (array, action) => {
+  const changeImageFn = (action) => {
     figureArray.current[index].classList.remove("showImage");
 
     switch (action) {
       case "next":
-        if (index >= 0 && index < array.length - 1) {
+        if (index >= 0 && index < currentArr.length - 1) {
           figureArray.current[index + 1].classList.add("showImage");
-        } else if ((index = array.length - 1)) {
+        } else if ((index = currentArr.length - 1)) {
           figureArray.current[0].classList.add("showImage");
         }
         break;
       case "prev":
         if (index === 0) {
-          figureArray.current[array.length - 1].classList.add("showImage");
+          figureArray.current[currentArr.length - 1].classList.add("showImage");
         } else {
           figureArray.current[index - 1].classList.add("showImage");
         }
@@ -56,16 +63,18 @@ const Showcase = () => {
     }
   };
 
+  // Returns figure elements after they have been rendered to the screen.
+  // This allows us to cycle through the images.
   const returnAllFigureEls = () =>
     [...imageContainer.current.children].filter(
       (child) => child.tagName === "FIGURE"
     );
 
   //. Cycle forward through currentImageArr
-  const nextImage = (arr) => {
-    changeImageFn(arr, "next");
+  const nextImage = () => {
+    changeImageFn("next");
     timeoutRef.current = setTimeout(() => {
-      if (index < arr.length - 1) {
+      if (index < currentArr.length - 1) {
         setIndex((index) => index + 1);
       } else {
         setIndex(0);
@@ -74,147 +83,170 @@ const Showcase = () => {
   };
 
   //. Cycle back through currentImageArr
-  const prevImage = (arr) => {
-    changeImageFn(arr, "prev");
+  const prevImage = () => {
+    changeImageFn("prev");
     timeoutRef.current = setTimeout(() => {
       if (index > 0) {
         setIndex((index) => index - 1);
       } else {
-        setIndex(parseInt(arr.length - 1));
+        setIndex(parseInt(currentArr.length - 1));
       }
     }, 300);
   };
 
-  const setSelectText = (rawText) => {
-    //. Sets the text in the "showcase controls" ::after pseudo element.  '
-    //. Prevents the select's "flashing". Changes a ref (No re-render)    '
-    const firstLetter = rawText.slice(0, 1).toUpperCase();
-    const rest = rawText.slice(1);
-    const text = `${firstLetter}${rest}`;
-    selectTextRef.current.setAttribute("data-select-text", `${text}`);
-  };
-
-  /*
-    ! This work fine on the pc browser but when you select the same option      '
-    ! twice, the gallery cover goes down and then nothing happens               '
-    ! I think it has something to do with the fact that maybe the android       '
-    ! chrome is skipping the preventative if statement.                         '
-  */
-  const delayedArrayChange = (key, timeout = 400, evt = { target: "" }) => {
-    if (
-      evt.target.value ===
-      selectTextRef.current.getAttribute("data-select-text").toLowerCase()
-    )
-      return;
-    if (key === undefined) {
-      setSelectText(STR_INITIAL_ARRAY_STRING);
-      return;
-    } else {
-      setSelectText(key);
-      animatedGalleryCover.current.classList.add(selectChangeAnimation);
-      timeoutRef.current = setTimeout(() => {
-        setCurrentArr(imgs[key]);
-      }, timeout);
-      return;
-    }
-    return;
-  };
-
-  const removeGalleryCover = (timeout = 500) => {
-    if (index > currentArr.length - 1 || index < 0) {
+  const changeTrailerType = (e) => {
+    const selectValue = e.target.value;
+    animatedGalleryCover.current.classList.add(selectChangeAnimation);
+    setSelectValue(selectValue);
+    delayedStateChangeRef.current = setTimeout(() => {
       setIndex(0);
-    }
-    if (animatedGalleryCover.current === null) return;
-    if (animatedGalleryCover?.current.classList.length > 0) {
-      timeoutRef.current = setTimeout(() => {
-        animatedGalleryCover.current.classList.remove(selectChangeAnimation);
-      }, timeout);
-    }
+      setCurrentArr(imgs[`${selectValue}`]);
+    }, 500);
+  };
+
+  const removeGalleryCover = useCallback(
+    (timeout = 500) => {
+      if (animatedGalleryCover?.current.classList.length > 0) {
+        timeoutRef.current = setTimeout(() => {
+          animatedGalleryCover.current.classList.remove(selectChangeAnimation);
+        }, timeout);
+      }
+    },
+    [selectValue]
+  );
+
+  const toggleFullScreen = () => {
+    setFullScreen((prevState) => !prevState);
   };
 
   useEffect(() => {
-    delayedArrayChange(STR_INITIAL_ARRAY_STRING);
+    setCurrentArr(imgs[STR_INITIAL_ARRAY_STRING]);
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
+    //. Returns all figures for scrolling through (adding "showImage")
     figureArray.current = returnAllFigureEls();
     removeGalleryCover();
     return () => {
-      // removeGalleryCover();
       clearTimeout(timeoutRef.current);
     };
   });
 
   return (
     <section className={showcase_container}>
-      <div className={controls_wrapper_for_large_screens}>
-        <div className={img_container} ref={imageContainer}>
+      <div
+        className={`${controls_wrapper_for_large_screens} ${
+          fullScreen ? fullScreenStyles : ""
+        }`}
+      >
+        <div className={`${img_container}`} ref={imageContainer}>
           <div
             role="presentation"
             ref={animatedGalleryCover}
             className={selectChangeAnimation}
           ></div>
-          {[...currentArr].map(({ src, alt, width, height, type }, i) => {
+          <label
+            htmlFor="description"
+            className={`${fullScreen && shiftOnFullScreen}`}
+            onClick={() => scrollTo(0, 0)}
+          >
+            i
+          </label>
+          <input type="checkbox" name="description" id="description" />
+          <label
+            htmlFor="fullScreen"
+            className={`${fullscreenBtn} ${fullScreen ? shiftBtnUp : ""}`}
+          >
+            <span>Full Screen</span>
+            <FullScreenIcon />
+          </label>
+          <input
+            type="checkbox"
+            name="fullScreen"
+            id="fullScreen"
+            onChange={toggleFullScreen}
+          />
+          {currentArr.map(({ src, alt, width, height, type }, i) => {
             const newId = `${Math.random() * i}-${Date.now()}`;
             const showCurrentImage = () => (i === index ? "showImage" : "");
+
+            const calcImageFit = () => {
+              let objectFitValue = width > height ? `fill` : `contain`;
+              let layoutValue = `fill`;
+              let isPortrait = "";
+
+              if (fullScreen) {
+                layoutValue = width > height ? `responsive` : `fill`;
+                isPortrait = width > height ? "" : "portrait";
+              }
+              return { objectFitValue, layoutValue, isPortrait };
+            };
+
+            const imgValues = calcImageFit();
+            const shownImage = showCurrentImage();
             return (
-              <figure role="group" key={newId} className={showCurrentImage()}>
+              <figure
+                role="group"
+                key={newId}
+                className={shownImage}
+                data-isportrait={imgValues.isPortrait}
+              >
                 <Image
                   src={src}
                   alt={alt}
-                  layout="fill"
+                  layout={imgValues.layoutValue}
                   priority={true}
-                  objectFit={width > height ? `fill` : `contain`}
+                  objectFit={imgValues.objectFitValue}
                 />
-                <figcaption>{type}</figcaption>
+                <figcaption>
+                  <span>{type}</span>
+                </figcaption>
+                {/* Limit description to 140 characters */}
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nesciunt id magnam temporibus ducimus voluptates officiis modi
+                  dolores fugit autem, perspiciatis sequi quasi debitis, totam
+                  eaque dolorum doloribus recusandae. Numquam sed accusantium
+                  ipsa, nisi distinctio iusto non dignissimos voluptates ratione
+                  ullam provident incidunt dolores labore repellat modi est
+                  voluptatum sunt. Dolore.
+                </p>
               </figure>
             );
           })}
         </div>
         {/* Controls for gallery */}
-        <div
-          className={`${showcase_controls}`}
-          ref={selectTextRef}
-          data-select-text=""
-        >
-          <button
-            className={`${changeImageButton}`}
-            data-btn-type="back"
-            onClick={() => prevImage(currentArr)}
-          >
-            <div></div>
-          </button>
+        <div className={`${showcase_controls}`}>
+          <Arrow
+            btn={true}
+            wrapperClassList={`customButton`}
+            svgClassList={`${cylceImageBtn} ${back}`}
+            dark={false}
+            clickHandler={(e) => prevImage(e)}
+          />
           <select
             name="type"
             id="trailerSelect"
-            ref={selectElementRef}
-            onChange={(e) => delayedArrayChange(e.target.value, 400, e)}
+            onChange={changeTrailerType}
+            value={selectValue}
           >
-            <option value="" aria-disabled="true">
-              Choose Unit
-            </option>
-            {trailerData.map((trailerType) => {
+            <option aria-disabled="true">Select Unit</option>
+            {trailerData.map(({ type, label }) => {
               return (
-                <option
-                  key={uuidv4()}
-                  value={trailerType.type}
-                  onClick={(e) => {
-                    selectPrevValueRef.current = e.target.textContent;
-                  }}
-                >
-                  {trailerType.label}
+                <option key={uuidv4()} value={type}>
+                  {label}
                 </option>
               );
             })}
           </select>
-          <button
-            className={`${changeImageButton}`}
-            data-btn-type="next"
-            onClick={() => nextImage(currentArr)}
-          >
-            <div></div>
-          </button>
+          <Arrow
+            btn={true}
+            wrapperClassList={`customButton`}
+            svgClassList={`${cylceImageBtn} ${next}`}
+            dark={true}
+            clickHandler={(e) => nextImage(e)}
+          />
         </div>
       </div>
     </section>

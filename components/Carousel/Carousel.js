@@ -5,12 +5,12 @@ import { ImageContext } from "../../contexts/ImageContext";
 import {
   carouselContainer,
   carouselBottomShadow,
-  scrollIndicator,
   carouselImage,
   showImage,
 } from "./Carousel.module.scss";
 import PropTypes from "prop-types";
 import Arrow from "../Arrow/Arrow";
+import { arrow, scrollIndicator } from "../Arrow/Arrow.module.scss";
 
 const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   const {
@@ -19,7 +19,7 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
 
   const { imgs } = useContext(ImageContext);
 
-  const carouselImages = imgs["Choose Unit"];
+  const carouselImages = imgs["Select Unit"];
 
   const auto = () => {
     const timer = setTimeout(() => {
@@ -41,7 +41,7 @@ const Carousel = ({ carouselIndex, setCarouselIndex }) => {
   return (
     <section className={`${carouselContainer} ${primary}-shadow`} style={{}}>
       <div role="presentation" className={carouselBottomShadow}></div>
-      <Arrow />
+      <Arrow svgClassList={`${arrow} ${scrollIndicator}`} />
       {carouselImages.map(({ src }, elementIndex) => {
         return (
           <Image

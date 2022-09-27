@@ -2,23 +2,28 @@
 
 .carouselContainer {
   position: relative;
-  height: 67vw;
-  z-index: 0;
   border-radius: 0;
   z-index: 0;
   width: 100%;
   overflow: hidden;
   margin: 0 auto;
-
+  height: 67vw;
+  
   @media screen and (min-width: 768px) {
-    height: 50vw;
+    --sixteenByNineUnit: calc(80vw / 16);
+    --sixteenByNineheight: calc(var(--sixteenByNineUnit) * 9);
+    height: var(--sixteenByNineheight);
+    // height: 50vw;
     width: 80%;
-    // max-height: ;
   }
-
+  
   @media screen and (min-width: 1800px) {
-    max-width: 1366px;
-    max-height: 1366px * 0.6;
+    $ARunit: calc(1366px / 16);
+    $ElementHeight: calc($ARunit * 9);
+    width: 1366px;
+    height: $ElementHeight;
+    max-width: 1920px;
+    max-height: 1920px * 0.6;
   }
 }
 
@@ -35,21 +40,6 @@
   );
   height: 8px;
   z-index: 6;
-
-  &::after, &::before {
-    content: '';
-    position: absolute;
-    // bottom: var(--m-5);
-    width: 0.5rem;
-    height: 3rem;
-    transform-origin: bottom center;
-    border-radius: 1rem;
-    background-color:var(--grey);
-  }
-}
-
-.scrollIndicator {
-
 }
 
 .carouselImage {
@@ -64,40 +54,4 @@
 
 img.showImage, span.showImage {
   opacity: 1 !important;
-}
-
-
-.scrollIndicator {
-  display: none;
-
-  @media screen and (min-width: 1200px) {
-    display: block;
-  }
-
-  position: absolute;
-  border-radius: 0.3rem;
-  border-bottom: 0.5rem solid var(--grey);
-  border-right: 0.5rem solid var(--grey);
-  bottom: 15%;
-  height: 3rem;
-  width: 3rem;
-  left: 50%;
-  transform: translateY(0%) translateX(-50%) rotateZ(45deg);
-  z-index: 6;
-  animation: scrollIndicator 2s ease-in-out 0s infinite normal forwards;
-}
-
-@keyframes scrollIndicator {
-  0% {
-    transform: translateY(0%) translateX(-50%) rotateZ(45deg);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  }
-  50% {
-    transform: translateY(-30%) translateX(-50%) rotateZ(45deg);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    transform: translateY(0%) translateX(-50%) rotateZ(45deg);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  }
 }

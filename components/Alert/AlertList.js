@@ -30,11 +30,11 @@ const AlertList = () => {
   return (
     <ul role="alert" className={`${alertList}`} ref={ulRef}>
       {alertArray?.length > 0
-        ? alertArray.map((alertObject) => {
+        ? alertArray.map((alertObject, i) => {
             return (
               <Alert
                 // key={uuid()}
-                key={Math.random()}
+                key={Math.random() * i}
                 type={alertObject.type}
                 message={alertObject.message()}
               />

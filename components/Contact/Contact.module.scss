@@ -69,7 +69,7 @@ p span.division {
     max-width: 30rem;
     margin: var(--m-3) auto 0 auto;
     border-radius: var(--button-border-radius);
-    background-image: var(--inverse-solid-bg);
-    color: var(--inverse-font-colour);
     padding: var(--p-3);
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
+    text-shadow: var(--normal-text-shadow);
 }

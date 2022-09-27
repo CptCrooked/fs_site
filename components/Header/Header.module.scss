@@ -11,7 +11,7 @@
   background-image: var(--glass-bg);
   box-shadow: var(--sm-md-shadow);
   padding: var(--p-6) 0;
-  z-index: 5;
+  z-index: 100;
 
   & .header_wrapper {
     display: flex;
@@ -80,7 +80,7 @@ label.menuButton {
   padding: var(--p-1);
   border-radius: var(--sm-border-radius);
   transition: box-shadow 0.1s;
-  z-index: 11;
+  z-index: 102;
   @include XYCenterChildren;
 
   @media screen and (min-width: 500px) {

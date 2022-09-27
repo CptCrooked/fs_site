@@ -27,14 +27,8 @@
 }
 
 .alert {
-  $alertHeight: 8%;
-  @media screen and (max-width: 280px){
-    $alertHeight: 10%;
-    
-  }
   margin: 0 auto;
   text-align: center;
-  height: $alertHeight;
   border: 1px ridge #ccc;
   border-radius: var(--button-border-radius);
   background-color: var(--grey);
@@ -44,11 +38,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
   transition: opacity 1s;
   width: 90%;
   max-width: 15rem;
-  // padding: 0 var(--p-7);
+  padding: var(--p-2) var(--p-7);
   max-height: 6rem;
   text-shadow: var(--normal-text-shadow);
 }

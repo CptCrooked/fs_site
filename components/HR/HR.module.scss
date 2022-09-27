@@ -8,10 +8,16 @@
   box-shadow: var(--sm-shadow);
 }
 
+.wider_hr {
+  @media screen and (min-width: 768px) {
+    max-width: 1024px;
+  }
+}
+
 .responsiveHr {
   @media screen and (min-width: 768px) {
     width: 4px;
-    height: 5rem;
+    height: 8rem;
   }
 }
 

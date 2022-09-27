@@ -1,21 +1,51 @@
 .arrow {
     position: absolute;
-    width: 5rem;
     z-index: 10;
+    stroke: #000;
+    
+}
+
+.scrollIndicator {
+    width: clamp(5rem, 15vw, 8rem);
     height: fit-content;
     left: 50%;
     bottom: var(--m-3);
-    stroke: #000;
     animation: arrowAnimation 2s ease-in-out 0s infinite normal forwards;
 
-    &::after {
-        content: 'hello';
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: red;
-        z-index: 10;
+    & stop {
+        stop-color: var(--inverse-font-colour);
     }
+    
+    @media screen and (min-width: 1366px) {
+        bottom: var(--m-7);
+    }
+}
+
+.cylceImageBtn {
+    // pointer-events: none;
+    width: 2rem;
+    height: 2rem;
+    stroke: #000;
+    & stop {
+        stop-color: var(--inverse-font-colour);
+
+        &:first-of-type {
+            stop-opacity: 0.4;
+        }
+        &:last-of-type {
+            stop-opacity: 0.9;
+        }
+    }
+
+}
+
+.back {
+        transform: rotateZ(90deg)
+}
+
+.next {
+    transform: rotateZ(270deg)
+
 }
 
 .arrowShadow {
@@ -30,6 +60,10 @@
     width: 3rem;
     background-image: radial-gradient(at center, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0),);
     transform: translateX(-50%);
+
+    @media screen and (min-width: 1366px) {
+        bottom: var(--m-6);
+    }
 }
 
 @keyframes arrowAnimation {

@@ -1,15 +1,12 @@
+@import "./mixins";
+
 $fontFamily: "Blinker";
 $regular: "-Regular";
 $thin: "-Thin";
 $bold: "-Bold";
 $backgroundImagePath: url("../public/imgs/bg_light.png");
 
-@mixin importFont($fontName) {
-  @font-face {
-    font-family: $fontName;
-    src: url("../public/fonts/Blinker/" + $fontName + ".ttf");
-  }
-}
+
 
 @include importFont($fontFamily + $regular);
 @include importFont($fontFamily + $thin);
@@ -18,6 +15,8 @@ $backgroundImagePath: url("../public/imgs/bg_light.png");
 body {
   font-family: $fontFamily + $regular, Arial, Helvetica, sans-serif;
   background-image: $backgroundImagePath;
+
+  --background-image: url("../public/imgs/bg_light.png");
 
   --header-height: 70.4px;
 
@@ -37,9 +36,13 @@ body {
   --m-6: 2.2rem;
   --m-7: 3rem;
 
+  --title-font-size: clamp(1.7rem, 5vw, 3rem);
+  --normal-letter-spacing: 0.15rem;
+
   --sm-border-radius: 0.4rem;
   --md-border-radius: 0.5rem;
   --button-border-radius: 2rem 2rem 10rem 10rem;
+  --button-border: 1px ridge var(--grey);
   --light-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.3);
   --dark-sm-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.8);
   --light-sm-shadow-colour: rgba(0, 0, 0, 0.5);
@@ -281,6 +284,7 @@ body {
   transition: color 0.5s, background-color 0.3s;
 }
 
+
 .flex {
   display: flex;
 }
@@ -370,7 +374,7 @@ label.pressed {
 .secondaryTitle {
   background-color: var(--sheet);
   padding: var(--p-3);
-  font-size: clamp(1.4rem, 1.75vw, 2rem);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
   text-shadow: var(--normal-text-shadow);
   box-shadow: var(--sm-md-shadow);
   border-radius: 0 0 100px 100px;
@@ -395,7 +399,7 @@ label.pressed {
   opacity: 1;
 }
 
-form[autocomplete="off"] > .highlight {
+form[autocomplete="off"] input.highlight {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
@@ -420,34 +424,6 @@ $darkerShadeBlur: 4rem;
     inset 0 -0.3rem $darkerShadeBlur -0.5rem rgb(124, 110, 1);
 }
 
-a:focus, button:focus, select:focus, input[type="submit"]:focus {
-  box-shadow: inherit, inset 0 0 0 2px red !important;
-}
-
-.myButton {
-  font-family: inherit;
-  letter-spacing: inherit;
-  display: block;
-  margin: var(--m-3) auto 0 auto;
-  border-radius: var(--button-border-radius);
-  background-image: var(--inverse-solid-bg);
-  border: none;
-    padding: var(--p-3);
-    box-shadow: var(--sm-md-shadow);
-      color: var(--inverse-font-colour);
-      transition: box-shadow 0.3s, color 0.3s;
-      
-      &:hover {
-        box-shadow: var(--md-shadow), inset 0 3rem 0 16px var(--inverse-font-colour);
-        text-shadow: var(--normal-text-shadow);
-        color: var(--font-colour);
-      }
-      
-      &:active {
-        box-shadow: var(--sm-shadow), inset 0 3rem 0 16px var(--inverse-font-colour);
-      }
-}
-
 p.tsandcs_banner {
   font-size: clamp(0.7rem, 1.5vw, 1.1rem);
     position: absolute;
@@ -463,4 +439,21 @@ p.tsandcs_banner {
 
 .showImage {
   opacity: 1 !important;
+}
+
+
+
+.customButton {
+  background-image: var(--inverse-solid-bg);
+  border: var(--button-border);
+  box-shadow: var(--sm-md-shadow), inset 0 4rem 0 3rem rgba(0, 0, 0, 0);
+  color: var(--inverse-font-colour);
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  letter-spacing: inherit;
+  text-shadow: var(--inverse-shadow-colour);
+  transition: box-shadow 0.3s, color 0.3s, text-shadow 0.3s;
+
+  @include hoverStyles;
 }

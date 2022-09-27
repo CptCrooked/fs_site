@@ -1,3 +1,10 @@
+@mixin importFont($fontName) {
+  @font-face {
+    font-family: $fontName;
+    src: url("../public/fonts/Blinker/" + $fontName + ".ttf");
+  }
+}
+
 @mixin XYCenterChildren {
   display: flex;
   justify-content: center;
@@ -11,13 +18,43 @@
 }
 
 @mixin btnState {
+  box-shadow: inset 0 0 1rem 3rem rgba(0, 0, 0, 0), var(--sm-md-shadow);
+  transition: box-shadow 0.3s;
   &:hover {
-    box-shadow: var(--md-shadow);
-
-    & a {
-      box-shadow: inset 0 3rem 0 16px var(--inverse-font-colour);
+    box-shadow: inset 0 0 1rem 3rem var(--inverse-font-colour), var(--sm-md-shadow);
       color: var(--font-colour);
+
+      & > svg, & path {
+          fill: var(--font-colour) !important;
+        }
+
+        &::after {
+          background-image: var(--inverse-solid-bg);
+        }
+
+    & a, & button {
+      box-shadow: inset 0 0 1rem 3rem var(--inverse-font-colour), var(--sm-md-shadow);
+        color: var(--font-colour);
       text-shadow: var(--normal-text-shadow);
     }
   }
+}
+
+@mixin hoverStyles {
+  @media(hover: hover) {
+      &:hover {
+        box-shadow: var(--md-shadow), inset 0 4rem 0 3rem var(--inverse-font-colour);
+        color: var(--font-colour);
+        text-shadow: var(--normal-text-shadow);
+
+        &>svg {
+            fill: var(--font-colour) !important;
+          }
+      }
+  
+    }
+  
+    &:active {
+      box-shadow: var(--sm-md-shadow), inset 0 4rem 0 3rem var(--inverse-font-colour) !important;
+    }
 }

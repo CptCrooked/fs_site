@@ -112,7 +112,7 @@ export const ImageContext = createContext();
 
 const ImageContextProvider = ({ children }) => {
   const [imgs, setImgs] = useState({
-    ["Choose Unit"]: [
+    ["Select Unit"]: [
       {
         src: afr11mBasin,
         alt: "Interior of 11 meter standard star trailer",

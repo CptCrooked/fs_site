@@ -25,7 +25,7 @@ const ContactInfo = () => {
       <p>
         <span>Where to find us</span>
         <a
-          className={`myButton ${googleMapLink}`}
+          className={`customButton ${googleMapLink}`}
           href="https://g.page/fleetstar-film-trailers?share"
           target="_blank"
           rel="noreferrer"

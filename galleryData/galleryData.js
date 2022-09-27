@@ -100,11 +100,11 @@ const trailerData = [
   //   subDivisions: [
   //     {
   //       division: "african",
-  //       label: "African Triple",
+  //       label: "African Wardrobe",
   //     },
   //     {
   //       division: "popout",
-  //       label: "Pop-Out Triple",
+  //       label: "Pop-Out Wardrobe",
   //     },
   //   ],
   // },

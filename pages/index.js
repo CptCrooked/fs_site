@@ -3,7 +3,6 @@ import { useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import HR from "../components/HR/HR";
 import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
-import Contact from "../components/Contact/Contact";
 
 //! development
 
@@ -22,15 +21,25 @@ export default function Home() {
         </h1>
         <div className={`${sellingPoints}`}>
           <h3 className={`contentWrapper secondaryTitle`}>What we provide:</h3>
+          <aside className={``}>
+            <p>
+              With an array of units available for actors, celebrities and crew,
+              Fleet Star is uniquely positioned to provide the best possible
+              solution for your on-set accommodation needs at an affordable
+              price.
+            </p>
+          </aside>
+          <HR remainsHorizontal={true} />
           <ul className={`contentWrapper`}>
-            <li>24 Hour access to our maintenance team</li>
-            <HR responsive={true} />
             <li>
               Rugged trucks and trailers capable of traversing tough terrain
             </li>
             <HR responsive={true} />
+            <li>24 Hour access to our maintenance team</li>
+            <HR responsive={true} />
             <li>17 Years of film and entertainment industry experience</li>
           </ul>
+          <HR remainsHorizontal={true} />
         </div>
       </section>
       <nav className={`${quickLinks}`}>

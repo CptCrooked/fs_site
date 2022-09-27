@@ -3,11 +3,11 @@
 .title {
   position: relative;
   background-image: var(--solid-bg);
-  font-size: clamp(1.7rem, 3.5vw, 3rem);
+  font-size: var(--title-font-size);
   padding: var(--p-3) 5%;
   text-align: center;
   box-shadow: var(--sm-md-shadow);
-  text-shadow: 0 2px 2px var(--shadow-colour);
+  text-shadow: var(--normal-text-shadow);
   z-index: 1;
   font-weight: bold;
   & span {
@@ -47,10 +47,34 @@
     font-size: clamp(1.1rem, 5vw, 1.5rem);
     max-width: 15rem;
     margin: 0 auto;
+    font-weight: bold;
+
     @media screen and (min-width: 768px) {
       max-width: 20rem;
       flex: 1;
       padding: 0 1rem;
+    }
+  }
+
+  & aside {
+    width: 100%;
+    max-width: 50rem;
+    padding: var(--p-2) var(--p-5);
+    border-radius: var(--md-border-radius);
+    line-height: clamp(1.8rem, 9vw, 3rem);
+    margin: 0 auto;
+  }
+  
+  & p {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    text-shadow: var(--normal-text-shadow);
+    
+    &:not(:last-of-type) {
+      margin-bottom: 2.5rem
+    }
+    
+    @media screen and (min-width: 768px) {
+      
     }
   }
 }
@@ -62,7 +86,7 @@
   z-index: 1;
 
   & h2 {
-    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    font-size: var(--title-font-size);
     padding: var(--p-3);
     padding-bottom: 0;
     text-align: center;
@@ -73,39 +97,45 @@
     padding-bottom: var(--p-2);
   }
 
+  // li and a elements have the same dimensions
+  --button-width: clamp(12rem, 25vw, 20rem);
+  
   & li {
     border-radius: var(--button-border-radius);
     box-shadow: var(--sm-md-shadow);
-    width: clamp(12rem, 15vw, 20rem);
+    width: var(--button-width);
     margin: 0 auto;
     margin-bottom: var(--m-2);
-    font-size: clamp(1.2rem, 3vw, 2.8rem);
     transition: box-shadow 0.4s, color 0.5s;
     @include btnState;
-
+    
     @media screen and (min-width: 768px) {
       margin: 0 auto;
-
+      
       &:first-of-type {
         margin-bottom: var(--m-3);
       }
     }
-
+    
     & a {
-      border-radius: var(--button-border-radius);
-      font-size: clamp(1.3rem, 1.75vw, 2rem);
-      letter-spacing: 0.15rem;
-      border: 1px ridge var(--grey);
       background-image: var(--inverse-solid-bg);
+      border: 1px ridge var(--grey);
+      border-radius: var(--button-border-radius);
       color: var(--inverse-font-colour);
       display: block;
-      width: clamp(12rem, 15vw, 20rem);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      letter-spacing: var(--normal-letter-spacing);
       min-height: 3rem;
-      text-shadow: 0 2px 2px var(--inverse-shadow-colour);
       padding-bottom: 0.2rem;
+      text-shadow: var(--inverse-text-shadow);
       transition: inherit;
+      width: var(--button-width);
       @include XYCenterChildren;
 
+      @media screen and (min-width: 768px) {
+        padding: clamp(0.5rem, 1.5vw, 1rem);
+      }
+      
       @media screen and (min-width: 1200px) {
         padding: 0.7rem;
       }
