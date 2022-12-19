@@ -18,14 +18,17 @@ const ContactForm = () => {
   const confirmCapture = () => setCustomCapture((prevState) => !prevState);
 
   const sendEmail = (e) => {
+    console.log(1);
     e.preventDefault();
     // //. Clears the alert state before a new check                                               '
     // if (alertArray.length > 0) {
     //   setAlertArray([]);
     // }
+    console.log(2);
     const formInputs = formRef.current.children;
     //. Create array of only the text inputs in the form.                                       '
     const editableInputs = [...formInputs].filter((child) => {
+      console.log(`3 ... Editable inputs loop`);
       if (child.name === "customCapture" || child.name === "" || !child.name) {
       } else {
         return child;
@@ -35,9 +38,13 @@ const ContactForm = () => {
     //. If the required inputs are empty, create a new alert object and add it to the temporary array,
     //. Once all the relevant inputs have been checked, update the alertArray state.
 
+    console.log(`4 ... Custom Capture`);
     const newAlertState = [];
+    console.log(`4 ... Custom Capture`);
     if (customCapture === true) {
       editableInputs.forEach((input) => {
+        //. If any of the inputs are required, yet they
+        //. are empty, highlight is and push an error to the list.
         if (/\*/.test(input.placeholder) && input.value.length <= 0) {
           input.classList.add("highlight");
           newAlertState.push(newAlertObject("error", "is required", input));
@@ -58,13 +65,12 @@ const ContactForm = () => {
         setAlertArray(newAlertState);
       }
 
-      /*
       emailjs
         .sendForm(
-          "service_9p73ljj",
-          "template_ehxejvr",
+          "service_kjqxsyf",
+          "template_9hz7xtn",
           e.target,
-          "user_K49o11aaGCnunDj7TA7FJ"
+          "2bzIRAahggVw66nJt"
         )
         .then(
           (result) => {
@@ -75,13 +81,12 @@ const ContactForm = () => {
               email: "",
               phone: "",
               message: "",
-            })
+            });
           },
           (error) => {
             console.log(error);
           }
         );
-        */
     } else {
       setAlertArray([newAlertObject("error", 'Check box above "Send"')]);
     }
