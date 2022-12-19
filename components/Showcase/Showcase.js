@@ -36,7 +36,7 @@ const Showcase = () => {
   const figureArray = useRef(null);
   const animatedGalleryCover = useRef(null);
   const timeoutRef = useRef();
-  const changeImagetimeoutRef = useRef();
+  // const changeImagetimeoutRef = useRef();
   const descriptionRef = useRef(null);
 
   const STR_INITIAL_ARRAY_STRING = "Select Unit";
@@ -68,7 +68,6 @@ const Showcase = () => {
   const changeImageFn = (action) => {
     if (currentArr.length === 1) return;
     if (figureArray.current[index] !== undefined) {
-      console.log(figureArray);
       figureArray.current[index].classList.remove("showImage");
     }
 
@@ -166,7 +165,7 @@ const Showcase = () => {
     removeGalleryCover();
     return () => {
       clearTimeout(timeoutRef.current);
-      clearTimeout(changeImagetimeoutRef?.current);
+      // clearTimeout(changeImagetimeoutRef?.current);
     };
   });
 
