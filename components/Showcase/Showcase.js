@@ -13,8 +13,6 @@ import {
   shiftOnFullScreen,
 } from "./Showcase.module.scss";
 
-import trailerData from "../../galleryData/galleryData";
-import { v4 as uuidv4 } from "uuid";
 import Arrow from "../../components/Arrow/Arrow";
 import {
   cylceImageBtn,
@@ -22,26 +20,57 @@ import {
   next,
 } from "../../components/Arrow/Arrow.module.scss";
 import FullScreenIcon from "../../components/FullScreenIcon/FullScreenIcon";
+import ImageSelector from "../ImageSelector/ImageSelector";
+import changeImage from "../../public/imgs/Change.png";
 
 const Showcase = () => {
   const { imgs } = useContext(ImageContext);
   const [currentArr, setCurrentArr] = useState([]);
   const [fullScreen, setFullScreen] = useState();
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValues, setSelectValues] = useState({
+    unitType: "",
+    subCategory: "",
+  });
   const [index, setIndex] = useState(0);
   const imageContainer = useRef(null);
   const figureArray = useRef(null);
   const animatedGalleryCover = useRef(null);
   const timeoutRef = useRef();
-  const delayedStateChangeRef = useRef();
+  const changeImagetimeoutRef = useRef();
+  const descriptionRef = useRef(null);
 
   const STR_INITIAL_ARRAY_STRING = "Select Unit";
+
+  const updateSelectValues = (e) => {
+    if (e.target.name === "unitType") {
+      setSelectValues({
+        unitType: e.target.value,
+        subCategory: "",
+      });
+    } else {
+      setSelectValues({
+        ...selectValues,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  // Returns figure elements after they have been rendered to the screen.
+  // This allows us to cycle through the images.
+  const returnAllFigureEls = () =>
+    [...imageContainer.current.children].filter(
+      (child) => child.tagName === "FIGURE"
+    );
 
   //. 1) Remove class of currently rendered image                           '
   //. 2) Depending on the 'direction' of the change, add the "showImage"    '
   //.    class to the image to be viewed in the next render                 '
   const changeImageFn = (action) => {
-    figureArray.current[index].classList.remove("showImage");
+    if (currentArr.length === 1) return;
+    if (figureArray.current[index] !== undefined) {
+      console.log(figureArray);
+      figureArray.current[index].classList.remove("showImage");
+    }
 
     switch (action) {
       case "next":
@@ -55,20 +84,15 @@ const Showcase = () => {
         if (index === 0) {
           figureArray.current[currentArr.length - 1].classList.add("showImage");
         } else {
-          figureArray.current[index - 1].classList.add("showImage");
+          if (figureArray.current[index - 1] !== undefined) {
+            figureArray.current[index - 1].classList.add("showImage");
+          }
         }
         break;
       default:
         break;
     }
   };
-
-  // Returns figure elements after they have been rendered to the screen.
-  // This allows us to cycle through the images.
-  const returnAllFigureEls = () =>
-    [...imageContainer.current.children].filter(
-      (child) => child.tagName === "FIGURE"
-    );
 
   //. Cycle forward through currentImageArr
   const nextImage = () => {
@@ -94,16 +118,6 @@ const Showcase = () => {
     }, 300);
   };
 
-  const changeTrailerType = (e) => {
-    const selectValue = e.target.value;
-    animatedGalleryCover.current.classList.add(selectChangeAnimation);
-    setSelectValue(selectValue);
-    delayedStateChangeRef.current = setTimeout(() => {
-      setIndex(0);
-      setCurrentArr(imgs[`${selectValue}`]);
-    }, 500);
-  };
-
   const removeGalleryCover = useCallback(
     (timeout = 500) => {
       if (animatedGalleryCover?.current.classList.length > 0) {
@@ -112,7 +126,8 @@ const Showcase = () => {
         }, timeout);
       }
     },
-    [selectValue]
+    //eslint-disable-next-line
+    [selectValues]
   );
 
   const toggleFullScreen = () => {
@@ -120,16 +135,38 @@ const Showcase = () => {
   };
 
   useEffect(() => {
-    setCurrentArr(imgs[STR_INITIAL_ARRAY_STRING]);
+    setIndex(0);
+    if (selectValues.unitType === "" && selectValues.subCategory === "") {
+      setCurrentArr(imgs[STR_INITIAL_ARRAY_STRING]);
+    } else if (
+      selectValues.unitType !== "" &&
+      selectValues.subCategory === ""
+    ) {
+      setCurrentArr([
+        {
+          src: changeImage,
+          alt: "Select Category",
+          height: 3872,
+          width: 6062,
+          type: "Category?",
+        },
+      ]);
+    } else {
+      setCurrentArr(
+        imgs[`${selectValues.unitType}`][`${selectValues.subCategory}`]
+      );
+    }
     //eslint-disable-next-line
-  }, []);
+  }, [selectValues]);
 
   useEffect(() => {
+    animatedGalleryCover.current.classList.remove(selectChangeAnimation);
     //. Returns all figures for scrolling through (adding "showImage")
     figureArray.current = returnAllFigureEls();
     removeGalleryCover();
     return () => {
       clearTimeout(timeoutRef.current);
+      clearTimeout(changeImagetimeoutRef?.current);
     };
   });
 
@@ -149,7 +186,6 @@ const Showcase = () => {
           <label
             htmlFor="description"
             className={`${fullScreen && shiftOnFullScreen}`}
-            onClick={() => scrollTo(0, 0)}
           >
             i
           </label>
@@ -159,7 +195,7 @@ const Showcase = () => {
             className={`${fullscreenBtn} ${fullScreen ? shiftBtnUp : ""}`}
           >
             <span>Full Screen</span>
-            <FullScreenIcon />
+            <FullScreenIcon fullScreen={fullScreen} />
           </label>
           <input
             type="checkbox"
@@ -191,6 +227,7 @@ const Showcase = () => {
                 key={newId}
                 className={shownImage}
                 data-isportrait={imgValues.isPortrait}
+                ref={descriptionRef}
               >
                 <Image
                   src={src}
@@ -203,15 +240,29 @@ const Showcase = () => {
                   <span>{type}</span>
                 </figcaption>
                 {/* Limit description to 140 characters */}
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nesciunt id magnam temporibus ducimus voluptates officiis modi
-                  dolores fugit autem, perspiciatis sequi quasi debitis, totam
-                  eaque dolorum doloribus recusandae. Numquam sed accusantium
-                  ipsa, nisi distinctio iusto non dignissimos voluptates ratione
-                  ullam provident incidunt dolores labore repellat modi est
-                  voluptatum sunt. Dolore.
-                </p>
+                <article>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
+                    autem quidem veniam quia ducimus dolorem ipsam rem
+                    consequatur. Voluptas soluta corporis rerum porro, dolorem
+                    odit quis hic. Cupiditate libero officiis aliquam impedit
+                    deserunt nam tempora vero soluta aspernatur illum ratione
+                    quasi officia aperiam reiciendis, nihil quibusdam aliquid
+                    nesciunt quis ex quisquam quos odit qui exercitationem
+                    quidem? Libero omnis itaque repudiandae vel, eius sapiente?
+                    Veniam sapiente officia sunt nemo, voluptas, quasi
+                    repellendus vero deleniti illo maxime porro. Reiciendis
+                    aliquid officiis et voluptatibus aperiam quae quod vero
+                    neque nemo recusandae veniam libero tempore, dolore magnam
+                    adipisci? Sit consequatur quaerat corporis accusamus,
+                    corrupti ex ad maxime aliquam nihil, provident eveniet
+                    impedit error! Cum, nobis officiis. Fugit officia similique
+                    cumque minima commodi nulla nisi ullam, dolor laborum
+                    consectetur voluptate exercitationem necessitatibus hic
+                    nesciunt eius quo. Facilis mollitia inventore laudantium sed
+                    dolore optio odio minima?
+                  </p>
+                </article>
               </figure>
             );
           })}
@@ -225,21 +276,10 @@ const Showcase = () => {
             dark={false}
             clickHandler={(e) => prevImage(e)}
           />
-          <select
-            name="type"
-            id="trailerSelect"
-            onChange={changeTrailerType}
-            value={selectValue}
-          >
-            <option aria-disabled="true">Select Unit</option>
-            {trailerData.map(({ type, label }) => {
-              return (
-                <option key={uuidv4()} value={type}>
-                  {label}
-                </option>
-              );
-            })}
-          </select>
+          <ImageSelector
+            selectValues={selectValues}
+            updateSelectValues={updateSelectValues}
+          />
           <Arrow
             btn={true}
             wrapperClassList={`customButton`}

@@ -1,8 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import Carousel from "../components/Carousel/Carousel";
 import HR from "../components/HR/HR";
-import { title, sellingPoints, quickLinks } from "../styles/Home.module.scss";
+import {
+  img_container,
+  title,
+  sellingPoints,
+  quickLinks,
+} from "../styles/Home.module.scss";
+import eleven_meter_star_outside from "../public/eleven_meter_star_outside.png";
 
 //! development
 
@@ -11,10 +17,13 @@ export default function Home() {
 
   return (
     <>
-      <Carousel
-        carouselIndex={carouselIndex}
-        setCarouselIndex={setCarouselIndex}
-      />
+      <div className={img_container}>
+        <Image
+          src={eleven_meter_star_outside}
+          alt={"Exterior of a single artist or 'star' trailer"}
+          layout={"responsive"}
+        />
+      </div>
       <section>
         <h1 className={`${title}`}>
           Trailers for all film and <span>entertainment needs</span>

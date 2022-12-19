@@ -109,6 +109,7 @@ $heightByAR: calc(100vw / 4 * 2.6);
         font-size: clamp(1.2rem, 3vw, 1.5rem);
         text-shadow: var(--inverse-text-shadow);
         box-shadow: var(--sm-md-shadow);
+
         @include btnState;
 
         @media screen and (min-width: 500px) {
@@ -126,15 +127,14 @@ $heightByAR: calc(100vw / 4 * 2.6);
         left: -1000vw;
         z-index: -1;
 
-        &:checked~figure {
-            overflow: scroll;
+        &:checked~figure article {
+            transform: translateY(0);
 
             & p {
                 z-index: 1;
                 min-height: 100%;
-                padding: clamp(2.7rem, 8vw, 4rem) clamp(0.5rem, 4vw, 1.5rem);
+                
                 border-top: 2px ridge #ccc;
-                transform: translateY(0);
             }
         }
     }
@@ -153,6 +153,32 @@ $heightByAR: calc(100vw / 4 * 2.6);
         &>span>img {
             width: 100%;
             height: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        article {
+            height: 100%;
+            min-height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: scroll;
+            transform: translateY(200%);
+            transition: transform 0.5s ease-in-out, padding 0.5s ease-in-out;
+            background-image: var(--background-image);
+            box-shadow: inset 0 0 0 100rem var(--sheet), inset 0 0 0 100rem var(--sheet);
+                
+            @media screen and (min-width: 500px) {
+                transform: translateY(120vw);
+
+            }
+            @media screen and (min-width: 768px) {
+            transform: translateY(200vw);
+            }
         }
     }
 
@@ -168,75 +194,78 @@ $heightByAR: calc(100vw / 4 * 2.6);
         text-shadow: var(--normal-text-shadow);
         font-size: clamp(1rem, 3vw, 1.3rem);
         z-index: 5;
-
+        
         @media screen and (min-width: 500px) {
             padding-left: 5%;
         }
-
+        
         @media screen and (min-width: 768px) {
             padding-left: var(--p-3);
         }
     }
 
     & p {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1;
+        
         border-top: 2px ridge #ccc;
         font-size: clamp(1rem, 3vw, 1.3rem);
-        background-color: var(--sheet);
         text-shadow: var(--normal-text-shadow);
         border-radius: var(--normal-border-radius);
-        transform: translateY(200%);
-        transition: transform 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out;
-        min-height: 100vh;
-        overflow: hidden;
+        // min-height: 100vh;
+        padding: clamp(2.7rem, 8vw, 4rem) clamp(0.5rem, 4vw, 1.5rem);
         // opacity: 0.3;
-
+        
+        &::after,
+        &::before {
+            @include pseudoEl;
+            width: 100%;
+            left: 0;
+            background-color: var(--sheet);
+            z-index: -1;
+        }
+        
         @media screen and (min-width: 500px) {
             --paddingOnSides: 5%;
             padding-left: var(--paddingOnSides);
             padding-right: var(--paddingOnSides);
-            transform: translateY(120vw);
         }
-
+        
         @media screen and (min-width: 768px) {
+            padding: clamp(2.7rem, 8vw, 4rem) 5%;
             --element-border-radius: var(--md-border-radius) var(--md-border-radius) 0 0;
             border-radius: var(--element-border-radius);
             border-bottom: 0;
-            box-shadow: inset 0 -1rem 0.25rem var(--shadow-colour);
-            display: flex;
-            align-items: center;
-            transform: translateY(200vw);
-
+            height: 100%;
             &::after,
             &::before {
                 border-radius: var(--element-border-radius);
                 pointer-events: none;
                 z-index: -1;
             }
-
+            
         }
-
+        
+        @media screen and (min-width: 1280px) {
+            display: flex;
+            align-items: center;
+        }
+        
         &::after {
             box-shadow: inset 0 -0.25rem 0.5rem -0.1rem var(--shadow-colour);
         }
-
+        
         &::before {
             background-image: var(--background-image);
         }
 
-        &::after,
-        &::before {
-            @include pseudoEl;
-            width: 100%;
-            left: 0;
-            height: 100%;
-            background-color: var(--sheet);
-            z-index: -1;
-        }
+        // &::after,
+        // &::before {
+        //     @include pseudoEl;
+        //     width: 100%;
+        //     left: 0;
+        //     height: 100%;
+        //     background-color: var(--sheet);
+        //     z-index: -1;
+        // }
     }
 }
 
@@ -247,12 +276,13 @@ $heightByAR: calc(100vw / 4 * 2.6);
 .showcase_controls {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     background-image: var(--solid-bg);
     box-shadow: var(--sm-md-shadow);
     padding: var(--p-3) var(--p-2);
     width: 100%;
-    z-index: 1;
+    z-index: 10;
 
 
     //! This has to change to space between when on full screen.
@@ -263,10 +293,6 @@ $heightByAR: calc(100vw / 4 * 2.6);
     @media screen and (min-width:768px) {
         position: unset;
 
-    }
-
-    @media screen and (min-width: 1280px) {
-        justify-content: space-between;
     }
 
     & button,
@@ -281,17 +307,17 @@ $heightByAR: calc(100vw / 4 * 2.6);
     }
 
     & button {
-        width: 4rem;
-        height: 3rem;
+        width: clamp(4rem, 20%, 6rem);
+        height: 6.5rem;
         margin: 0;
         z-index: 10;
 
         &:first-of-type {
-            border-radius: var(--md-border-radius) var(--md-border-radius) var(--md-border-radius) 4rem;
+            border-radius: var(--md-border-radius) var(--md-border-radius) var(--md-border-radius) 6rem;
         }
 
         &:last-of-type {
-            border-radius: var(--md-border-radius) var(--md-border-radius) 4rem var(--md-border-radius);
+            border-radius: var(--md-border-radius) var(--md-border-radius) 6rem var(--md-border-radius);
         }
 
         @media screen and (min-width: 768px) {
@@ -304,13 +330,13 @@ $heightByAR: calc(100vw / 4 * 2.6);
 
             &:first-of-type {
                 left: $oneSide;
-                transform: translateX(-50%);
+                transform: translateX(-50%) translateY(-50%);
                 border-radius: 50%;
             }
 
             &:last-of-type {
                 right: $oneSide;
-                transform: translateX(50%);
+                transform: translateX(50%) translateY(-50%);
                 border-radius: 50%;
             }
 
@@ -322,12 +348,12 @@ $heightByAR: calc(100vw / 4 * 2.6);
 
             &:first-of-type {
                 left: $oneSide;
-                transform: translateY(-50%) translateX(-50%)
+                // transform: translateY(-50%) translateX(-50%)
             }
 
             &:last-of-type {
                 right: $oneSide;
-                transform: translateY(-50%) translateX(50%)
+                // transform: translateY(-50%) translateX(50%)
             }
         }
 
@@ -453,7 +479,8 @@ div[role="presentation"].selectChangeAnimation {
 }
 
 label.shiftOnFullScreen:first-of-type {
-   right: 4rem;
+   opacity: 0;
+   pointer-events: none;
 }
 
 .fullScreenStyles {
@@ -534,6 +561,18 @@ label.shiftOnFullScreen:first-of-type {
             height: 3.5rem;
             width: 3.5rem;
             opacity: 0.7;
+
+            &:first-of-type, &:last-of-type {
+                transform: translate(0, 0);
+            }
+
+            &:first-of-type {
+                left: var(--m-4);
+            }
+
+            &:last-of-type {
+                right: var(--m-4);
+            }
         }
     }
 }

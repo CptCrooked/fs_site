@@ -1,5 +1,36 @@
 @import "./mixins";
 
+.img_container{
+    position: relative;
+    border-radius: 0;
+    z-index: 0;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 67vw;
+
+    
+    @media screen and (min-width: 768px) {
+      --sixteenByNineUnit: calc(80vw / 16);
+      --sixteenByNineheight: calc(var(--sixteenByNineUnit) * 9);
+      height: var(--sixteenByNineheight);
+      // height: 50vw;
+      width: 80%;
+      & > span {
+        transform: translateY(-10%);
+      }
+    }
+
+    @media screen and (min-width: 1800px) {
+      $ARunit: calc(1366px / 16);
+      $ElementHeight: calc($ARunit * 9);
+      width: 1366px;
+      height: $ElementHeight;
+      max-width: 1920px;
+      max-height: 1920px * 0.6;
+    }
+  }
+
 .title {
   position: relative;
   background-image: var(--solid-bg);
