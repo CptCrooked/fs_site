@@ -1,18 +1,19 @@
+import { useContext } from "react";
 import { v4 as uuid } from "uuid";
-import imgData from "../../dev/imageStructure";
-
+import { ImageContext } from "../../contexts/ImageContext";
 import {
   select_container,
   highlightElement,
 } from "./ImageSelector.module.scss";
 
 const ImageSelector = ({ selectValues, updateSelectValues }) => {
+  const { imgs } = useContext(ImageContext);
+
   const returnArrayOfObjectKeys = (obj) => {
     return [...Object.keys(obj)];
   };
 
-  const unitTypeArray = returnArrayOfObjectKeys(imgData);
-
+  const unitTypeArray = returnArrayOfObjectKeys(imgs);
   return (
     <div className={select_container}>
       <select
@@ -21,10 +22,12 @@ const ImageSelector = ({ selectValues, updateSelectValues }) => {
         value={selectValues.unitType}
         onChange={updateSelectValues}
       >
-        <option aria-disabled value="">
-          Select Unit
-        </option>
-        {unitTypeArray.map((unitType) => {
+        {unitTypeArray.map((unitType, i) => {
+          if (i === 0) {
+            <option key={uuid()} aria-disabled value="">
+              {unitType}
+            </option>;
+          }
           return (
             <option key={uuid()} value={unitType}>
               {unitType}
@@ -45,7 +48,7 @@ const ImageSelector = ({ selectValues, updateSelectValues }) => {
             <option aria-disabled value="">
               Select Category
             </option>
-            {returnArrayOfObjectKeys(imgData[selectValues.unitType]).map(
+            {returnArrayOfObjectKeys(imgs[selectValues.unitType]).map(
               (subCategory) => {
                 return (
                   <option key={uuid()} value={subCategory}>
